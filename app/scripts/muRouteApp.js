@@ -2,7 +2,12 @@
 
   'use strict';
 
-  angular.module('muRouteApp', ['ngRoute', 'mm.foundation', 'sessionModule', 'routeModule'])
+  angular.module('muRouteApp', [
+      'ngRoute',
+      'ngCookies',
+      'mm.foundation',
+      'sessionModule',
+      'routeModule'])
 
     .config(function ($routeProvider) {
       $routeProvider

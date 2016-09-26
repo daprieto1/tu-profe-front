@@ -4,12 +4,18 @@
 
   angular.module('sessionModule')
 
-    .controller('LoginController', function ($scope, $location) {
+    .controller('LoginController', function ($scope, $location, $cookies, ServiceSession) {
 
       var vm = this;
 
       vm.login = function () {
-        $location.path('dashboard');
+        ServiceSession.login(vm.email, vm.password)
+          .then(function (response) {
+            $cookies.put('user', vm.email);
+            $location.path('dashboard');
+          }, function (error) {
+            console.log(error);
+          });
       };
 
       function initCtrl() {
