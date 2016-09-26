@@ -1,0 +1,20 @@
+{
+  "name": "muroute",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.1",
+    "angular": "^1.5.8",
+    "angular-cookies": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "foundation-sites": "^6.2.3",
+    "underscore": "^1.8.3",
+    "angular-foundation-6": "^0.10.12"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
+}
