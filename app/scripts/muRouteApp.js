@@ -5,6 +5,7 @@
   angular.module('muRouteApp', [
       'ngRoute',
       'ngCookies',
+      'ngResource',
       'mm.foundation',
       'sessionModule',
       'routeModule'])

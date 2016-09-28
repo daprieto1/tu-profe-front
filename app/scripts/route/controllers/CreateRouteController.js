@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('routeModule')
-    .controller('CreateRouteController', function ($scope, $location, ServiceUtils, HOUR_INIT_TYPES, DELIVERY_TYPES, ROUTE_TYPES, VEHICLE_TYPES, CITIES) {
+    .controller('CreateRouteController', function ($scope, $location, $cookies, ServiceUtils, ServiceRoute, HOUR_INIT_TYPES, DELIVERY_TYPES, ROUTE_TYPES, VEHICLE_TYPES, CITIES) {
       var vm = this;
 
       /**
@@ -20,8 +20,20 @@
       };
 
       vm.createRoute = function () {
-        console.log(vm.newRoute);
-        console.log(angular.toJson(vm.newRoute));
+        var newRoute = angular.copy(vm.newRoute);
+        newRoute.city = vm.newRoute.city.id;
+        newRoute.initHour = vm.newRoute.initHour.name;
+        newRoute.deliveryType = vm.newRoute.deliveryType.name;
+        newRoute.routeType = vm.newRoute.routeType.name;
+        newRoute.owner = vm.user.id;
+
+        ServiceRoute.saveRoute(newRoute)
+          .then(function () {
+            vm.popup.close();
+            $location.path('/dashboard')
+          }, function (error) {
+            console.log(error);
+          });
       };
 
       /**
@@ -59,6 +71,8 @@
 
 
       function initCtrl() {
+        vm.user = $cookies.getObject('user');
+
         vm.step = 1;
         vm.cities = CITIES;
         vm.hourInitTypes = angular.copy(HOUR_INIT_TYPES);

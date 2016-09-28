@@ -21,13 +21,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <td>01020304</td>
+    <tr ng-repeat="route in vm.routes">
+      <td>{{route.id}}</td>
       <td>Teléfonica</td>
       <td>20:17</td>
       <td>15/25</td>
       <td><span class="warning label">En espera</span></td>
-      <td><button class="tiny secondary button" href="#">Ver Ruteo</button></td>
+      <td>
+        <button class="tiny secondary button" href="#">Ver Ruteo</button>
+      </td>
     </tr>
     </tbody>
   </table>

@@ -11,7 +11,7 @@
       vm.login = function () {
         ServiceSession.login(vm.email, vm.password)
           .then(function (response) {
-            $cookies.put('user', vm.email);
+            $cookies.putObject('user', response.data.data);
             $location.path('dashboard');
           }, function (error) {
             console.log(error);
