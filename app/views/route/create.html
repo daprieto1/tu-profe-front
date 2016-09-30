@@ -1,6 +1,6 @@
 <div ng-controller="CreateRouteController as vm">
 
-  <div id="create-route" ng-if="vm.step === 1">
+  <div id="create-route">
     <div class="row">
       <div class="large-12 columns">
         <h1>
@@ -119,8 +119,8 @@
 
           <div class="row">
             <div class="small-12 large-3 columns end">
-              <button class="button" ng-click="vm.step = 2" ng-disabled="createRouteForm.$invalid">
-                Siguiente
+              <button class="button" ng-click="vm.createRoute()" ng-disabled="createRouteForm.$invalid">
+                Crear Ruteo
               </button>
             </div>
           </div>
@@ -189,36 +189,7 @@
 
   </div>
 
-  <div class="reveal" id="summary-load" data-reveal>
 
-    <h3>Direcciones cargadas</h3>
-    <p>Has cargado {{vm.newRoute.points.length}} direcciones correctamente, el total de unidades es de {{vm.totalUnits}}</p>
-
-    <div id="table">
-      <table>
-        <thead>
-        <tr>
-          <th>Dirección</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="point in vm.newRoute.points track by $index">
-          <td>{{ point.address }}</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-    <div id="button-options">
-      <button class="secondary button" ng-click="vm.cancelLoad()">
-        Cancelar
-      </button>
-      <button class="button" ng-click="vm.createRoute()">
-        Crear Ruteo
-      </button>
-    </div>
-  </div>
 </div>
 
 

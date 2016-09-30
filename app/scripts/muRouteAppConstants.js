@@ -75,5 +75,17 @@
         lat: 10.972697,
         log: -74.795767
       }
-    ]);
+    ])
+
+    .constant('POINT_STATES', [
+        {
+          id: 1,
+          name: 'No Geolocalized'
+        },
+        {
+          id: 2,
+          name: 'Geolocalized'
+        }
+      ]
+    );
 })();

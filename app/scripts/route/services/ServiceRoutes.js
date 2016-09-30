@@ -21,6 +21,10 @@
 
         saveRoute: function (route) {
           return new Route(route).$save();
+        },
+
+        getRoute: function (idRoute) {
+          return Route.get({idRoute: idRoute}).$promise;
         }
       };
     });

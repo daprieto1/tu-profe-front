@@ -1,0 +1,125 @@
+<div id="view-route" ng-controller="ViewRouteController as vm">
+
+  <div class="row">
+    <div class="large-12 columns">
+
+      <h1>Ruteo {{vm.route.id}}</h1>
+
+      <ul class="vertical medium-horizontal menu">
+        <li><a href="">Importar direcciones</a></li>
+        <li><a href="#/route/edit">Editar Configuración</a></li>
+      </ul>
+
+      <input id="real-input-file" type="file" accept=".csv" ng-show="false" file-reader="vm.fileContent">
+
+      <hr>
+
+      <div id="upload-file" ng-if="vm.route.points.length <= 0">
+        <img src="images/route/view/file.png" alt="">
+        <h4>No tienes direcciones cargadas</h4>
+        <p><a href="" ng-click="vm.searchFile()">
+          <ins>Importa direcciones</ins>
+        </a> desde archivo CSV para alistar el ruteo
+        </p>
+      </div>
+
+      <div id="summary" ng-if="vm.route.points.length > 0">
+        <div class="large-12 columns">
+
+          <button class="button">
+            Solucionar
+          </button>
+          <button class="secondary button">
+            Borrar
+          </button>
+
+          <h3>Ver direcciones cargadas</h3>
+
+          <div class="callout warning">
+            <h5>No se encontraron algunas direcciones</h5>
+            <p>Hubo problemas y no se geolocalizaron 10 direcciones del archivo que cargaste anteriormente. Revisa que
+              las direcciones estén bien escritas.</p>
+          </div>
+
+          <tabset>
+            <tab>
+              <tab-heading>
+                Direcciones geolocalizadas
+                <span class="info label">250</span>
+              </tab-heading>
+              <table>
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Direcciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="point in vm.route.points track by $index">
+                  <td></td>
+                  <td>{{point.address}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </tab>
+            <tab>
+              <tab-heading>
+                Direcciones NO geolocalizadas
+                <span class="warning label">10</span>
+              </tab-heading>
+              <table>
+                <thead>
+                <tr>
+                  <th></th>
+                  <th>Direcciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td></td>
+                  <td>Carrera 8</td>
+                </tr>
+                </tbody>
+              </table>
+            </tab>
+          </tabset>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="reveal" id="summary-load" data-reveal>
+
+    <h3>Direcciones cargadas</h3>
+    <p>Has cargado {{vm.newPoints.length}} direcciones correctamente, el total de unidades es de
+      {{vm.totalUnits}}</p>
+
+    <div id="table">
+      <table>
+        <thead>
+        <tr>
+          <th>Dirección</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="point in vm.newPoints track by $index">
+          <td>{{ point.address }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <div id="button-options">
+      <button class="secondary button" ng-click="vm.cancelLoad()">
+        Cancelar
+      </button>
+      <button class="button" ng-click="vm.loadAddress()">
+        Cargar
+      </button>
+    </div>
+  </div>
+
+</div>
