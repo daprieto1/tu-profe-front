@@ -29,7 +29,7 @@
           <button class="button">
             Solucionar
           </button>
-          <button class="secondary button">
+          <button class="secondary button" ng-click="vm.deleteAddress()">
             Borrar
           </button>
 
@@ -43,7 +43,7 @@
           </div>
 
           <tabset>
-            <tab>
+            <tab select="vm.tabSelected = 1">
               <tab-heading>
                 Direcciones geolocalizadas
                 <span class="info label">{{vm.geolocalized.length}}</span>
@@ -51,19 +51,23 @@
               <table>
                 <thead>
                 <tr>
-                  <th></th>
+                  <th>
+                    <input type="checkbox" ng-model="vm.selectGeolocalized">
+                  </th>
                   <th>Direcciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="point in vm.geolocalized track by $index">
-                  <td></td>
+                  <td>
+                    <input type="checkbox" ng-model="point.selected">
+                  </td>
                   <td>{{point.address}}</td>
                 </tr>
                 </tbody>
               </table>
             </tab>
-            <tab>
+            <tab select="vm.tabSelected = 2">
               <tab-heading>
                 Direcciones NO geolocalizadas
                 <span class="warning label">{{vm.noGeolocalized.length}}</span>
@@ -71,13 +75,17 @@
               <table>
                 <thead>
                 <tr>
-                  <th></th>
+                  <th>
+                    <input type="checkbox" ng-model="vm.selectNoGeolocalized">
+                  </th>
                   <th>Direcciones</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="point in vm.noGeolocalized track by $index">
-                  <td></td>
+                  <td>
+                    <input type="checkbox" ng-model="point.selected">
+                  </td>
                   <td>{{point.address}}</td>
                 </tr>
                 </tbody>
@@ -121,6 +129,22 @@
         Cargar
       </button>
     </div>
+  </div>
+
+  <div class="reveal" id="delete-address" data-reveal>
+
+    <h3>¿Estás seguro?</h3>
+    <p>Estás a punto de borrar {{vm.numDeleteAddress}} direcciones del ruteo {{vm.route.id}}</p>
+
+    <div class="large-12 cloumns">
+      <button class="secondary button">
+        Cancelar
+      </button>
+      <button class="button">
+        Borrar
+      </button>
+    </div>
+
   </div>
 
 </div>

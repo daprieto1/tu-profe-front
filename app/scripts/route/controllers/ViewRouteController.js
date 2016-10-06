@@ -5,6 +5,17 @@
     .controller('ViewRouteController', function ($scope, $cookies, $location, ServiceRoute, ServicePoints, ServiceUtils, CITIES) {
       var vm = this;
 
+      vm.deleteAddress = function () {
+        vm.numDeleteAddress = 0;
+        if (vm.tabSelected === 1) {
+          vm.numDeleteAddress = _.filter(vm.geolocalized, function (point) {
+            return point.selected;
+          }).length;
+        }
+        vm.deletePopup = new Foundation.Reveal($('#delete-address'));
+        vm.deletePopup.open();
+      };
+
       /**
        * Search .csv file from pc.
        */
@@ -47,6 +58,34 @@
         }
       });
 
+      $scope.$watch('vm.selectGeolocalized', function (value) {
+
+        if (value) {
+          _.each(vm.geolocalized, function (point) {
+            point.selected = true;
+          });
+        } else {
+          _.each(vm.geolocalized, function (point) {
+            point.selected = false;
+          });
+        }
+
+      });
+
+      $scope.$watch('vm.selectNoGeolocalized', function (value) {
+
+        if (value) {
+          _.each(vm.noGeolocalized, function (point) {
+            point.selected = true;
+          });
+        } else {
+          _.each(vm.noGeolocalized, function (point) {
+            point.selected = false;
+          });
+        }
+
+      });
+
       function loadData() {
         vm.totalUnits = 0;
         vm.newPoints = _.map(ServiceUtils.parseCSVFileToArray(vm.fileContent).slice(1), function (point) {
@@ -70,6 +109,9 @@
         vm.newPoints = [];
         vm.realInputFile = angular.element('#real-input-file');
         vm.fileContent = undefined;
+        vm.tabSelected = 1;
+
+        vm.selectGeolocalized = false;
 
         if (angular.isDefined(vm.route)) {
           ServiceRoute.getRoute(vm.route.id)
