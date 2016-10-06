@@ -6,7 +6,7 @@
       <h1>Ruteo {{vm.route.id}}</h1>
 
       <ul class="vertical medium-horizontal menu">
-        <li><a href="">Importar direcciones</a></li>
+        <li><a href="" ng-click="vm.searchFile()">Importar direcciones</a></li>
         <li><a href="#/route/edit">Editar Configuración</a></li>
       </ul>
 
@@ -35,9 +35,10 @@
 
           <h3>Ver direcciones cargadas</h3>
 
-          <div class="callout warning">
+          <div class="callout warning" ng-if="vm.noGeolocalized.length > 0">
             <h5>No se encontraron algunas direcciones</h5>
-            <p>Hubo problemas y no se geolocalizaron 10 direcciones del archivo que cargaste anteriormente. Revisa que
+            <p>Hubo problemas y no se geolocalizaron {{vm.noGeolocalized.length}} direcciones del archivo que cargaste
+              anteriormente. Revisa que
               las direcciones estén bien escritas.</p>
           </div>
 
@@ -45,7 +46,7 @@
             <tab>
               <tab-heading>
                 Direcciones geolocalizadas
-                <span class="info label">250</span>
+                <span class="info label">{{vm.geolocalized.length}}</span>
               </tab-heading>
               <table>
                 <thead>
@@ -55,7 +56,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="point in vm.route.points track by $index">
+                <tr ng-repeat="point in vm.geolocalized track by $index">
                   <td></td>
                   <td>{{point.address}}</td>
                 </tr>
@@ -65,7 +66,7 @@
             <tab>
               <tab-heading>
                 Direcciones NO geolocalizadas
-                <span class="warning label">10</span>
+                <span class="warning label">{{vm.noGeolocalized.length}}</span>
               </tab-heading>
               <table>
                 <thead>
@@ -75,9 +76,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr ng-repeat="point in vm.noGeolocalized track by $index">
                   <td></td>
-                  <td>Carrera 8</td>
+                  <td>{{point.address}}</td>
                 </tr>
                 </tbody>
               </table>
