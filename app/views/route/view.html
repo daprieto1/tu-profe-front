@@ -14,6 +14,69 @@
 
       <hr>
 
+      <div id="route-summary">
+        <h3>Detalles del ruteo</h3>
+        <div class="row">
+          <div class="small-12 medium-6 large-1 columns">
+            <img src="images/route/view/city.png" alt="">
+            <p>{{vm.route.city.name}}</p>
+            <h6>
+              <small>Ciudad</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-2 columns">
+            <img src="images/route/view/origin_address.png" alt="">
+            <p>{{vm.route.originAddress}}</p>
+            <h6>
+              <small>Dirección de Origen</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-2 columns">
+            <img src="images/route/view/init_date.png" alt="">
+            <p>{{vm.route.initDate.toLocaleString()}}</p>
+            <h6>
+              <small>Fecha de Inicio</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-2 columns">
+            <img src="images/route/view/init_time.png" alt="">
+            <p>{{vm.route.initHour}}</p>
+            <h6>
+              <small>Hora de inicio</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-2 columns">
+            <img src="images/route/view/delivery_type.png" alt="">
+            <p>{{vm.route.deliveryType}}</p>
+            <h6>
+              <small>Tipo de entrega</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-2 columns">
+            <img src="images/route/view/route_type.png" alt="">
+            <p>{{vm.route.routeType}}</p>
+            <h6>
+              <small>Tipo de ruta</small>
+            </h6>
+          </div>
+
+          <div class="small-12 medium-6 large-1 columns">
+            <img src="images/route/view/vehicle_type.png" alt="">
+            <p>{{vm.route.vehicleType.name}}</p>
+            <h6>
+              <small>Tipo de vehículo</small>
+            </h6>
+          </div>
+
+
+        </div>
+      </div>
+
       <div id="upload-file" ng-if="vm.route.points.length <= 0">
         <img src="images/route/view/file.png" alt="">
         <h4>No tienes direcciones cargadas</h4>
@@ -29,7 +92,7 @@
           <button class="button">
             Solucionar
           </button>
-          <button class="secondary button" ng-click="vm.deleteAddress()">
+          <button class="secondary button" ng-click="vm.deleteAddress()" ng-disabled="vm.thereIsAddressSelected()">
             Borrar
           </button>
 
@@ -48,21 +111,28 @@
                 Direcciones geolocalizadas
                 <span class="info label">{{vm.geolocalized.length}}</span>
               </tab-heading>
+              <div class="row">
+                <div class="small-12 medium-9 large-6 columns">
+                  <input type="text" placeholder="Buscar dirección" ng-model="vm.addressFilter">
+                </div>
+              </div>
               <table>
                 <thead>
                 <tr>
-                  <th>
+                  <th class="large-1">
                     <input type="checkbox" ng-model="vm.selectGeolocalized">
                   </th>
-                  <th>Direcciones</th>
+                  <th class="large-6">Direcciones</th>
+                  <th>Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="point in vm.geolocalized track by $index">
+                <tr ng-repeat="point in vm.geolocalized | filter:vm.addressFilter">
                   <td>
                     <input type="checkbox" ng-model="point.selected">
                   </td>
                   <td>{{point.address}}</td>
+                  <td>{{point.receiver}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -72,21 +142,33 @@
                 Direcciones NO geolocalizadas
                 <span class="warning label">{{vm.noGeolocalized.length}}</span>
               </tab-heading>
+              <div class="row">
+                <div class="small-12 large-6 columns">
+                  <input type="text" placeholder="Buscar dirección" ng-model="vm.addressFilter">
+                </div>
+                <div class="small-12 large-6 columns">
+                  <button class="button secondary">
+                    Descargar No Geolocalizadas
+                  </button>
+                </div>
+              </div>
               <table>
                 <thead>
                 <tr>
-                  <th>
+                  <th class="large-1">
                     <input type="checkbox" ng-model="vm.selectNoGeolocalized">
                   </th>
-                  <th>Direcciones</th>
+                  <th class="large-6">Direcciones</th>
+                  <th>Nombre</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="point in vm.noGeolocalized track by $index">
+                <tr ng-repeat="point in vm.noGeolocalized | filter:vm.addressFilter">
                   <td>
                     <input type="checkbox" ng-model="point.selected">
                   </td>
                   <td>{{point.address}}</td>
+                  <td>{{point.receiver}}</td>
                 </tr>
                 </tbody>
               </table>
@@ -131,6 +213,7 @@
     </div>
   </div>
 
+  <!-- DELETE ADDRESS -->
   <div class="reveal" id="delete-address" data-reveal>
 
     <h3>¿Estás seguro?</h3>
@@ -146,5 +229,7 @@
     </div>
 
   </div>
+  <!-- DELETE ADDRESS -->
+
 
 </div>

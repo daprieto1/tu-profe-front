@@ -5,10 +5,18 @@
     .controller('ViewRouteController', function ($scope, $cookies, $location, ServiceRoute, ServicePoints, ServiceUtils, CITIES) {
       var vm = this;
 
+      vm.thereIsAddressSelected = function () {
+        return angular.isUndefined(_.findWhere(vm.geolocalized, {selected: true})) && angular.isUndefined(_.findWhere(vm.noGeolocalized, {selected: true}));
+      };
+
       vm.deleteAddress = function () {
         vm.numDeleteAddress = 0;
         if (vm.tabSelected === 1) {
           vm.numDeleteAddress = _.filter(vm.geolocalized, function (point) {
+            return point.selected;
+          }).length;
+        } else if (vm.tabSelected === 2) {
+          vm.numDeleteAddress = _.filter(vm.noGeolocalized, function (point) {
             return point.selected;
           }).length;
         }
@@ -127,6 +135,8 @@
 
               vm.geolocalized = result.true;
               vm.noGeolocalized = result.false;
+
+              console.log(vm.route);
 
             }, function (error) {
               console.log(error);
