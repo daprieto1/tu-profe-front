@@ -7,11 +7,6 @@
 
       vm.createRoute = function () {
         var newRoute = angular.copy(vm.newRoute);
-        newRoute.city = vm.newRoute.city.id;
-        newRoute.initHour = vm.newRoute.initHour.name;
-        newRoute.deliveryType = vm.newRoute.deliveryType.name;
-        newRoute.routeType = vm.newRoute.routeType.name;
-        newRoute.owner = vm.user.id;
 
         ServiceRoute.saveRoute(newRoute)
           .then(function () {

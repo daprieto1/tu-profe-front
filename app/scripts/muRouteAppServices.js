@@ -17,6 +17,26 @@
           });
 
           return records;
+        },
+
+        parseArrayToCSV: function (array) {
+          var result = '';
+
+          _.each(array, function (item) {
+            result += (item + '\r\n');
+          });
+
+          return result;
+        },
+
+        downloadData: function (data, filename, extension) {
+          var anchor = angular.element('<a/>');
+
+          anchor.attr({
+            href: 'data:attachment/csv;charset=utf-8,' + encodeURI(data),
+            target: '_blank',
+            download: filename + '.' + extension
+          })[0].click();
         }
       };
     });

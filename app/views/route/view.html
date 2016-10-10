@@ -92,7 +92,7 @@
           <button class="button">
             Solucionar
           </button>
-          <button class="secondary button" ng-click="vm.deleteAddress()" ng-disabled="vm.thereIsAddressSelected()">
+          <button class="secondary button" ng-click="vm.deleteAddressOpen()" ng-disabled="vm.thereIsAddressSelected()">
             Borrar
           </button>
 
@@ -147,7 +147,7 @@
                   <input type="text" placeholder="Buscar dirección" ng-model="vm.addressFilter">
                 </div>
                 <div class="small-12 large-6 columns">
-                  <button class="button secondary">
+                  <button class="button secondary" ng-click="vm.downloadAddress()">
                     Descargar No Geolocalizadas
                   </button>
                 </div>
@@ -220,10 +220,10 @@
     <p>Estás a punto de borrar {{vm.numDeleteAddress}} direcciones del ruteo {{vm.route.id}}</p>
 
     <div class="large-12 cloumns">
-      <button class="secondary button">
+      <button class="secondary button" ng-click="vm.deleteAddressClose(false)">
         Cancelar
       </button>
-      <button class="button">
+      <button class="button" ng-click="vm.deleteAddressClose(true)">
         Borrar
       </button>
     </div>

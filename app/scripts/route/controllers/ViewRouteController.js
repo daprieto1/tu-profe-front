@@ -9,7 +9,51 @@
         return angular.isUndefined(_.findWhere(vm.geolocalized, {selected: true})) && angular.isUndefined(_.findWhere(vm.noGeolocalized, {selected: true}));
       };
 
-      vm.deleteAddress = function () {
+      vm.downloadAddress = function () {
+        function parsePointToArray(point) {
+          var array = [];
+          array.push(point.address);
+          array.push(point.receiver);
+          return array;
+        }
+
+        Promise.resolve(_.map(vm.noGeolocalized, function (point) {
+            return parsePointToArray(point).join();
+          }))
+          .then(ServiceUtils.parseArrayToCSV)
+          .then(function (value) {
+            ServiceUtils.downloadData(value, 'noGeolocalized', 'csv');
+          });
+
+      };
+
+      vm.deleteAddressClose = function (deleteOption) {
+        if (deleteOption) {
+          if (vm.tabSelected === 1) {
+            _.each(vm.geolocalized, function (point) {
+              if (point.selected) {
+                ServicePoints.deletePoint(point.id);
+              }
+            });
+            vm.geolocalized = _.filter(vm.geolocalized, function (point) {
+              return angular.isUndefined(point.selected) || !point.selected;
+            });
+          } else if (vm.tabSelected === 2) {
+            _.each(vm.noGeolocalized, function (point) {
+              if (point.selected) {
+                ServicePoints.deletePoint(point.id);
+              }
+            });
+            vm.noGeolocalized = _.filter(vm.noGeolocalized, function (point) {
+              return angular.isUndefined(point.selected) || !point.selected;
+            });
+          }
+        }
+
+        vm.deletePopup.close();
+      };
+
+      vm.deleteAddressOpen = function () {
         vm.numDeleteAddress = 0;
         if (vm.tabSelected === 1) {
           vm.numDeleteAddress = _.filter(vm.geolocalized, function (point) {
