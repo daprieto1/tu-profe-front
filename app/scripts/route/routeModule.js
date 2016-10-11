@@ -10,6 +10,9 @@
         .when('/route/view', {
           templateUrl: 'views/route/view.html'
         })
+        .when('/route/view-solution', {
+          templateUrl: 'views/route/viewSolution.html'
+        })
         .when('/route/edit', {
           templateUrl: 'views/route/edit.html'
         })

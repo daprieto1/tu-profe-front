@@ -1,0 +1,97 @@
+<div id="view-route-solution" ng-controller="ViewRouteSolutionController as vm">
+
+	<div class="row">
+		<nav aria-label="You are here:" role="navigation">
+			<ul class="breadcrumbs">
+				<li><a href="#/dashboard">Dashboard</a></li>
+				<li><a href="#/route/view">Ruteo</a></li>
+				<li>
+					<span class="show-for-sr">Current: </span> Solución Ruteo
+				</li>
+			</ul>
+		</nav>
+
+		<h1>Ruteo {{vm.route.id}}</h1>
+
+		<div id="route-summary">
+			<h3>Detalles del ruteo</h3>
+			<div class="row">
+				<div class="small-12 medium-6 large-1 columns">
+					<img src="images/route/view/city.png" alt="">
+					<p>{{vm.route.city.name}}</p>
+					<h6>
+						<small>Ciudad</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-2 columns">
+					<img src="images/route/view/origin_address.png" alt="">
+					<p>{{vm.route.originAddress}}</p>
+					<h6>
+						<small>Dirección de Origen</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-2 columns">
+					<img src="images/route/view/init_date.png" alt="">
+					<p>{{vm.route.initDate.toLocaleString()}}</p>
+					<h6>
+						<small>Fecha de Inicio</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-2 columns">
+					<img src="images/route/view/init_time.png" alt="">
+					<p>{{vm.route.initHour}}</p>
+					<h6>
+						<small>Hora de inicio</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-2 columns">
+					<img src="images/route/view/delivery_type.png" alt="">
+					<p>{{vm.route.deliveryType}}</p>
+					<h6>
+						<small>Tipo de entrega</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-2 columns">
+					<img src="images/route/view/route_type.png" alt="">
+					<p>{{vm.route.routeType}}</p>
+					<h6>
+						<small>Tipo de ruta</small>
+					</h6>
+				</div>
+
+				<div class="small-12 medium-6 large-1 columns">
+					<img src="images/route/view/vehicle_type.png" alt="">
+					<p>{{vm.route.vehicleType.name}}</p>
+					<h6>
+						<small>Tipo de vehículo</small>
+					</h6>
+				</div>
+
+
+			</div>
+		</div>
+
+		<accordion close-others="false">
+			<accordion-group heading="{{solution.name}}" ng-repeat="solution in vm.route.solution">
+				<table>
+					<thead>
+						<tr>
+							<th>Direcciones</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="point in solution.points">
+							<td>{{point.address}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</accordion-group>
+		</accordion>
+	</div>
+
+</div>
