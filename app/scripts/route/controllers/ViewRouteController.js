@@ -6,7 +6,7 @@
       var vm = this;
 
       vm.thereIsAddressSelected = function () {
-        return angular.isUndefined(_.findWhere(vm.geolocalized, {selected: true})) && angular.isUndefined(_.findWhere(vm.noGeolocalized, {selected: true}));
+        return angular.isUndefined(_.findWhere(vm.geolocalized, { selected: true })) && angular.isUndefined(_.findWhere(vm.noGeolocalized, { selected: true }));
       };
 
       vm.downloadAddress = function () {
@@ -18,8 +18,8 @@
         }
 
         Promise.resolve(_.map(vm.noGeolocalized, function (point) {
-            return parsePointToArray(point).join();
-          }))
+          return parsePointToArray(point).join();
+        }))
           .then(ServiceUtils.parseArrayToCSV)
           .then(function (value) {
             ServiceUtils.downloadData(value, 'noGeolocalized', 'csv');
@@ -27,29 +27,27 @@
 
       };
 
+      /**
+       * Make a bulk delete with the selected points but only in the tab selected.
+       */
       vm.deleteAddressClose = function (deleteOption) {
         if (deleteOption) {
           if (vm.tabSelected === 1) {
-            _.each(vm.geolocalized, function (point) {
-              if (point.selected) {
-                ServicePoints.deletePoint(point.id);
-              }
-            });
-            vm.geolocalized = _.filter(vm.geolocalized, function (point) {
-              return angular.isUndefined(point.selected) || !point.selected;
-            });
+            var array = _.where(vm.geolocalized, { selected: true });
+            array = _.map(array, function (point) { return point.id; });
+            ServicePoints.bulkDelete(array)
+              .then(function () {
+                vm.geolocalized = _.where(vm.geolocalized, { selected: false });
+              });
           } else if (vm.tabSelected === 2) {
-            _.each(vm.noGeolocalized, function (point) {
-              if (point.selected) {
-                ServicePoints.deletePoint(point.id);
-              }
-            });
-            vm.noGeolocalized = _.filter(vm.noGeolocalized, function (point) {
-              return angular.isUndefined(point.selected) || !point.selected;
-            });
+            var array = _.where(vm.noGeolocalized, { selected: true });
+            array = _.map(array, function (point) { return point.id; });
+            ServicePoints.bulkDelete(array)
+              .then(function () {
+                vm.noGeolocalized = _.where(vm.noGeolocalized, { selected: false });
+              });
           }
         }
-
         vm.deletePopup.close();
       };
 
@@ -174,6 +172,7 @@
               });
 
               var result = _.groupBy(vm.route.points, function (point) {
+                point.selected = false;
                 return angular.isDefined(point.coordinate);
               });
 

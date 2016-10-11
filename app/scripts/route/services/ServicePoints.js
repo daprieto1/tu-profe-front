@@ -11,14 +11,15 @@
           isArray: true,
           withCredentials: true
         },
-        delete: {
-          method: 'DELETE'
+        bulkDelete: {
+          method: 'POST',
+          url: 'http://localhost:1337/point/bulk-delete'
         }
       });
 
       return {
-        deletePoint: function (idPont) {
-          return Point.delete({idPoint: idPont}).$promise;
+        bulkDelete: function (points) {
+          return Point.bulkDelete(points).$promise;
         },
         bulkSave: function (points) {
           return Point.bulkSave(points).$promise;
