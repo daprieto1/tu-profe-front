@@ -3,16 +3,22 @@
   'use strict';
 
   angular.module('muRouteApp', [
-      'ngRoute',
-      'ngCookies',
-      'ngResource',
-      'mm.foundation',
-      'sessionModule',
-      'routeModule'])
+    'ngRoute',
+    'ngCookies',
+    'ngResource',
+    'mm.foundation',
+    'sessionModule',
+    'routeModule'])
 
-    .config(function ($routeProvider) {
+    .config(function ($routeProvider, $cookiesProvider) {
+
+      $cookiesProvider.defaults.path = '/';
+
       $routeProvider
         .when('/', {
+          templateUrl: 'views/session/login.html'
+        })
+        .when('/login', {
           templateUrl: 'views/session/login.html'
         })
         .when('/dashboard', {

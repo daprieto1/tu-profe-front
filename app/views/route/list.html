@@ -1,36 +1,38 @@
 <div class="list-routes-wrapper" ng-controller="RoutesController as vm">
-  <div class="small-12 large-6 columns">
-    <h1>Dashboard</h1>
-    <h2>Ruteos creados recientemente</h2>
-  </div>
-  <div class="small-12 large-6 columns">
-    <a id="create-route" href="#/route/create" class="button">
+	<div class="row">
+		<div class="small-12 large-6 columns">
+			<h1>Dashboard</h1>
+			<h2>Ruteos creados recientemente</h2>
+		</div>
+		<div class="small-12 large-6 columns">
+			<a id="create-route" href="#/route/create" class="button">
       Crear Ruteo
     </a>
-  </div>
+		</div>
 
-  <table>
-    <thead>
-    <tr>
-      <th>Código Ruteo</th>
-      <th>Empresa/Usuario</th>
-      <th>Hora de inicio</th>
-      <th>Entregadas</th>
-      <th>Estado</th>
-      <th>Acciones</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="route in vm.routes">
-      <td>{{route.id}}</td>
-      <td>Teléfonica</td>
-      <td>20:17</td>
-      <td>15/25</td>
-      <td><span class="warning label">En espera</span></td>
-      <td>
-        <button class="tiny secondary button" ng-click="vm.goToViewRoute(route)">Ver Ruteo</button>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+		<table>
+			<thead>
+				<tr>
+					<th>Código Ruteo</th>
+					<th>Empresa/Usuario</th>
+					<th>Hora de inicio</th>
+					<th>Entregadas</th>
+					<th>Estado</th>
+					<th>Acciones</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="route in vm.routes">
+					<td>{{route.id}}</td>
+					<td>Teléfonica</td>
+					<td>20:17</td>
+					<td>15/25</td>
+					<td><span class="warning label">En espera</span></td>
+					<td>
+						<button class="tiny secondary button" ng-click="vm.goToViewRoute(route)">Ver Ruteo</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 </div>

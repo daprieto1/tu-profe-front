@@ -11,7 +11,9 @@
     "angular-sanitize": "^1.5.8",
     "foundation-sites": "^6.2.3",
     "underscore": "^1.8.3",
-    "angular-foundation-6": "^0.10.12"
+    "angular-foundation-6": "^0.10.12",
+    "foundation-icons": "*",
+    "foundation-icon-fonts": "*"
   },
   "devDependencies": {
     "chai": "^3.5.0",

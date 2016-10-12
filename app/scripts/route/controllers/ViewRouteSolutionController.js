@@ -5,6 +5,15 @@
         .controller('ViewRouteSolutionController', function ($scope, $location, $cookies, ServiceRoute, CITIES) {
             var vm = this;
 
+            vm.changeSelected = function (solution) {
+                if (angular.isDefined(solution)) {
+                    console.log(vm.route);
+                    console.log(solution);
+                    solution.selected = !solution.selected;            
+                    console.log(solution);
+                }
+            };
+
             function initCtrl() {
 
                 vm.route = $cookies.getObject('selectedRoute');
@@ -22,6 +31,7 @@
                             vm.route.solution = [
                                 {
                                     name: 'Ruta 1',
+                                    cost: 3000,
                                     points: [
                                         {
                                             address: 'Carrera 19'
@@ -29,6 +39,8 @@
                                     ]
                                 }
                             ];
+
+                            _.each(vm.route.solution, function (solution) { solution.selected = false; });
 
                         }, function (error) {
                             console.log(error);
