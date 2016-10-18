@@ -5,6 +5,16 @@
     .controller('ViewRouteController', function ($scope, $cookies, $location, ServiceRoute, ServicePoints, ServiceUtils, CITIES) {
       var vm = this;
 
+      vm.solve = function () {
+        ServiceRoute.solve(vm.route.id)
+          .then(function (response) {
+            vm.route.solution = response;
+            $location.path('/route/view-solution');
+          }, function (error) {
+            console.log(error);
+          });
+      };
+
       vm.thereIsAddressSelected = function () {
         return angular.isUndefined(_.findWhere(vm.geolocalized, { selected: true })) && angular.isUndefined(_.findWhere(vm.noGeolocalized, { selected: true }));
       };

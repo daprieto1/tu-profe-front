@@ -76,7 +76,7 @@
 
 					<div class="small-12 medium-6 large-1 columns">
 						<img src="images/route/view/vehicle_type.png" alt="">
-						<p>{{vm.route.vehicleType.name}}</p>
+						<p>{{vm.route.vehicle.name}}</p>
 						<h6>
 							<small>Tipo de vehículo</small>
 						</h6>
@@ -90,7 +90,7 @@
 				<img src="images/route/view/file.png" alt="">
 				<h4>No tienes direcciones cargadas</h4>
 				<p>
-					<a href="" ng-click="vm.searchFile()">
+					<a href="" ng-click="vm.searchFile()"> 
 						<ins>Importa direcciones</ins>
 					</a> desde archivo CSV para alistar el ruteo
 				</p>
@@ -99,12 +99,12 @@
 			<div id="summary" ng-if="vm.route.points.length > 0">
 				<div class="large-12 columns">
 
-					<button class="button">
-            Solucionar
-          </button>
+					<button class="button" ng-click="vm.solve()">
+            			Solucionar
+          			</button>
 					<button class="secondary button" ng-click="vm.deleteAddressOpen()" ng-disabled="vm.thereIsAddressSelected()">
-            Borrar
-          </button>
+            			Borrar
+          			</button>
 
 					<h3>Ver direcciones cargadas</h3>
 

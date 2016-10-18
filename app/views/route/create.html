@@ -96,7 +96,7 @@
 					<div class="row">
 						<div class="large-12 columns">
 							<label for="vehicleType">Tipo de vehiculo
-                <select id="vehicleType" name="vehicleType" ng-model="vm.newRoute.vehicleType"
+                <select id="vehicleType" name="vehicleType" ng-model="vm.newRoute.vehicle"
                         ng-options="vehicleType as vehicleType.name for vehicleType in vm.vehicleTypes track by vehicleType.id"
                         required>
                 </select>
@@ -107,22 +107,22 @@
 					<div class="row" ng-if="vm.newRoute.routeType !== undefined && vm.newRoute.routeType.id !== 3">
 						<div class="small-12 large-3 columns">
 							<label for="height">Alto (cm)
-                <input id="height" name="height" ng-model="vm.newRoute.vehicleType.height" type="number" required>
+                <input id="height" name="height" ng-model="vm.newRoute.vehicle.height" type="number" required>
               </label>
 						</div>
 						<div class="small-12 large-3 columns">
 							<label for="width">Ancho (cm)
-                <input id="width" name="width" ng-model="vm.newRoute.vehicleType.width" type="number" required>
+                <input id="width" name="width" ng-model="vm.newRoute.vehicle.width" type="number" required>
               </label>
 						</div>
 						<div class="small-12 large-3 columns">
 							<label for="deep">Largo (cm)
-                <input id="deep" name="deep" ng-model="vm.newRoute.vehicleType.deep" type="number" required>
+                <input id="deep" name="deep" ng-model="vm.newRoute.vehicle.deep" type="number" required>
               </label>
 						</div>
 						<div class="small-12 large-3 columns">
 							<label for="weight">Peso (Kg)
-                <input id="weight" name="weight" ng-model="vm.newRoute.vehicleType.weight" type="number" required>
+                <input id="weight" name="weight" ng-model="vm.newRoute.vehicle.weight" type="number" required>
               </label>
 						</div>
 					</div>
