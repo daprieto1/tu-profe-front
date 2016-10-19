@@ -4,10 +4,10 @@
   angular.module('routeModule')
     .factory('ServicePoints', function ($resource) {
 
-      var Point = $resource('http://localhost:1337/point/:idPoint', {idRoute: '@idPoint'}, {
+      var Point = $resource('http://localhost:1337/point/:idPoint', { idRoute: '@idPoint' }, {
         bulkSave: {
           method: 'POST',
-          url: 'http://localhost:8080/point/bulk-save',
+          url: 'http://localhost:8080/route/bulk-save/:idRoute',
           isArray: true,
           withCredentials: true
         },
@@ -21,8 +21,8 @@
         bulkDelete: function (points) {
           return Point.bulkDelete(points).$promise;
         },
-        bulkSave: function (points) {
-          return Point.bulkSave(points).$promise;
+        bulkSave: function (idRoute, points) {
+          return Point.bulkSave({ idRoute: idRoute }, points).$promise;
         }
       }
     });

@@ -94,7 +94,7 @@
 
         vm.popup.close();
 
-        ServicePoints.bulkSave(vm.newPoints)
+        ServicePoints.bulkSave(vm.route.id, vm.newPoints)
           .then(function (response) {
             console.log(response);
             vm.route.points = vm.route.points.concat(vm.newPoints);
