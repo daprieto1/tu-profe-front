@@ -164,7 +164,7 @@
       }
 
       function initCtrl() {
-
+        
         vm.route = $cookies.getObject('selectedRoute');
         vm.newPoints = [];
         vm.realInputFile = angular.element('#real-input-file');
@@ -177,9 +177,7 @@
           ServiceRoute.getRoute(vm.route.id)
             .then(function (response) {
               vm.route = response;
-              vm.route.city = _.find(CITIES, function (city) {
-                return city.id = vm.route.city;
-              });
+              vm.route.city = _.find(CITIES, function (city) { return city.id == vm.route.city; });
 
               var result = _.groupBy(vm.route.points, function (point) {
                 point.selected = false;

@@ -13,6 +13,8 @@
 
 		<h1>Ruteo {{vm.route.id}}</h1>
 
+		<alert ng-if="vm.alert.show" type="vm.alert.type" close="vm.alert.show=false">{{vm.alert.msg}}</alert>
+
 		<div id="route-summary">
 			<h3>Detalles del ruteo</h3>
 			<div class="row">
@@ -109,12 +111,12 @@
 					</toggle>
 					<pane>
 						<ul class="no-bullet">
-							<li><button>Descargar todas las rutas</button></li>
-							<li><button>Crear ruteo</button></li>
+							<li><button ng-click="vm.downloadRoutes(false)">Descargar todas las rutas</button></li>
+							<li><button>Crear todas las rutas</button></li>
 						</ul>
 						<hr>
 						<ul class="no-bullet">
-							<li><button>Descargar rutas seleccionadas</button></li>
+							<li><button ng-click="vm.downloadRoutes(true)">Descargar rutas seleccionadas</button></li>
 							<li><button>Crear rutas seleccionadas</button></li>
 						</ul>
 					</pane>
@@ -122,30 +124,54 @@
 			</div>
 		</div>
 
-		<accordion close-others="false">
-			<accordion-group ng-repeat="route in vm.route.solution.routes track by $index" ng-click="vm.changeSelected()">
-				<accordion-heading class="accordion-heading">
-					<a href="" ng-show="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-checkbox"></i></a>
-					<a href="" ng-hide="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-annotate"></i></a>
-					<p>Ruta {{$index + 1}}</p>
-					<p><strong>${{route.cost.toLocaleString()}}</strong></p>
-					<p>{{route.distance}}</p>
-					<p>{{route.isCreated}}</p>
-				</accordion-heading>
-				<table>
-					<thead>
-						<tr>
-							<th>Direcciones</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="point in route.points">
-							<td>{{point.address}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</accordion-group>
-		</accordion>
+		<table>
+			<thead>
+				<tr>
+					<th></th>
+					<th></th>
+					<th>Nombre</th>
+					<th>Costo</th>
+					<th>Distancia</th>
+					<th>Estado</th>
+					<th>Número de Puntos</th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="route in vm.route.solution.routes track by $index">
+				<tr>
+					<td>
+						<a href="" ng-hide="route.show" ng-click="route.show=!route.show" class="large"><i class="fi-arrows-out"></i></a>
+						<a href="" ng-show="route.show" ng-click="route.show=!route.show" class="large"><i class="fi-arrows-in"></i></a>
+					</td>
+					<td>
+						<a href="" ng-show="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-checkbox"></i></a>
+						<a href="" ng-hide="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-annotate"></i></a>
+					</td>
+					<td>Ruta {{$index + 1}}</td>
+					<td>${{route.cost.toLocaleString()}}</td>
+					<td>{{route.distance}} Km</td>
+					<td>{{route.isCreated ? 'created' : 'uncreated'}}</td>
+					<td>{{route.points.length}}</td>
+				</tr>
+				<tr ng-if="route.show">
+					<td colspan="7">
+						<table>
+							<thead>
+								<tr>
+									<th>Direcciones</th>
+									<th>Nombre</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="point in route.points">
+									<td>{{point.address}}</td>
+									<td>{{point.receiver}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 
 </div>

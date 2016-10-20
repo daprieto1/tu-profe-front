@@ -30,7 +30,8 @@
 
     })
 
-    .run(function ($rootScope) {
+    .run(function ($rootScope, CITIES) {
+      console.log(CITIES); 
       $rootScope.$apply(function () {
         angular.element(document).foundation();
       });
