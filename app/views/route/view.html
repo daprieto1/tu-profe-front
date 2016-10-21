@@ -133,6 +133,8 @@
 											<input type="checkbox" ng-model="vm.selectGeolocalized">
 										</th>
 										<th class="large-6">Direcciones</th>
+										<th>Ciudad</th>
+										<th>Fuera perímetro</th>
 										<th>Nombre</th>
 									</tr>
 								</thead>
@@ -142,6 +144,8 @@
 											<input type="checkbox" ng-model="point.selected">
 										</td>
 										<td>{{point.address}}</td>
+										<td>{{point.coordinate.city}}</td>
+										<td>{{point.coordinate.nearByCity}}</td>
 										<td>{{point.receiver}}</td>
 									</tr>
 								</tbody>

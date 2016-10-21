@@ -80,21 +80,25 @@
 
 		<div class="callout">
 			<div class="row">
-				<div class="small-12 large-3 columns" class="has-tip" tooltip-placement="top" tooltip="Número de rutas en la solución">
+				<div class="small-12 large-2 columns" class="has-tip" tooltip-placement="top" tooltip="Número de rutas en la solución">
 					<p>Número de rutas</p>
 					<div class="stat">{{vm.route.solution.routes.length}}</div>
 				</div>
-				<div class="small-12 large-3 columns" class="has-tip" tooltip-placement="top" tooltip="Costo total del ruteo">
-					<p>Costo total del ruteo</p>
-					<div class="stat">$200,000</div>
-				</div>
-				<div class="small-12 large-3 columns" class="has-tip" tooltip-placement="top" tooltip="Promedio de direcciones en cada ruta">
+				<div class="small-12 large-2 columns" class="has-tip" tooltip-placement="top" tooltip="Promedio de direcciones en cada ruta">
 					<p>Promedio direcciones</p>
 					<div class="stat">{{vm.avgPoints}}</div>
 				</div>
+				<div class="small-12 large-3 columns" class="has-tip" tooltip-placement="top" tooltip="Costo total del ruteo">
+					<p>Costo total del ruteo</p>
+					<div class="stat">$ {{vm.route.cost.toLocaleString()}}</div>
+				</div>
 				<div class="small-12 large-3 columns" class="has-tip" tooltip-placement="top" tooltip="Costo promedio por ruta">
 					<p>Costo promedio</p>
-					<div class="stat">$3,000</div>
+					<div class="stat">$ {{vm.avgCost.toLocaleString()}}</div>
+				</div>
+				<div class="small-12 large-2 columns" class="has-tip" tooltip-placement="top" tooltip="Costo por unidad de entrega">
+					<p>Costo por entrega</p>
+					<div class="stat">$ {{vm.route.solution.costByDelivery.toLocaleString()}}</div>
 				</div>
 			</div>
 		</div>
@@ -133,37 +137,52 @@
 					<th>Costo</th>
 					<th>Distancia</th>
 					<th>Estado</th>
-					<th>Número de Puntos</th>
+					<th width="150">Número de Puntos</th>
+					<th width="150">Demanda total</th>
 				</tr>
 			</thead>
 			<tbody ng-repeat="route in vm.route.solution.routes track by $index">
 				<tr>
 					<td>
-						<a href="" ng-hide="route.show" ng-click="route.show=!route.show" class="large"><i class="fi-arrows-out"></i></a>
-						<a href="" ng-show="route.show" ng-click="route.show=!route.show" class="large"><i class="fi-arrows-in"></i></a>
+						<a href="" ng-hide="route.show" ng-click="route.show=!route.show"><i class="fi-plus"></i></a>
+						<a href="" ng-show="route.show" ng-click="route.show=!route.show"><i class="fi-minus"></i></a>
 					</td>
 					<td>
-						<a href="" ng-show="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-checkbox"></i></a>
-						<a href="" ng-hide="route.selected" ng-click="vm.changeSelected(route)" class="large"><i class="fi-annotate"></i></a>
+						<input type="checkbox" ng-model="route.selected">
 					</td>
 					<td>Ruta {{$index + 1}}</td>
 					<td>${{route.cost.toLocaleString()}}</td>
 					<td>{{route.distance}} Km</td>
-					<td>{{route.isCreated ? 'created' : 'uncreated'}}</td>
+					<td>
+						<span class="label" ng-class="route.isCreated ? 'success' : 'secondary'">
+							<i ng-class="route.isCreated ? 'fi-check' : 'fi-x-circle'"></i> {{route.isCreated ? 'creado' : 'sin crear'}}
+						</span>
+					</td>
 					<td>{{route.points.length}}</td>
+					<td>{{route.totalUnits}}</td>
 				</tr>
 				<tr ng-if="route.show">
-					<td colspan="7">
+					<td colspan="8">
 						<table>
 							<thead>
 								<tr>
 									<th>Direcciones</th>
+									<th>Ciudad</th>
+									<th width="150">Fuera perímetro</th>
+									<th width="150">Demanda</th>
 									<th>Nombre</th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr ng-repeat="point in route.points">
 									<td>{{point.address}}</td>
+									<td>{{point.coordinate.city}}</td>
+									<td>
+										<span class="alert label" ng-if="point.coordinate.nearByCity">
+											<i class="fi-alert"></i>
+										</span>
+									</td>
+									<td>{{point.units}}</td>
 									<td>{{point.receiver}}</td>
 								</tr>
 							</tbody>

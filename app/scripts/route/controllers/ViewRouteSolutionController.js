@@ -75,16 +75,21 @@
                             vm.route.solution = vm.route.solution[0];
                             vm.route.city = _.find(CITIES, function (city) { return city.id == vm.route.city; });
                             moment.locale('es');
-                            vm.route.initDate = moment(vm.route.initDate).format('dddd, Do MMMM YYYY');
+                            vm.route.initDate = moment(vm.route.initDate).format('dddd, D MMMM YYYY');
 
                             _.each(vm.route.solution.routes, function (route) {
                                 route.selected = false;
                                 route.show = false;
                                 route.distance = Math.round(route.distance / 1000);
                             });
+
                             var sum = _.reduce(vm.route.solution.routes, function (memo, route) { return memo + route.points.length; }, 0);
                             vm.avgPoints = sum / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
                             vm.avgPoints = Math.round(vm.avgPoints);
+
+                            vm.route.cost = _.reduce(vm.route.solution.routes, function (memo, route) { return memo + route.cost; }, 0);
+                            vm.avgCost = vm.route.cost / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
+                            vm.avgCost = Math.round(vm.avgCost);
 
                         }, function (error) {
                             console.log(error);
