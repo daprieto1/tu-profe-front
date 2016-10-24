@@ -14,7 +14,8 @@
     "angular-foundation-6": "^0.10.12",
     "foundation-icons": "*",
     "foundation-icon-fonts": "*",
-    "moment": "^2.15.1"
+    "moment": "^2.15.1",
+    "font-awesome": "fontawesome#^4.7.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

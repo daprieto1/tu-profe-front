@@ -5,6 +5,11 @@
         .controller('ViewRouteSolutionController', function ($scope, $location, $cookies, ServiceRoute, ServiceUtils, CITIES) {
             var vm = this;
 
+            vm.sortBy = function (propertyName) {
+                vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
+                vm.propertyName = propertyName;
+            };
+
             vm.downloadRoutes = function (flag) {
 
                 function parseRouteToArray(route) {
@@ -67,6 +72,8 @@
 
                 vm.route = $cookies.getObject('selectedRoute');
                 vm.alert = {};
+                vm.propertyName = 'distance';
+                vm.reverse = false;
 
                 if (angular.isDefined(vm.route)) {
                     ServiceRoute.getRoute(vm.route.id)
@@ -82,7 +89,7 @@
                                 route.show = false;
                                 route.distance = Math.round(route.distance / 1000);
                             });
-
+                            
                             var sum = _.reduce(vm.route.solution.routes, function (memo, route) { return memo + route.points.length; }, 0);
                             vm.avgPoints = sum / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
                             vm.avgPoints = Math.round(vm.avgPoints);
