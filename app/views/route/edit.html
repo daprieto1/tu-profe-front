@@ -1,151 +1,160 @@
 <div id="edit-route" ng-controller="EditRouteController as vm">
 
-  <div class="row">
-    <div class="large-12 columns">
-      <h1>
-        Editar Ruteo {{vm.route.id}}
-      </h1>
+    <div class="row">
+        <div class="large-12 columns">
+            <nav aria-label="You are here:" role="navigation">
+                <ul class="breadcrumbs">
+                    <li><a href="#/dashboard">Dashboard</a></li>
+                    <li><a href="#/route/view">Ruteo</a></li>
+                    <li>
+                        <span class="show-for-sr">Current: </span> Editar Ruteo
+                    </li>
+                </ul>
+            </nav>
+
+            <h1>
+                Editar Ruteo {{vm.route.id}}
+            </h1>
+        </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="large-12 columns">
-      <h2>
-        Detalles del Ruteo
-      </h2>
+    <div class="row">
+        <div class="large-12 columns">
+            <h2>
+                Detalles del Ruteo
+            </h2>
+        </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="small-12 large-6 columns">
+    <div class="row">
+        <div class="small-12 large-6 columns">
 
-      <form name="createRouteForm" novalidate>
+            <form name="createRouteForm" novalidate>
 
-        <div class="row">
-          <div class="large-12 columns">
-            <label for="city">Ciudad
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="city">Ciudad
               <select id="city" name="city" ng-model="vm.route.city"
                       ng-options="city as city.name for city in vm.cities track by city.id"
                       required>
               </select>
             </label>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="row">
-          <div class="large-12 columns">
-            <label for="originAddress">Dirección de origen
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="originAddress">Dirección de origen
               <input id="originAddress" name="originAddress" type="text" ng-model="vm.route.originAddress"
                      required>
             </label>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="row">
+                <div class="row">
 
-          <div class="small-12 large-6 columns">
-            <label for="initDate">Fecha de Inicio
+                    <div class="small-12 large-6 columns">
+                        <label for="initDate">Fecha de Inicio
               <input id="initDate" name="initDate" type="date" ng-model="vm.route.initDate" required>
             </label>
-          </div>
+                    </div>
 
-          <div class="small-12 large-6 columns">
-            <label for="initHour">Hora de Inicio
+                    <div class="small-12 large-6 columns">
+                        <label for="initHour">Hora de Inicio
               <select id="initHour" name="initHour" ng-model="vm.route.initHour"
                       ng-options="initHour as initHour.name for initHour in vm.hourInitTypes track by initHour.id"
                       required>
               </select>
             </label>
-          </div>
+                    </div>
 
-        </div>
+                </div>
 
-        <div class="row">
+                <div class="row">
 
-          <div class="small-12 large-6 columns">
-            <label for="deliveryType">Tipo de Entrega
+                    <div class="small-12 large-6 columns">
+                        <label for="deliveryType">Tipo de Entrega
               <select id="deliveryType" name="deliveryType" ng-model="vm.route.deliveryType"
                       ng-options="deliveryType as deliveryType.name for deliveryType in vm.deliveryTypes track by deliveryType.id"
                       required>
               </select>
             </label>
-          </div>
+                    </div>
 
-          <div class="small-12 large-6 columns">
-            <label for="routeType">Tipo de Ruta
+                    <div class="small-12 large-6 columns">
+                        <label for="routeType">Tipo de Ruta
               <select id="routeType" name="routeType" ng-model="vm.route.routeType"
                       ng-options="routeType as routeType.name for routeType in vm.routeTypes track by routeType.id"
                       required>
               </select>
             </label>
-          </div>
+                    </div>
 
-        </div>
+                </div>
 
-        <div class="row">
-          <div class="large-12 columns">
-            <label for="vehicleType">Tipo de vehiculo
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="vehicleType">Tipo de vehiculo
               <select id="vehicleType" name="vehicleType" ng-model="vm.route.vehicleType"
                       ng-options="vehicleType as vehicleType.name for vehicleType in vm.vehicleTypes track by vehicleType.id"
                       required>
               </select>
             </label>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="row" ng-if="vm.route.routeType !== undefined && vm.route.routeType.id !== 3">
-          <div class="small-12 large-3 columns">
-            <label for="height">Alto (cm)
+                <div class="row" ng-if="vm.route.routeType !== undefined && vm.route.routeType.id !== 3">
+                    <div class="small-12 large-3 columns">
+                        <label for="height">Alto (cm)
               <input id="height" name="height" ng-model="vm.route.vehicleType.height" type="number" required>
             </label>
-          </div>
-          <div class="small-12 large-3 columns">
-            <label for="width">Ancho (cm)
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label for="width">Ancho (cm)
               <input id="width" name="width" ng-model="vm.route.vehicleType.width" type="number" required>
             </label>
-          </div>
-          <div class="small-12 large-3 columns">
-            <label for="deep">Largo (cm)
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label for="deep">Largo (cm)
               <input id="deep" name="deep" ng-model="vm.route.vehicleType.deep" type="number" required>
             </label>
-          </div>
-          <div class="small-12 large-3 columns">
-            <label for="weight">Peso (Kg)
+                    </div>
+                    <div class="small-12 large-3 columns">
+                        <label for="weight">Peso (Kg)
               <input id="weight" name="weight" ng-model="vm.route.vehicleType.weight" type="number" required>
             </label>
-          </div>
-        </div>
+                    </div>
+                </div>
 
-        <div class="row">
-          <div class="small-12 large-3 columns end">
-            <button class="button" ng-click="vm.createRoute()" ng-disabled="createRouteForm.$invalid">
+                <div class="row">
+                    <div class="small-12 large-3 columns end">
+                        <button class="button" ng-click="vm.update()" ng-disabled="createRouteForm.$invalid">
               Editar Ruteo
             </button>
-          </div>
+                    </div>
+                </div>
+            </form>
+
         </div>
-      </form>
+        <div class="small-12 large-6 columns">
+            <h3>Preguntas Frecuentes</h3>
 
+            <accordion close-others="false">
+                <accordion-group heading="¿Qué es tipo de ruta?">
+                    <ul>
+                        <li>Entregas: El cliente necesita que sea entregado algún item.</li>
+                        <li>Recogida: El cliente necesita que sea recogido algún item.</li>
+                        <li>
+                            Recaudo: El cliente necesita que se recoja un monto de dinero específico. Recuerda que el límite por mensajero es de $2’000,000.
+                        </li>
+                    </ul>
+                </accordion-group>
+                <accordion-group heading="¿Qué es tipo de entrega?">
+
+                </accordion-group>
+            </accordion>
+
+        </div>
     </div>
-    <div class="small-12 large-6 columns">
-      <h3>Preguntas Frecuentes</h3>
-
-      <accordion close-others="false">
-        <accordion-group heading="¿Qué es tipo de ruta?">
-          <ul>
-            <li>Entregas: El cliente necesita que sea entregado algún item.</li>
-            <li>Recogida: El cliente necesita que sea recogido algún item.</li>
-            <li>
-              Recaudo: El cliente necesita que se recoja un monto de dinero específico. Recuerda que el límite por
-              mensajero es de $2’000,000.
-            </li>
-          </ul>
-        </accordion-group>
-        <accordion-group heading="¿Qué es tipo de entrega?">
-
-        </accordion-group>
-      </accordion>
-
-    </div>
-  </div>
 
 </div>

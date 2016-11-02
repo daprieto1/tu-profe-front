@@ -1,16 +1,16 @@
-(function () {
+(function() {
     'use strict';
 
     angular.module('routeModule')
-        .controller('ViewRouteSolutionController', function ($scope, $location, $cookies, ServiceRoute, ServiceUtils, CITIES) {
+        .controller('ViewRouteSolutionController', function($scope, $location, $cookies, ServiceSolution, ServiceUtils, CITIES) {
             var vm = this;
 
-            vm.sortBy = function (propertyName) {
+            vm.sortBy = function(propertyName) {
                 vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
                 vm.propertyName = propertyName;
             };
 
-            vm.downloadRoutes = function (flag) {
+            vm.downloadRoutes = function(flag) {
 
                 function parseRouteToArray(route) {
                     var array = [];
@@ -29,7 +29,7 @@
                     summary.push(route.points.length);
                     array.push(summary.join());
 
-                    _.each(route.points, function (point) {
+                    _.each(route.points, function(point) {
                         var pointArray = [];
                         pointArray.push(point.address);
                         pointArray.push(point.units);
@@ -44,15 +44,15 @@
 
                 var routes;
                 if (flag) {
-                    var routes = _.filter(vm.route.solution.routes, function (route) { return route.selected });
+                    var routes = _.filter(vm.route.solution.routes, function(route) { return route.selected });
                 } else {
                     var routes = vm.route.solution.routes;
                 }
 
                 if (angular.isDefined(routes) && routes.length > 0) {
-                    Promise.resolve(routes.map(parseRouteToArray).reduce(function (mem, route) { return mem.concat(route); }))
+                    Promise.resolve(routes.map(parseRouteToArray).reduce(function(mem, route) { return mem.concat(route); }))
                         .then(ServiceUtils.parseArrayToCSV)
-                        .then(function (value) {
+                        .then(function(value) {
                             ServiceUtils.downloadData(value, vm.route.id + 'routes', 'csv');
                         });
                 } else {
@@ -62,7 +62,7 @@
                 }
             };
 
-            vm.changeSelected = function (route) {
+            vm.changeSelected = function(route) {
                 if (angular.isDefined(route)) {
                     route.selected = !route.selected;
                 }
@@ -76,29 +76,29 @@
                 vm.reverse = false;
 
                 if (angular.isDefined(vm.route)) {
-                    ServiceRoute.getRoute(vm.route.id)
-                        .then(function (response) {
-                            vm.route = response;
-                            vm.route.solution = vm.route.solution[0];
-                            vm.route.city = _.find(CITIES, function (city) { return city.id == vm.route.city; });
+                    ServiceSolution.getSolutionByRoute(vm.route.id)
+                        .then(function(response) {
+                            console.log(response);
+                            vm.route.solution = response;
+                            vm.route.city = _.find(CITIES, function(city) { return city.id == vm.route.city; });
                             moment.locale('es');
                             vm.route.initDate = moment(vm.route.initDate).format('dddd, D MMMM YYYY');
 
-                            _.each(vm.route.solution.routes, function (route) {
+                            _.each(vm.route.solution.routes, function(route) {
                                 route.selected = false;
                                 route.show = false;
                                 route.distance = Math.round(route.distance / 1000);
                             });
-                            
-                            var sum = _.reduce(vm.route.solution.routes, function (memo, route) { return memo + route.points.length; }, 0);
+
+                            var sum = _.reduce(vm.route.solution.routes, function(memo, route) { return memo + route.points.length; }, 0);
                             vm.avgPoints = sum / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
                             vm.avgPoints = Math.round(vm.avgPoints);
 
-                            vm.route.cost = _.reduce(vm.route.solution.routes, function (memo, route) { return memo + route.cost; }, 0);
+                            vm.route.cost = _.reduce(vm.route.solution.routes, function(memo, route) { return memo + route.cost; }, 0);
                             vm.avgCost = vm.route.cost / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
                             vm.avgCost = Math.round(vm.avgCost);
 
-                        }, function (error) {
+                        }, function(error) {
                             console.log(error);
                         });
                 } else {

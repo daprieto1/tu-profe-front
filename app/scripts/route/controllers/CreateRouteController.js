@@ -15,7 +15,7 @@
 
         ServiceRoute.saveRoute(newRoute)
           .then(function () {
-            $location.path('/dashboard')
+            $location.path('/dashboard');
           }, function (error) {
             console.log(error);
           });

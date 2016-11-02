@@ -1,27 +1,42 @@
-(function () {
-  'use strict';
+(function() {
+    'use strict';
 
-  angular.module('routeModule')
-    .controller('EditRouteController', function ($scope, $location, $cookies, ServiceUtils, HOUR_INIT_TYPES, DELIVERY_TYPES, ROUTE_TYPES, VEHICLE_TYPES, CITIES) {
-      var vm = this;
+    angular.module('routeModule')
+        .controller('EditRouteController', function($scope, $location, $cookies, ServiceUtils, ServiceRoute, HOUR_INIT_TYPES, DELIVERY_TYPES, ROUTE_TYPES, VEHICLE_TYPES, CITIES) {
+            var vm = this;
 
-      function initCtrl() {
-        vm.cities = CITIES;
-        vm.hourInitTypes = angular.copy(HOUR_INIT_TYPES);
-        vm.deliveryTypes = angular.copy(DELIVERY_TYPES);
-        vm.routeTypes = angular.copy(ROUTE_TYPES);
-        vm.vehicleTypes = angular.copy(VEHICLE_TYPES);
+            vm.update = function() {
+                var newRoute = angular.copy(vm.route);
+                newRoute.city = vm.route.city.id;
+                newRoute.initHour = vm.route.initHour.name;
+                newRoute.deliveryType = vm.route.deliveryType.name;
+                newRoute.routeType = vm.route.routeType.name;
 
-        vm.route = $cookies.getObject('selectedRoute');
-        console.log(vm.route);
-        vm.route.city = _.findWhere(vm.cities, { id: vm.route.city });
-        vm.route.deliveryType = _.findWhere(vm.deliveryTypes, { name: vm.route.deliveryType });
-        vm.route.initHour = _.findWhere(vm.hourInitTypes, { name: vm.route.initHour });
-        vm.route.routeType = _.findWhere(vm.routeTypes, { name: vm.route.routeType });
+                ServiceRoute.update(newRoute)
+                    .then(function() {
+                        $location.path('/dashboard');
+                    }, function(error) {
+                        console.log(error);
+                    });
+            };
 
-        console.log(vm.route);
-      }
+            function initCtrl() {
+                vm.cities = CITIES;
+                vm.hourInitTypes = angular.copy(HOUR_INIT_TYPES);
+                vm.deliveryTypes = angular.copy(DELIVERY_TYPES);
+                vm.routeTypes = angular.copy(ROUTE_TYPES);
+                vm.vehicleTypes = angular.copy(VEHICLE_TYPES);
 
-      initCtrl();
-    });
+                vm.route = $cookies.getObject('selectedRoute');
+                console.log(vm.route);
+                vm.route.city = _.findWhere(vm.cities, { id: vm.route.city });
+                vm.route.deliveryType = _.findWhere(vm.deliveryTypes, { name: vm.route.deliveryType });
+                vm.route.initHour = _.findWhere(vm.hourInitTypes, { name: vm.route.initHour });
+                vm.route.routeType = _.findWhere(vm.routeTypes, { name: vm.route.routeType });
+
+                console.log(vm.route);
+            }
+
+            initCtrl();
+        });
 })();

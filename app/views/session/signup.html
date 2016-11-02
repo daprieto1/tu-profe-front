@@ -1,0 +1,29 @@
+<div class="signup-wrapper" ng-controller="SignUpController as vm">
+    <form name="signUpForm" novalidate>
+        <div class="row">
+            <div class="small-12 large-6 large-centered columns">
+                <img src="images/login/logo-mu.svg" alt="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-6 large-centered columns">
+                <input type="text" placeholder="Usuario" ng-model="vm.user.name" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-6 large-centered columns">
+                <input type="email" placeholder="Correo Electrónico" ng-model="vm.user.email" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-6 large-centered columns">
+                <input type="password" placeholder="Contraseña" ng-model="vm.user.password" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-6 large-centered columns">
+                <button ng-disabled="signUpForm.$invalid" class="button expand" ng-click="vm.signUp()">Crear Cuenta</button>
+            </div>
+        </div>
+    </form>
+</div>
