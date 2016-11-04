@@ -5,6 +5,22 @@
         .controller('ViewRouteSolutionController', function($scope, $location, $cookies, ServiceSolution, ServiceUtils, CITIES) {
             var vm = this;
 
+            vm.createSelectedRoutes = function() {
+                var routesToCreate = vm.route.solution.routes.filter(function(route) {
+                        return route.selected
+                    })
+                    .map(function(route) {
+                        return { id: route.id };
+                    });
+                ServiceSolution.createRoutesInMu(vm.route.id, routesToCreate)
+                    .then(function(response) {
+                        console.log(response);
+                    }, function(error) {
+                        console.log(error);
+                    });
+                console.log(routesToCreate);
+            };
+
             vm.sortBy = function(propertyName) {
                 vm.reverse = (vm.propertyName === propertyName) ? !vm.reverse : false;
                 vm.propertyName = propertyName;
