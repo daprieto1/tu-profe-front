@@ -44,16 +44,24 @@
                     </div>
 
                     <div class="row">
-                        <div class="small-12 large-6 columns">
+                        <div class="large-12 columns">
                             <label for="originAddress">Dirección de origen
 								<input id="originAddress" name="originAddress" type="text" ng-model="vm.newRoute.originAddress"
 									required>
 							</label>
                         </div>
+                    </div>
 
+                    <div class="row">
                         <div class="small-12 large-6 columns">
                             <label for="clientId">Id del cliente
-								<input id="clientId" name="clientId" type="number" ng-model="vm.newRoute.clientId" required>
+								<input id="clientId" name="clientId" type="number" ng-model="vm.newRoute.idClient" min="0" required>
+							</label>
+                        </div>
+
+                        <div class="small-12 large-6 columns">
+                            <label for="unitDeclaredValue">Costo de Unidad
+								<input id="unitDeclaredValue" name="unitDeclaredValue" type="number" ng-model="vm.newRoute.unitDeclaredValue" min="0" required>
 							</label>
                         </div>
                     </div>
