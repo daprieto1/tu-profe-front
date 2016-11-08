@@ -5,6 +5,14 @@
         .controller('ViewRouteController', function($scope, $cookies, $location, $route, ServiceRoute, ServicePoints, ServiceUtils, CITIES) {
             var vm = this;
 
+            vm.isPossibleEdit = function() {
+                if (vm.route.state === 'created' || vm.route.state === 'solved'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+
             vm.delete = function() {
                 ServiceRoute.delete(vm.route.id)
                     .then(function() {

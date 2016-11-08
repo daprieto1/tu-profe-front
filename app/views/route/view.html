@@ -16,7 +16,7 @@
 
             <alert ng-if="vm.alert.show" type="vm.alert.type" close="vm.alert.show=false">{{vm.alert.msg}}</alert>
 
-            <ul class="vertical medium-horizontal menu">
+            <ul class="vertical medium-horizontal menu" ng-if="vm.isPossibleEdit()">
                 <li><a href="" ng-click="vm.searchFile()">Importar direcciones</a></li>
                 <li><a href="#/route/edit">Editar Configuración</a></li>
                 <li><a href="" ng-click="vm.delete()">Eliminar Ruteo</a></li>
@@ -105,8 +105,8 @@
                     <button class="button" ng-click="vm.solve()" ng-if="vm.route.state === 'created'">
             			Solucionar
           			</button>
-                    <a class="button" ng-if="vm.route.state === 'solved'" href="#/route/view-solution"> Ver Solución</a>
-                    <button class="secondary button" ng-click="vm.deleteAddressOpen()" ng-disabled="vm.thereIsAddressSelected()">
+                    <a class="button" ng-if="vm.route.state !== 'created'" href="#/route/view-solution"> Ver Solución</a>
+                    <button class="secondary button" ng-click="vm.deleteAddressOpen()" ng-disabled="vm.thereIsAddressSelected()" ng-if="vm.isPossibleEdit()">
             			Borrar
           			</button>
 

@@ -2,23 +2,33 @@
     'use strict';
 
     angular.module('routeModule')
-        .controller('ViewRouteSolutionController', function($scope, $location, $cookies, ServiceSolution, ServiceUtils, CITIES) {
+        .controller('ViewRouteSolutionController', function($scope, $location, $cookies, $route, ServiceSolution, ServiceUtils, CITIES) {
             var vm = this;
 
-            vm.createSelectedRoutes = function() {
-                var routesToCreate = vm.route.solution.routes.filter(function(route) {
-                        return route.selected
-                    })
-                    .map(function(route) {
-                        return { id: route.id };
-                    });
-                ServiceSolution.createRoutesInMu(vm.route.id, routesToCreate)
-                    .then(function(response) {
-                        console.log(response);
-                    }, function(error) {
-                        console.log(error);
-                    });
-                console.log(routesToCreate);
+            vm.createRoutes = function(all) {
+                var routesToCreate = [];
+
+                if (all) {
+                    routesToCreate = vm.route.solution.routes.filter(function(route) { return !route.isCreated; })
+                        .map(function(route) { return { id: route.id }; });
+                } else {
+                    routesToCreate = vm.route.solution.routes.filter(function(route) { return route.selected; })
+                        .map(function(route) { return { id: route.id }; });
+                }
+
+                if (routesToCreate.length === 0) {
+                    vm.alert.show = true;
+                    vm.alert.msg = 'No hay rutas seleccionadas o disponibles para crear';
+                    vm.alert.type = 'alert';
+                } else {
+                    ServiceSolution.createRoutesInMu(vm.route.id, routesToCreate)
+                        .then(function(response) {
+                            $route.reload();
+                        }, function(error) {
+                            console.log(error);
+                        });
+                }
+
             };
 
             vm.sortBy = function(propertyName) {
