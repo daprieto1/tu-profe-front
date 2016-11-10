@@ -133,7 +133,9 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Nombre</th>
+                    <th ng-click="vm.sortBy('id')">
+                        <i class="fa fa-sort-alpha-{{vm.reverse ? 'desc' : 'asc' }}" aria-hidden="true"></i> Nombre
+                    </th>
                     <th ng-click="vm.sortBy('cost')">
                         <i class="fa fa-sort-numeric-{{vm.reverse ? 'desc' : 'asc' }}" aria-hidden="true"></i> Costo
                     </th>
@@ -160,7 +162,7 @@
                     <td>
                         <input type="checkbox" ng-model="route.selected">
                     </td>
-                    <td>Ruta {{$index + 1}}</td>
+                    <td>Ruta {{route.id}}</td>
                     <td>${{route.cost.toLocaleString()}}</td>
                     <td>{{route.distance}} Km</td>
                     <td>
