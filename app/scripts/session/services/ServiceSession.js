@@ -8,27 +8,19 @@
             var Session = $resource('http://localhost:8080/session', {}, {
                 signUp: {
                     method: 'POST',
-                    url: 'http://localhost:8080/session/signup',
-                    isArray: true,
-                    withCredentials: true
+                    url: 'http://localhost:8080/session/signup'
+                },
+                login: {
+                    method: 'POST',
+                    params: { username: '@username', password: '@password' },
+                    url: 'http://localhost:8080/session/login',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }
             });
 
             return {
-                login: function(email, password) {
-                    var req = {
-                        method: 'POST',
-                        url: 'http://localhost:1337/login',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        data: {
-                            email: email,
-                            password: password
-                        }
-                    };
-
-                    return $http(req);
+                login: function(username, password) {
+                    return Session.login({ username: username, password: password }).$promise;
                 },
 
                 signUp: function(user) {

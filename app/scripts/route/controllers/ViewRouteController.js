@@ -6,9 +6,9 @@
             var vm = this;
 
             vm.isPossibleEdit = function() {
-                if (vm.route.state === 'created' || vm.route.state === 'solved'){
+                if (vm.route.state === 'created' || vm.route.state === 'solved') {
                     return true;
-                }else{
+                } else {
                     return false;
                 }
             }
@@ -23,11 +23,15 @@
             };
 
             vm.solve = function() {
+                vm.loader.show = true;
+                vm.loader.message = 'Paciencia estamos buscando una solución.';
+
                 ServiceRoute.solve(vm.route.id)
                     .then(function(response) {
                         vm.route.solution = response;
                         $location.path('/route/view-solution');
                     }, function(error) {
+                        vm.loader.show = false;
                         vm.alert.show = true;
                         vm.alert.msg = angular.isDefined(error.data.message) ? error.data.message : 'Error solucionando el ruteo, contacte al administrador.';
                         vm.alert.type = 'alert';
@@ -112,11 +116,14 @@
             vm.loadAddress = function() {
 
                 vm.popup.close();
+                vm.loader.show = true;
+                vm.loader.message = 'Estamos buscando las rutas en Mensajeros Urbanos.';
 
                 ServicePoints.bulkSave(vm.route.id, vm.newPoints)
                     .then(function(response) {
                         $route.reload();
                     }, function(error) {
+                        vm.loader.show = false;
                         vm.alert.show = true;
                         vm.alert.msg = angular.isDefined(error.data.message) ? error.data.message : 'Error solucionando el ruteo, contacte al administrador.';
                         vm.alert.type = 'alert';
@@ -179,12 +186,15 @@
                         route: vm.route.id
                     }
                 });
-                console.log(vm.newPoints);
             }
 
             function initCtrl() {
 
                 vm.alert = {};
+                vm.loader = {
+                    show: true,
+                    message: 'Estamos recuperando la infromación de la ruta.'
+                };
                 vm.route = $cookies.getObject('selectedRoute');
                 vm.newPoints = [];
                 vm.realInputFile = angular.element('#real-input-file');
@@ -209,9 +219,10 @@
                             vm.geolocalized = result.false;
                             vm.noGeolocalized = result.true;
 
-                            console.log(vm.route);
+                            vm.loader.show = false;
 
                         }, function(error) {
+                            vm.loader.show = false;
                             console.log(error);
                         });
                 } else {

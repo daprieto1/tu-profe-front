@@ -1,29 +1,31 @@
-(function () {
+(function() {
 
-  'use strict';
+    'use strict';
 
-  angular.module('sessionModule')
+    angular.module('sessionModule')
 
-    .controller('LoginController', function ($scope, $rootScope, $location, $cookies, ServiceSession) {
+    .controller('LoginController', function($scope, $rootScope, $location, $cookies, ServiceSession) {
 
-      var vm = this;
+        var vm = this;
 
-      vm.login = function () {
-        ServiceSession.login(vm.email, vm.password)
-          .then(function (response) {
-            $cookies.putObject('user', response.data.data);
-            $rootScope.user = response.data.data;
-            $location.path('dashboard');
-          }, function (error) {
-            console.log(error);
-          });
-      };
+        vm.login = function() {
+            ServiceSession.login(vm.email, vm.password)
+                .then(function(response) {
+                    $cookies.putObject('user', response);
+                    $cookies.put('username', vm.email);
+                    $cookies.put('token', vm.password);
+                    $rootScope.user = response;
+                    $location.path('dashboard');
+                }, function(error) {
+                    console.log(error);
+                });
+        };
 
-      function initCtrl() {
-        vm.email = undefined;
-        vm.password = undefined;
-      }
+        function initCtrl() {
+            vm.email = undefined;
+            vm.password = undefined;
+        }
 
-      initCtrl();
+        initCtrl();
     });
 })();

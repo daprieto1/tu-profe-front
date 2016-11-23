@@ -6,6 +6,9 @@
             var vm = this;
 
             vm.createRoutes = function(all) {
+                vm.loader.show = true;
+                vm.loader.message = 'Estamos creando las rutas en Mensajeros Urbanos.';
+
                 var routesToCreate = [];
 
                 if (all) {
@@ -23,9 +26,10 @@
                 } else {
                     ServiceSolution.createRoutesInMu(vm.route.id, routesToCreate)
                         .then(function(response) {
-                            $route.reload();
+                            //$route.reload();
                         }, function(error) {
                             console.log(error);
+                            vm.loader.show = false;
                         });
                 }
 
@@ -40,27 +44,43 @@
 
                 function parseRouteToArray(route) {
                     var array = [];
+                    var head = [];
                     var title = [];
                     var summary = [];
 
-                    title.push('Cost');
-                    title.push('Distance');
-                    title.push('State');
-                    title.push('Number of points');
+                    head = [
+                        ['Empresa:', 'Clinica Barraguer', 'Luz Clara Guillen', '3176433437'],
+                        ['Dirección de Recogida:', 'Call 100 #18a- 51', 'Ruta ' + (route.id + 1)],
+                        ['Hora y fecha de RECOGIDA', '1:00 pm'],
+                        ['Hora y fecha de ENTREGA', '10/11/2016'],
+                        ['Producto o documento a entregar:', 'Invitaciones'],
+                        ['Persona que le entrega:  firma o sello', 'Luz Clara Guillen']
+                    ];
+                    head.forEach(function(headValue) {
+                        array.push(headValue);
+                    });
+
+                    title.push('característica');
+                    title.push('Dirección');
+                    title.push('Cantidad');
+                    title.push('Nombre de Quien Recibe');
+                    title.push('Firma y sello de Quien Recibe');
+                    title.push('Observaciones');
                     array.push(title.join());
 
                     summary.push(route.cost);
                     summary.push(route.distance);
                     summary.push(route.isCreated ? 'created' : 'uncreated');
                     summary.push(route.points.length);
-                    array.push(summary.join());
+                    //array.push(summary.join());
 
                     _.each(route.points, function(point) {
                         var pointArray = [];
                         pointArray.push(point.address);
+                        pointArray.push(point.address);
                         pointArray.push(point.units);
                         pointArray.push(point.receiver);
-                        pointArray.push(point.receiverPhone);
+                        pointArray.push(point.receiver);
                         pointArray.push(point.comments);
                         array.push(pointArray.join());
                     });
@@ -96,15 +116,18 @@
 
             function initCtrl() {
 
-                vm.route = $cookies.getObject('selectedRoute');
                 vm.alert = {};
+                vm.loader = {
+                    show: true,
+                    message: 'Estamos recuperando la infromación de la solución.'
+                };
+                vm.route = $cookies.getObject('selectedRoute');
                 vm.propertyName = 'distance';
                 vm.reverse = false;
 
                 if (angular.isDefined(vm.route)) {
                     ServiceSolution.getSolutionByRoute(vm.route.id)
                         .then(function(response) {
-                            console.log(response);
                             vm.route.solution = response;
                             vm.route.city = _.find(CITIES, function(city) { return city.id == vm.route.city; });
                             moment.locale('es');
@@ -124,7 +147,9 @@
                             vm.avgCost = vm.route.cost / (vm.route.solution.routes.length === 0 ? 1 : vm.route.solution.routes.length);
                             vm.avgCost = Math.round(vm.avgCost);
 
+                            vm.loader.show = false;
                         }, function(error) {
+                            vm.loader.show = false;
                             console.log(error);
                         });
                 } else {

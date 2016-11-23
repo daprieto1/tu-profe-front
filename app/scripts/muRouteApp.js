@@ -16,11 +16,12 @@
 
     .config(function($routeProvider, $cookiesProvider) {
 
+
         $cookiesProvider.defaults.path = '/';
 
         $routeProvider
             .when('/', {
-                templateUrl: 'views/session/login.html'
+                templateUrl: 'views/route/list.html'
             })
             .when('/login', {
                 templateUrl: 'views/session/login.html'

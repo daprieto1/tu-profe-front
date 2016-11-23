@@ -10,7 +10,9 @@
             </ul>
         </nav>
 
-        <div class="large-12 columns">
+        <loader show="vm.loader.show" message="vm.loader.message"></loader>
+
+        <div class="large-12 columns" ng-hide="vm.loader.show">
 
             <h1>Ruteo {{vm.route.id}}</h1>
 
@@ -256,6 +258,7 @@
 
     </div>
     <!-- DELETE ADDRESS -->
+
 
 
 </div>

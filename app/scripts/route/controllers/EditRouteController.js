@@ -28,13 +28,10 @@
                 vm.vehicleTypes = angular.copy(VEHICLE_TYPES);
 
                 vm.route = $cookies.getObject('selectedRoute');
-                console.log(vm.route);
                 vm.route.city = _.findWhere(vm.cities, { id: vm.route.city });
                 vm.route.deliveryType = _.findWhere(vm.deliveryTypes, { name: vm.route.deliveryType });
                 vm.route.initHour = _.findWhere(vm.hourInitTypes, { name: vm.route.initHour });
                 vm.route.routeType = _.findWhere(vm.routeTypes, { name: vm.route.routeType });
-
-                console.log(vm.route);
             }
 
             initCtrl();
