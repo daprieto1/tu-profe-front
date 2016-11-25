@@ -2,49 +2,50 @@
     'use strict';
 
     angular.module('routeModule')
-        .factory('ServiceRoute', function($resource) {
+        .factory('ServicePoints', function($resource) {
 
-            var Route = $resource('http://localhost:8080/route/:idRoute', { idRoute: '@idRoute' }, {
-                getRoutesByUser: {
-                    method: 'GET',
-                    params: { idUser: '@idUser' },
-                    url: 'http://localhost:8080/route/get-routes-by-user/:idUser',
+            var Point = $resource('localhost:1337/point/:idPoint', { idRoute: '@idPoint' }, {
+                bulkSave: {
+                    method: 'POST',
+                    url: 'localhost:8080/route/bulk-save/:idRoute',
                     isArray: true,
                     withCredentials: true
                 },
-                solve: {
+                bulkDelete: {
                     method: 'POST',
-                    url: 'http://localhost:8080/route/solve/:idRoute',
-                },
-                update: {
-                    method: 'PUT'
+                    url: 'localhost:8080/route/bulk-delete/:idRoute'
                 }
             });
 
             return {
-                getRoutesByUser: function(idUser) {
-                    return Route.getRoutesByUser({ idUser: idUser }).$promise;
+                bulkDelete: function(idRoute, points) {
+                    return Point.bulkDelete({ idRoute: idRoute }, points).$promise;
                 },
-
-                saveRoute: function(route) {
-                    return new Route(route).$save();
-                },
-
-                getRoute: function(idRoute) {
-                    return Route.get({ idRoute: idRoute }).$promise;
-                },
-
-                solve: function(idRoute) {
-                    return Route.solve({ idRoute: idRoute }).$promise;
-                },
-
-                update: function(route) {
-                    return Route.update({}, route).$promise;
-                },
-
-                delete: function(idRoute) {
-                    return Route.remove({ idRoute: idRoute }).$promise;
+                bulkSave: function(idRoute, points) {
+                    return Point.bulkSave({ idRoute: idRoute }, points).$promise;
                 }
-            };
+            }
         });
+})();
+saveRoute: function(route) {
+        return new Route(route).$save();
+    },
+
+    getRoute: function(idRoute) {
+        return Route.get({ idRoute: idRoute }).$promise;
+    },
+
+    solve: function(idRoute) {
+        return Route.solve({ idRoute: idRoute }).$promise;
+    },
+
+    update: function(route) {
+        return Route.update({}, route).$promise;
+    },
+
+    delete: function(idRoute) {
+        return Route.remove({ idRoute: idRoute }).$promise;
+    }
+};
+});
 })();

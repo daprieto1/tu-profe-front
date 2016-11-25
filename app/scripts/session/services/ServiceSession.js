@@ -5,15 +5,15 @@
     angular.module('sessionModule')
         .factory('ServiceSession', function($http, $resource) {
 
-            var Session = $resource('http://localhost:8080/session', {}, {
+            var Session = $resource('localhost:8080/session', {}, {
                 signUp: {
                     method: 'POST',
-                    url: 'http://localhost:8080/session/signup'
+                    url: 'localhost:8080/session/signup'
                 },
                 login: {
                     method: 'POST',
                     params: { username: '@username', password: '@password' },
-                    url: 'http://localhost:8080/session/login',
+                    url: 'localhost:8080/session/login',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }
             });
