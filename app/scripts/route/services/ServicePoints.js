@@ -2,18 +2,18 @@
     'use strict';
 
     angular.module('routeModule')
-        .factory('ServicePoints', function($resource) {
+        .factory('ServicePoints', function($resource, $rootScope) {
 
-            var Point = $resource('localhost:1337/point/:idPoint', { idRoute: '@idPoint' }, {
+            var Point = $resource('http://localhost:1337/point/:idPoint', { idRoute: '@idPoint' }, {
                 bulkSave: {
                     method: 'POST',
-                    url: 'localhost:8080/route/bulk-save/:idRoute',
+                    url: $rootScope.routeApi + '/route/bulk-save/:idRoute',
                     isArray: true,
                     withCredentials: true
                 },
                 bulkDelete: {
                     method: 'POST',
-                    url: 'localhost:8080/route/bulk-delete/:idRoute'
+                    url: $rootScope.routeApi + '/route/bulk-delete/:idRoute'
                 }
             });
 

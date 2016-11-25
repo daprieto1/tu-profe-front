@@ -2,20 +2,20 @@
     'use strict';
 
     angular.module('routeModule')
-        .factory('ServiceSolution', function($resource) {
+        .factory('ServiceSolution', function($resource, $rootScope) {
 
-            var Solution = $resource('localhost:8080/solution/:idSolution', { idSolution: '@idSolution' }, {
+            var Solution = $resource($rootScope.routeApi + '/solution/:idSolution', { idSolution: '@idSolution' }, {
                 getSolutionByRoute: {
                     method: 'GET',
                     params: { idRoute: '@idRoute' },
-                    url: 'localhost:8080/solution/:idRoute',
+                    url: $rootScope.routeApi + '/solution/:idRoute',
                     isArray: false,
                     withCredentials: true
                 },
                 createRoutesInMu: {
                     method: 'POST',
                     params: { idRoute: '@idRoute' },
-                    url: 'localhost:8080/solution/create-routes-in-mu/:idRoute'
+                    url: $rootScope.routeApi + '/solution/create-routes-in-mu/:idRoute'
                 }
             });
 

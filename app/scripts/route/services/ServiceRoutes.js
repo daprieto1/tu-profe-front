@@ -2,19 +2,19 @@
     'use strict';
 
     angular.module('routeModule')
-        .factory('ServiceRoute', function($resource) {
+        .factory('ServiceRoute', function($resource, $rootScope) {
 
-            var Route = $resource('localhost:8080/route/:idRoute', { idRoute: '@idRoute' }, {
+            var Route = $resource($rootScope.routeApi + '/route/:idRoute', { idRoute: '@idRoute' }, {
                 getRoutesByUser: {
                     method: 'GET',
                     params: { idUser: '@idUser' },
-                    url: 'localhost:8080/route/get-routes-by-user/:idUser',
+                    url: $rootScope.routeApi + '/route/get-routes-by-user/:idUser',
                     isArray: true,
                     withCredentials: true
                 },
                 solve: {
                     method: 'POST',
-                    url: 'localhost:8080/route/solve/:idRoute',
+                    url: $rootScope.routeApi + '/route/solve/:idRoute',
                 },
                 update: {
                     method: 'PUT'

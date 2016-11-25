@@ -41,6 +41,7 @@
     .run(function($rootScope, CITIES) {
 
         $rootScope.$apply(function() {
+            $rootScope.routeApi = 'http://35.164.136.97:8080'
             angular.element(document).foundation();
         });
 

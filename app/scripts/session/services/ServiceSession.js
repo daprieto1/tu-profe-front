@@ -3,17 +3,17 @@
     'use strict';
 
     angular.module('sessionModule')
-        .factory('ServiceSession', function($http, $resource) {
+        .factory('ServiceSession', function($http, $resource, $rootScope) {
 
-            var Session = $resource('localhost:8080/session', {}, {
+            var Session = $resource($rootScope.routeApi + '/session', {}, {
                 signUp: {
                     method: 'POST',
-                    url: 'localhost:8080/session/signup'
+                    url: $rootScope.routeApi + '/session/signup'
                 },
                 login: {
                     method: 'POST',
                     params: { username: '@username', password: '@password' },
-                    url: 'localhost:8080/session/login',
+                    url: $rootScope.routeApi + '/session/login',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
                 }
             });
