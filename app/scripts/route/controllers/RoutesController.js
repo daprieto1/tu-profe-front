@@ -18,6 +18,10 @@
                 ServiceRoute.getRoutesByUser(vm.user.id)
                     .then(function(response) {
                         vm.routes = response;
+                        vm.routes.forEach(function(route) {
+                            route.initDate = moment(route.initDate).format('dddd, D MMMM YYYY');
+                        });
+                        console.log(vm.routes);
                         vm.loader.show = false;
                     }, function(error) {
                         console.log(error);

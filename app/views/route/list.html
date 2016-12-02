@@ -34,8 +34,8 @@
                         <tr>
                             <th>Código Ruteo</th>
                             <th>Empresa/Usuario</th>
-                            <th>Hora de inicio</th>
-                            <th>Entregadas</th>
+                            <th>Fecha de inicio</th>
+                            <th>Origen</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
@@ -43,9 +43,9 @@
                     <tbody>
                         <tr ng-repeat="route in vm.routes">
                             <td>{{route.id}}</td>
-                            <td>Teléfonica</td>
-                            <td>20:17</td>
-                            <td>15/25</td>
+                            <td>{{route.idClient}}</td>
+                            <td>{{route.initDate}}</td>
+                            <td>{{route.originAddress}}</td>
                             <td><span class="warning label">{{route.state}}</span></td>
                             <td>
                                 <button class="tiny secondary button" ng-click="vm.goToViewRoute(route)">Ver Ruteo</button>
