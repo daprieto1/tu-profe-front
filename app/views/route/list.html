@@ -1,52 +1,60 @@
 <div class="list-routes-wrapper" ng-controller="RoutesController as vm">
-	<div class="row">
-		<div class="small-12 large-6 columns">
-			<h1>Dashboard</h1>
-			<h2>Ruteos creados recientemente</h2>
-		</div>
-		<div class="small-12 large-6 columns">
-			<a id="create-route" href="#/route/create" class="button">
+    <div class="row">
+        <div class="small-12 large-6 columns">
+            <h1>Dashboard</h1>
+            <h2>Ruteos creados recientemente</h2>
+        </div>
+        <div class="small-12 large-6 columns">
+            <a id="create-route" href="#/route/create" class="button">
       			Crear Ruteo
     		</a>
-		</div>
+        </div>
 
-		<div class="small-12 large-12 columns">
-			<div ng-hide="vm.routes.length > 0" class="callout">
-				<img src="images/route/list/empty.png" alt="">
-				<h4>Ups… aún no hay ningún dato en este momento.</h4>
-				<p>
-					<a href="#/route/create">
-						<ins>Crea tu primer ruteo</ins>
-					</a>
-				</p>
-			</div>
-		</div>
+        <div class="small-12 large-12 columns">
+            <loader show="vm.loader.show" message="vm.loader.message"></loader>
+        </div>
 
-		<div class="row">
-			<table ng-if="vm.routes.length > 0">
-				<thead>
-					<tr>
-						<th>Código Ruteo</th>
-						<th>Empresa/Usuario</th>
-						<th>Hora de inicio</th>
-						<th>Entregadas</th>
-						<th>Estado</th>
-						<th>Acciones</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="route in vm.routes">
-						<td>{{route.id}}</td>
-						<td>Teléfonica</td>
-						<td>20:17</td>
-						<td>15/25</td>
-						<td><span class="warning label">{{route.state}}</span></td>
-						<td>
-							<button class="tiny secondary button" ng-click="vm.goToViewRoute(route)">Ver Ruteo</button>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+
+        <div ng-hide="vm.loader.show">
+            <div class=" small-12 large-12 columns ">
+                <div ng-hide="vm.routes.length> 0" class="callout">
+                    <img src="images/route/list/empty.png" alt="">
+                    <h4>Ups… aún no hay ningún dato en este momento.</h4>
+                    <p>
+                        <a href="#/route/create">
+                            <ins>Crea tu primer ruteo</ins>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <table ng-if="vm.routes.length > 0">
+                    <thead>
+                        <tr>
+                            <th>Código Ruteo</th>
+                            <th>Empresa/Usuario</th>
+                            <th>Hora de inicio</th>
+                            <th>Entregadas</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="route in vm.routes">
+                            <td>{{route.id}}</td>
+                            <td>Teléfonica</td>
+                            <td>20:17</td>
+                            <td>15/25</td>
+                            <td><span class="warning label">{{route.state}}</span></td>
+                            <td>
+                                <button class="tiny secondary button" ng-click="vm.goToViewRoute(route)">Ver Ruteo</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
 </div>

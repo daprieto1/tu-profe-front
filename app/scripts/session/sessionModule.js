@@ -36,9 +36,6 @@
                  * @returns {*}
                  */
                 request: function(config) {
-                    if (angular.isDefined($cookies.get('user'))) {
-                        console.log(config)
-                    }
                     return config || $q.when(config);
                 }
             };
