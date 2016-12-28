@@ -1,8 +1,11 @@
 node_modules
 dist
-.tmp
 bower_components
 test/bower_components
+
+app/fonts
+
+.tmp
 .idea
 .DS_Store
 .sonar/    

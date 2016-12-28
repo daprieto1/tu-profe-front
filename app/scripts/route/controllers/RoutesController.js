@@ -19,7 +19,7 @@
                     .then(function(response) {
                         vm.routes = response;
                         vm.routes.forEach(function(route) {
-                            route.initDate = moment(route.initDate).format('dddd, D MMMM YYYY');
+                            route.initDateT = moment(route.initDate).format('dddd, D MMMM YYYY');
                         });
                         console.log(vm.routes);
                         vm.loader.show = false;

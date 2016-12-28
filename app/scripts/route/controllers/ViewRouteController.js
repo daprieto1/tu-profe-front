@@ -85,6 +85,7 @@
             };
 
             vm.deleteAddressOpen = function() {
+
                 vm.numDeleteAddress = 0;
                 if (vm.tabSelected === 1) {
                     vm.numDeleteAddress = _.filter(vm.geolocalized, function(point) {
@@ -136,11 +137,24 @@
             /**
              * Listen for changes in the selected file.
              */
-            $scope.$watch('vm.fileContent', function(newValue) {
-                if (angular.isDefined(newValue)) {
-                    loadData();
-                    vm.popup = new Foundation.Reveal($('#summary-load'));
-                    vm.popup.open();
+            $scope.$watch('vm.fileContent', function() {
+                var file = angular.element(document.querySelector('#real-input-file')).prop("files")[0];
+                if (angular.isDefined(vm.fileContent)) {
+                    ServicePoints.readPointsFromFile(file)
+                        .then(function(response) {
+                            vm.newPoints = response.data;
+                            vm.newPoints.forEach(function(point) {
+                                point.city = vm.route.city.internalName;
+                                point.route = vm.route.id;
+                            });
+                            vm.totalUnits = vm.newPoints.reduce(function(lastVal, actualVal) {
+                                return { units: lastVal.units + actualVal.units };
+                            }).units;
+                            vm.popup = new Foundation.Reveal($('#summary-load'));
+                            vm.popup.open();
+                        }, function(error) {
+                            console.log(error);
+                        });
                 }
             });
 
@@ -171,22 +185,6 @@
                 }
 
             });
-
-            function loadData() {
-                vm.totalUnits = 0;
-                vm.newPoints = _.map(ServiceUtils.parseCSVFileToArray(vm.fileContent).slice(1), function(point) {
-                    vm.totalUnits += parseInt(point[1]);
-                    return {
-                        address: point[0],
-                        units: parseInt(point[1]),
-                        receiver: point[2],
-                        receiverPhone: point[3],
-                        comments: point[4],
-                        city: vm.route.city.internalName,
-                        route: vm.route.id
-                    }
-                });
-            }
 
             function initCtrl() {
 
@@ -223,7 +221,6 @@
 
                         }, function(error) {
                             vm.loader.show = false;
-                            console.log(error);
                         });
                 } else {
                     $location.path('/dashboard');
