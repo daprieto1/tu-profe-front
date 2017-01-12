@@ -2,6 +2,7 @@ node_modules
 dist
 bower_components
 test/bower_components
+yarn.lock
 
 app/fonts
 
@@ -10,3 +11,4 @@ app/fonts
 .DS_Store
 .sonar/    
 .vscode/
+

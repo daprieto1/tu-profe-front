@@ -70,7 +70,8 @@
                     case '/signup':
                         break;
                     default:
-                        $location.path('/login');
+                        $location.path('/teacher-profile');
+                        //$location.path('/login');
                         break;
                 }
             }

@@ -11,7 +11,8 @@
         'ngResource',
         'mm.foundation',
         'sessionModule',
-        'routeModule'
+        'routeModule',
+        'teacherProfileModule'
     ])
 
     .config(function($routeProvider, $cookiesProvider) {
@@ -21,10 +22,16 @@
 
         $routeProvider
             .when('/', {
-                templateUrl: 'views/route/list.html'
+                templateUrl: 'views/home/home.html'
             })
             .when('/login', {
                 templateUrl: 'views/session/login.html'
+            })
+            .when('/teacher-sign-up', {
+                templateUrl: 'views/session/teacherSignUp.html'
+            })
+            .when('/teacher-profile', {
+                templateUrl: 'views/teacherProfile/teacherProfile.html'
             })
             .when('/signup', {
                 templateUrl: 'views/session/signup.html'
@@ -38,7 +45,7 @@
 
     })
 
-    .run(function($rootScope, CITIES) {
+    .run(function($rootScope) {
 
         $rootScope.$apply(function() {
             $rootScope.routeApi = 'http://localhost:8080'
