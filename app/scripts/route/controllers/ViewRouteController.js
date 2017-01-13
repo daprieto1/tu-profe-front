@@ -138,7 +138,7 @@
              * Listen for changes in the selected file.
              */
             $scope.$watch('vm.fileContent', function() {
-                var file = angular.element(document.querySelector('#real-input-file')).prop("files")[0];
+                var file = angular.element(document.querySelector('#real-input-file')).prop('files')[0];
                 if (angular.isDefined(vm.fileContent)) {
                     ServicePoints.readPointsFromFile(file)
                         .then(function(response) {

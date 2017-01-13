@@ -1,0 +1,265 @@
+<div id="basic-data" ng-controller="TeacherBasicDataController as vm">
+    <div class="title-bar hide-for-large">
+        <div class="title-bar-left">
+            <button class="menu-icon" type="button" data-open="my-info"></button>
+            <span class="title-bar-title">Mike Mikerson</span>
+        </div>
+    </div>
+    <div class="callout primary">
+        <div class="row column">
+            <h1>Bienvenido Profe.</h1>
+            <p class="lead">
+                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa información actualizada ya que así mismo te permitirá obtener mejores beneficios.
+            </p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="large-6 columns">
+            <div id="account-data">
+                <h3>Datos de Cuenta</h3>
+                <div class="row" ng-if="!vm.editData.account">
+                    <div class="large-12 columns">
+                        <strong>Nombre: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Apellido: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Correo electrónico: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <button class="hollow button" ng-click="vm.editData.account = true">
+                                Editar
+                            </button>
+                    </div>
+                </div>
+                <form action="" ng-if="vm.editData.account">
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="">Nombre</label>
+                            <input type="text" placeholder="">
+                        </div>
+                        <div class="large-6 columns">
+                            <label for=""></label>Apellido
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for=""></label>Correo Electrónico
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <button class="button">
+                                Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <hr>
+
+            <div id="personal-data">
+                <h3>Datos Personales</h3>
+                <div class="row" ng-if="!vm.editData.personal">
+                    <div class="large-12 columns">
+                        <strong>Cédula: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Celular: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Teléfono Fijo: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Ciudad: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Barrio: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Dirección: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <button class="hollow button" ng-click="vm.editData.personal = true">
+                                Editar
+                            </button>
+                    </div>
+                </div>
+                <form action="" ng-if="vm.editData.personal">
+
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for=""></label>Cedula
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="">Celular</label>
+                            <input type="text" placeholder="">
+                        </div>
+                        <div class="large-6 columns">
+                            <label for=""></label>Telefono fijo
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for=""></label>Ciudad
+                            <input type="text" placeholder="">
+                        </div>
+                        <div class="large-6 columns">
+                            <label for=""></label>Barrio
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for=""></label>Dirección
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <hr>
+
+            <div id="academical-data">
+                <h3>Datos Academicos</h3>
+                <div class="row" ng-if="!vm.editData.academical">
+                    <div class="large-12 columns">
+                        <strong>Universidad: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Dirección Universidad: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Profesión: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Semestre: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Fecha de Grado: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <button class="hollow button" ng-click="vm.editData.academical = true">
+                                Editar
+                            </button>
+                    </div>
+                </div>
+                <form action="" ng-if="vm.editData.academical">
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="">Universidad</label>
+                            <input type="text" placeholder="">
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="">Dirección Universidad</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="">Profesion</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="">Semestre</label>
+                            <input type="text" placeholder="">
+                        </div>
+                        <div class="large-6 columns">
+                            <label for="">Fecha de Grado</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <div class="large-6 columns">
+            <form action="">
+                <h3>Materias</h3>
+                <label for="">Selecciona</label>
+                <div class="input-group">
+                    <span class="input-group-label">+</span>
+                    <input class="input-group-field" type="text">
+                </div>
+                <div class="callout">
+                    <span class="label secondary"><i class="fi-x-circle"></i> Matemáticas</span>
+                    <span class="label secondary"><i class="fi-x-circle"></i> Español</span>
+                    <span class="label secondary"><i class="fi-x-circle"></i> Cálculo</span>
+                    <span class="label secondary"><i class="fi-x-circle"></i> Geometría</span>
+                    <span class="label secondary"><i class="fi-x-circle"></i> Inglés</span>
+                </div>
+            </form>
+
+            <hr>
+
+            <div id="financial-data">
+                <h3>Datos Financieros</h3>
+                <div class="row" ng-if="!vm.editData.financial">
+                    <div class="large-12 columns">
+                        <strong>Banco: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Número de Cuenta: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Tipo de Cuenta: </strong>
+                        <p>Fidel</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <button class="hollow button" ng-click="vm.editData.financial = true">
+                                Editar
+                            </button>
+                    </div>
+                </div>
+                <form action="" ng-if="vm.editData.financial">
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="">Banco</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="">Número de Cuenta</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="">Tipo de Cuenta</label>
+                            <input type="text" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
