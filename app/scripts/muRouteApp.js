@@ -11,7 +11,6 @@
         'ngResource',
         'mm.foundation',
         'sessionModule',
-        'routeModule',
         'teacherProfileModule'
     ])
 
@@ -32,12 +31,6 @@
             })
             .when('/teacher-profile', {
                 templateUrl: 'views/teacherProfile/teacherProfile.html'
-            })
-            .when('/signup', {
-                templateUrl: 'views/session/signup.html'
-            })
-            .when('/dashboard', {
-                templateUrl: 'views/route/list.html'
             })
             .otherwise({
                 templateUrl: '/'

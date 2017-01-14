@@ -1,37 +1,42 @@
-<div id="teacher-sign-up" class="row">
+<div id="teacher-sign-up" class="row" ng-controller="TeacherSignUpController as vm">
     <div class="large-offset-8 large-4 columns">
         <img src="http://www.tu-profe.com/uploads/default/others_conf/b500a4f0a392ff0defd893af479a6266.jpg" alt="">
-        <form action="">
+        <form name="teacherSignUpForm" novalidate>
             <div class="row">
                 <div class="large-6 columns">
-                    <input type="text" placeholder="Nombre">
+                    <input id="name" name="name" type="text" placeholder="Nombre" ng-model="vm.teacher.name" required>
+                    <p ng-if="teacherSignUpForm.name.$invalid && teacherSignUpForm.name.$dirty" class="error">Por favor índica tú nombre</p>
                 </div>
                 <div class="large-6 columns">
-                    <input type="text" placeholder="Apellido">
+                    <input id="lastName" name="lastName" type="text" placeholder="Apellido" ng-model="vm.teacher.lastName" required>
+                    <p ng-if="teacherSignUpForm.lastName.$invalid && teacherSignUpForm.lastName.$dirty" class="error">Por favor índica tú apellido</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input type="text" placeholder="Correo electrónico">
+                    <input id="email" name="email" type="email" placeholder="Correo electrónico" ng-model="vm.teacher.email" required>
+                    <p ng-if="teacherSignUpForm.email.$invalid && teacherSignUpForm.email.$dirty" class="error">Por favor índica un correo electrónico valido</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input type="text" placeholder="Correo electrónico">
+                    <input id="password" name="password" type="password" placeholder="Contraseña" minLength="8" ng-model="vm.teacher.password" required>
+                    <p ng-if="teacherSignUpForm.password.$invalid && teacherSignUpForm.password.$dirty" class="error">Por favor índica tú contraseña, debe tener mínimo 8 cáracteres</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input type="text" placeholder="Correo electrónico">
+                    <input id="cellPhone" name="cellPhone" type="number" placeholder="Celular" min="0" max="9999999999" ng-model="vm.teacher.cellPhone" required>
+                    <p ng-if="teacherSignUpForm.cellPhone.$invalid && teacherSignUpForm.cellPhone.$dirty" class="error">Por favor índica un número de celularo válido</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="large-12 columns">
-                    <button class="button expanded">
+                    <button class="button expanded" ng-disabled="teacherSignUpForm.$invalid" ng-click="vm.signUp()">
                         ENVIAR
                     </button>
                 </div>

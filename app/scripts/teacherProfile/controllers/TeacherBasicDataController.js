@@ -1,6 +1,6 @@
 (function() {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function() {
+        .controller('TeacherBasicDataController', function(ServiceTeachers) {
             var vm = this;
 
             function initCtrl() {

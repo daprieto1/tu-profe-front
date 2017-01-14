@@ -6,9 +6,9 @@
         .factory('ServiceSession', function($http, $resource, $rootScope) {
 
             var Session = $resource($rootScope.routeApi + '/session', {}, {
-                signUp: {
+                signUpTeacher: {
                     method: 'POST',
-                    url: $rootScope.routeApi + '/session/signup'
+                    url: $rootScope.routeApi + '/session/signup-teacher'
                 },
                 login: {
                     method: 'POST',
@@ -23,8 +23,8 @@
                     return Session.login({ username: username, password: password }).$promise;
                 },
 
-                signUp: function(user) {
-                    return Session.signUp({}, user).$promise;
+                signUpTeacher: function(teacher) {
+                    return Session.signUpTeacher({}, teacher).$promise;
                 }
 
             };
