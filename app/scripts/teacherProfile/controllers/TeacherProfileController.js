@@ -1,11 +1,10 @@
-(function() {
+(function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherProfileController', function(ServiceTeachers) {
+        .controller('TeacherProfileController', function (ServiceTeachers) {
             var vm = this;
 
             function initCtrl() {
-                vm.section = 'basicData';
-
+                vm.section = 'schedule';                
             }
 
             initCtrl();

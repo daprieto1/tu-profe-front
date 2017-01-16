@@ -1,4 +1,4 @@
-<div id="schedule">
+<div id="schedule" ng-controller="TeacherScheduleController as vm">
     <div class="row">
         <table>
             <thead>
@@ -15,83 +15,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>6:00</td>
-                    <td>
-                        <div class="callout success">
-
+                <tr ng-repeat="hour in vm.schedule track by $index">
+                    <td>{{vm.getScheduleTime($index)}}</td>
+                    <td class="no-padding" ng-repeat="section in hour track by $index">
+                        <div class="callout hvr-grow-shadow" ng-class="section ? 'success' : ''" ng-click="section = !section">
                         </div>
                     </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>6:00</td>
-                </tr>
-                <tr>
-                    <td>6:00</td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout secondary">
-
-                        </div>
-                    </td>
-                    <td>
-                        <div class="callout success">
-
-                        </div>
-                    </td>
-                    <td>6:00</td>
+                    <td>{{vm.getScheduleTime($index)}}</td>
                 </tr>
             </tbody>
         </table>

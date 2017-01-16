@@ -9,7 +9,8 @@
         <div class="row column">
             <h1>Bienvenido Profe.</h1>
             <p class="lead">
-                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa información actualizada ya que así mismo te permitirá obtener mejores beneficios.
+                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa
+                información actualizada ya que así mismo te permitirá obtener mejores beneficios.
             </p>
         </div>
     </div>
@@ -21,15 +22,15 @@
                 <div class="row" ng-if="!vm.editData.account">
                     <div class="large-12 columns">
                         <strong>Nombre: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.name}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Apellido: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.lastName}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Correo electrónico: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.email}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.account = true">
@@ -65,7 +66,7 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <button class="button">
+                            <button class="button" ng-disabled="accountForm.$invalid" ng-click="vm.edit(vm.editData.account)">
                                 Guardar
                             </button>
                         </div>
@@ -80,27 +81,27 @@
                 <div class="row" ng-if="!vm.editData.personal">
                     <div class="large-12 columns">
                         <strong>Cédula: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.identification}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Celular: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.cellPhone}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Teléfono Fijo: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.phone}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Ciudad: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.city}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Barrio: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.neighborhood}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Dirección: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.address}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.personal = true">
@@ -114,7 +115,7 @@
                         <div class="large-12 columns">
                             <label for="identification">Cedula</label>
                             <input id="identification" name="identification" type="text" ng-model="vm.teacher.identification" required>
-                            <p class="error" ng-if="accountForm.identification.$invalid && accountForm.identification.$dirty">
+                            <p class="error" ng-if="personalForm.identification.$invalid && personalForm.identification.$dirty">
                                 Por favor escriba su identificación.
                             </p>
                         </div>
@@ -123,14 +124,14 @@
                         <div class="large-6 columns">
                             <label for="cellPhone">Celular</label>
                             <input id="cellPhone" name="cellPhone" type="text" ng-model="vm.teacher.cellPhone" required>
-                            <p class="error" ng-if="accountForm.cellPhone.$invalid && accountForm.cellPhone.$dirty">
+                            <p class="error" ng-if="personalForm.cellPhone.$invalid && personalForm.cellPhone.$dirty">
                                 Por favor escriba su teléfono celular.
                             </p>
                         </div>
                         <div class="large-6 columns">
                             <label for="phone">Telefono Fijo</label>
                             <input id="phone" name="phone" type="text" ng-model="vm.teacher.phone" required>
-                            <p class="error" ng-if="accountForm.phone.$invalid && accountForm.phone.$dirty">
+                            <p class="error" ng-if="personalForm.phone.$invalid && personalForm.phone.$dirty">
                                 Por favor escriba su teléfono fijo.
                             </p>
                         </div>
@@ -139,14 +140,14 @@
                         <div class="large-6 columns">
                             <label for="city">Ciudad</label>
                             <input id="city" name="city" type="text" ng-model="vm.teacher.city" required>
-                            <p class="error" ng-if="accountForm.city.$invalid && accountForm.city.$dirty">
+                            <p class="error" ng-if="personalForm.city.$invalid && personalForm.city.$dirty">
                                 Por favor escriba su ciudad.
                             </p>
                         </div>
                         <div class="large-6 columns">
                             <label for="neighborhood">Barrio</label>
                             <input id="neighborhood" name="neighborhood" type="text" ng-model="vm.teacher.neighborhood" required>
-                            <p class="error" ng-if="accountForm.neighborhood.$invalid && accountForm.neighborhood.$dirty">
+                            <p class="error" ng-if="personalForm.neighborhood.$invalid && personalForm.neighborhood.$dirty">
                                 Por favor escriba su barrio.
                             </p>
                         </div>
@@ -155,9 +156,16 @@
                         <div class="large-12 columns">
                             <label for="address">Dirección</label>
                             <input id="address" name="address" type="text" ng-model="vm.teacher.address" required>
-                            <p class="error" ng-if="accountForm.address.$invalid && accountForm.address.$dirty">
+                            <p class="error" ng-if="personalForm.address.$invalid && personalForm.address.$dirty">
                                 Por favor escriba su dirección.
                             </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <button class="button" ng-disabled="personalForm.$invalid" ng-click="vm.edit(vm.editData.personal)">
+                                Guardar
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -170,23 +178,23 @@
                 <div class="row" ng-if="!vm.editData.academical">
                     <div class="large-12 columns">
                         <strong>Universidad: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.university}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Dirección Universidad: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.universityAddress}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Profesión: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.profession}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Semestre: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.semester}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Fecha de Grado: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.gradeDate}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.academical = true">
@@ -194,31 +202,53 @@
                             </button>
                     </div>
                 </div>
-                <form action="" ng-if="vm.editData.academical">
+                <form name="academicalForm" ng-if="vm.editData.academical">
                     <div class="row">
                         <div class="large-6 columns">
-                            <label for="">Universidad</label>
-                            <input id="" name="" type="text">
+                            <label for="university">Universidad</label>
+                            <input id="university" name="university" type="text" ng-model="vm.teacher.university" required>
+                            <p class="error" ng-if="academicalForm.university.$invalid && academicalForm.university.$dirty">
+                                Por favor escriba el nombre de su Universidad.
+                            </p>
                         </div>
                         <div class="large-6 columns">
-                            <label for="">Dirección Universidad</label>
-                            <input id="" name="" type="text">
+                            <label for="universityAddress">Dirección Universidad</label>
+                            <input id="universityAddress" name="universityAddress" type="text" ng-model="vm.teacher.universityAddress" required>
+                            <p class="error" ng-if="academicalForm.universityAddress.$invalid && academicalForm.universityAddress.$dirty">
+                                Por favor escriba la dirección d su Universidad.
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label for="">Profesion</label>
-                            <input id="" name="" type="text">
+                            <label for="profession">Profesión</label>
+                            <input id="profession" name="profession" type="text" ng-model="vm.teacher.profession" required>
+                            <p class="error" ng-if="academicalForm.profession.$invalid && academicalForm.profession.$dirty">
+                                Por favor seleccione su profesion.
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-6 columns">
-                            <label for="">Semestre</label>
-                            <input id="" name="" type="text">
+                            <label for="semester">Semestre</label>
+                            <input id="semester" name="semester" type="text" ng-model="vm.teacher.semester" required>
+                            <p class="error" ng-if="academicalForm.semester.$invalid && academicalForm.semester.$dirty">
+                                Por favor seleccione su semestre.
+                            </p>
                         </div>
                         <div class="large-6 columns">
-                            <label for="">Fecha de Grado</label>
-                            <input id="" name="" type="text">
+                            <label for="gradeDate">Fecha de Grado</label>
+                            <input id="gradeDate" name="gradeDate" type="text" ng-model="vm.teacher.gradeDate" required>
+                            <p class="error" ng-if="academicalForm.gradeDate.$invalid && academicalForm.gradeDate.$dirty">
+                                Por favor seleccione su fecha de grado.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <button class="button" ng-disabled="academicalForm.$invalid" ng-click="vm.edit(vm.editData.academical)">
+                                Guardar
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -249,15 +279,15 @@
                 <div class="row" ng-if="!vm.editData.financial">
                     <div class="large-12 columns">
                         <strong>Banco: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.bank}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Número de Cuenta: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.accountNumber}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Tipo de Cuenta: </strong>
-                        <p>Fidel</p>
+                        <p>{{vm.teacher.accountType}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.financial = true">
@@ -265,23 +295,39 @@
                             </button>
                     </div>
                 </div>
-                <form action="" ng-if="vm.editData.financial">
+                <form name="financialData" novalidate ng-if="vm.editData.financial">
                     <div class="row">
                         <div class="large-12 columns">
-                            <label for="">Banco</label>
-                            <input id="" name="" type="text">
+                            <label for="bank">Banco</label>
+                            <input id="bank" name="bank" type="text" ng-model="vm.teacher.bank" required>
+                            <p class="error" ng-if="financialData.bank.$invalid && financialData.bank.$dirty">
+                                Por favor seleccione su banco.
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label for="">Número de Cuenta</label>
-                            <input id="" name="" type="text">
+                            <label for="accountNumber">Número de Cuenta</label>
+                            <input id="accountNumber" name="accountNumber" type="text" ng-model="vm.teacher.accountNumber" required>
+                            <p class="error" ng-if="financialData.accountNumber.$invalid && financialData.accountNumber.$dirty">
+                                Por favor escriba el número de su cuenta.
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label for="">Tipo de Cuenta</label>
-                            <input id="" name="" type="text">
+                            <label for="accountType">Tipo de Cuenta</label>
+                            <input id="accountType" name="accountType" type="text" ng-model="vm.teacher.accountType" required>
+                            <p class="error" ng-if="financialData.accountType.$invalid && financialData.accountType.$dirty">
+                                Por favor seleccione su tipo de cuenta.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <button class="button" ng-disabled="financialData.$invalid" ng-click="vm.edit(vm.editData.financial)">
+                                Guardar
+                            </button>
                         </div>
                     </div>
                 </form>

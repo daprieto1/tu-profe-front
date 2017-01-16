@@ -1,4 +1,4 @@
-<div id="linkUp">
+<div id="linkUp" ng-controller="TeacherLinkUpController as vm">
     <div class="row">
         <h1>
             Proceso de Vinculación
@@ -10,33 +10,73 @@
                 <img src="images/teacherProfile/linkUp/rating.svg" alt="">
                 <div>
                     <h3>Registro</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus, diam porttitor vulputate sodales, lectus quam.</p>
+                    <p>Gracias por querer hacer parte del equipo de tu profe, nos gusta trabajar y por eso tenemos un proceso
+                        de vinculación que asegura que nuestro servicio y tus beneficios sean los mejores, te invitamos a
+                        seguir adelante.</p>
                 </div>
             </div>
-            <div>
+            <div ng-if="vm.teacher.state >= 0">
                 <img src="images/teacherProfile/linkUp/file.svg" alt="">
                 <div>
                     <h3>Hoja de vida</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus, diam porttitor vulputate sodales, lectus quam.</p>
+                    <p ng-if="vm.teacher.state !== 0">Gracias por subir tu hoja de vida, ten por seguro que la leeremos con detalle.</p>
+                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
+                        es importante que seas honesto y detallado ya que nos ayudará a buscar la mejor manera de trabajar
+                        juntos.
+                    </p>
+                    <div class="input-group" ng-if="vm.teacher.state === 0">
+                        <input id="real-input-file" name="file" type="file" ng-show="false" accept=".docx" file-reader="vm.fileContent">
+                        <button type="submit" class="button secondary" ng-click="vm.searchFile()">Cargar</button>
+                    </div>
                 </div>
             </div>
-            <div>
+            <div ng-if="vm.teacher.state >= 1">
                 <img src="images/teacherProfile/linkUp/followers.svg" alt="">
                 <div>
                     <h3>Entrevista</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus, diam porttitor vulputate sodales, lectus quam.</p>
+                    <p ng-if="vm.teacher.state !== 1">La entrevista ha sido agendada para el día que escogiste. Nos comunicaremos contigo para informarte cualquier
+                        eventualidad.
+                    </p>
+                    <p ng-if="vm.teacher.state === 1">Nos gusta que la relación con los profesores sea más humana y amistosa, por eso nos gustaría conocerte
+                        a través de una entrevista. Selecciona tu mejor horario.</p>
+                    <button class="button warning" ng-if="vm.teacher.state === 1">
+                            Solicitar Entrevista
+                        </button>
                 </div>
             </div>
-            <div>
+            <div ng-if="vm.teacher.state === 3">
                 <img src="images/teacherProfile/linkUp/calendar.svg" alt="">
                 <div>
                     <h3>Materias y Horario</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus, diam porttitor vulputate sodales, lectus quam.</p>
+                    <p>Felicitaciones profe, ya que eres parte del equipo de invitamos a las ventanas de Horario y Datos para
+                        que completes tu perfil y empecemos a trabajar juntos con la mejor energía. Cuando estes listo presiona
+                        en el botón activar cuenta, esto permitirá que empieces a tomar asesorías</p>
+                    <button class="button success" ng-if="vm.teacher.state === 3">
+                            Activar Cuenta
+                        </button>
                 </div>
             </div>
-            <div class="callout alert">
+        </div>
+        <div class="large-6 columns">
+            <div class="callout warning" ng-if="vm.teacher.state < 3">
+                <h3>En proceso de vinculación</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus,
+                    diam porttitor vulputate sodales, lectus quam.</p>
+            </div>
+            <div class="callout success" ng-if="vm.teacher.state === 3">
+                <h3>Ya eres parte del equipo</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus,
+                    diam porttitor vulputate sodales, lectus quam.</p>
+            </div>
+            <div class="callout success" ng-if="3 <= vm.teacher.state && vm.teacher.state === 4">
+                <h3>Cuenta Activa</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus,
+                    diam porttitor vulputate sodales, lectus quam.</p>
+            </div>
+            <div class="callout alert" ng-if="vm.teacher.state === 5">
                 <h3>Solicitud Rechazada</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus, diam porttitor vulputate sodales, lectus quam.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce viverra hendrerit ornare. Vestibulum finibus,
+                    diam porttitor vulputate sodales, lectus quam.</p>
             </div>
         </div>
     </div>
