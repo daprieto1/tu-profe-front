@@ -22,6 +22,8 @@
         };
 
         function initCtrl() {
+            vm.isTeacher = false;
+            vm.isStudent = false;
             vm.email = undefined;
             vm.password = undefined;
         }

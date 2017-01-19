@@ -9,8 +9,7 @@
         <div class="row column">
             <h1>Bienvenido Profe.</h1>
             <p class="lead">
-                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa
-                información actualizada ya que así mismo te permitirá obtener mejores beneficios.
+                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa información actualizada ya que así mismo te permitirá obtener mejores beneficios.
             </p>
         </div>
     </div>
@@ -52,15 +51,6 @@
                             <input id="lastName" name="lastName" type="text" ng-model="vm.teacher.lastName" required>
                             <p class="error" ng-if="accountForm.lastName.$invalid && accountForm.lastName.$dirty">
                                 Por favor escriba su apellido.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <label for="email">Correo electrónico</label>
-                            <input id="email" name="email" type="text" ng-model="vm.teacher.email" required>
-                            <p class="error" ng-if="accountForm.email.$invalid && accountForm.email.$dirty">
-                                Por favor escriba su correo electrónico.
                             </p>
                         </div>
                     </div>
@@ -231,14 +221,14 @@
                     <div class="row">
                         <div class="large-6 columns">
                             <label for="semester">Semestre</label>
-                            <input id="semester" name="semester" type="text" ng-model="vm.teacher.semester" required>
+                            <input id="semester" name="semester" type="number" ng-model="vm.teacher.semester" min="6" max="14" required>
                             <p class="error" ng-if="academicalForm.semester.$invalid && academicalForm.semester.$dirty">
                                 Por favor seleccione su semestre.
                             </p>
                         </div>
                         <div class="large-6 columns">
                             <label for="gradeDate">Fecha de Grado</label>
-                            <input id="gradeDate" name="gradeDate" type="text" ng-model="vm.teacher.gradeDate" required>
+                            <input id="gradeDate" name="gradeDate" type="date" ng-model="vm.teacher.gradeDate" required>
                             <p class="error" ng-if="academicalForm.gradeDate.$invalid && academicalForm.gradeDate.$dirty">
                                 Por favor seleccione su fecha de grado.
                             </p>

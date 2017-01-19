@@ -3,13 +3,18 @@
         <div class="top-bar">
             <div class="top-bar-left">
                 <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="menu-text">Tu Profe</li>
+                    <li class="menu-text">
+                        <a id="main-logo" href="/">
+                            <img src="images/home/logo.jpg" alt="">
+                        </a>
+                    </li>
                     <li ng-if="isAuthenticated()"><a href="#/dashboard">Dashboard</a></li>
                     <li ng-if="isAuthenticated()"><a href="#/route/create">Crear Ruteo</a></li>
                 </ul>
             </div>
             <div class="top-bar-right">
                 <ul class="dropdown menu" dropdown-menu>
+                    <li><a href="#/login">SOLICITA TU ASESORÍA</a></li>
                     <li ng-if="!isAuthenticated()"><a href="#/login">Iniciar sesión</a></li>
                     <li ng-if="isAuthenticated()">
                         <a href="">{{user.name}}</a>
