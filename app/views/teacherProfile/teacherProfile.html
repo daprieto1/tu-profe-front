@@ -18,6 +18,12 @@
                 <li ng-click="vm.section = 'schedule'">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Horario
                 </li>
+                <li ng-click="vm.section = 'gameRules'">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Reglas de juego
+                </li>
+                <li ng-click="vm.section = 'trainings'">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Capacitaciones
+                </li>
             </ul>
         </div>
 
@@ -30,6 +36,12 @@
             </ng-include>
 
             <ng-include src="'views/teacherProfile/schedule.html'" ng-show="vm.section === 'schedule'">
+            </ng-include>
+
+            <ng-include src="'views/teacherProfile/gameRules.html'" ng-show="vm.section === 'gameRules'">
+            </ng-include>
+
+            <ng-include src="'views/teacherProfile/trainings.html'" ng-show="vm.section === 'trainings'">
             </ng-include>
 
         </div>

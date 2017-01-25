@@ -280,6 +280,14 @@
                         <p>{{vm.teacher.accountType}}</p>
                     </div>
                     <div class="large-12 columns">
+                        <strong>Nombre titular de la cuenta: </strong>
+                        <p>{{vm.teacher.accountHolderName}}</p>
+                    </div>
+                    <div class="large-12 columns">
+                        <strong>Cedula titular de la cuenta: </strong>
+                        <p>{{vm.teacher.accountHolderIdentification}}</p>
+                    </div>
+                    <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.financial = true">
                                 Editar
                             </button>
@@ -310,6 +318,24 @@
                             <input id="accountType" name="accountType" type="text" ng-model="vm.teacher.accountType" required>
                             <p class="error" ng-if="financialData.accountType.$invalid && financialData.accountType.$dirty">
                                 Por favor seleccione su tipo de cuenta.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="accountHolderName">Nombre titular de la cuenta</label>
+                            <input id="accountHolderName" name="accountHolderName" type="text" ng-model="vm.teacher.accountHolderName" required>
+                            <p class="error" ng-if="financialData.accountHolderName.$invalid && financialData.accountHolderName.$dirty">
+                                Por favor escriba el nombre del titular de la cuenta.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="accountHolderIdentification">Cedula titular de la cuenta</label>
+                            <input id="accountHolderIdentification" name="accountHolderIdentification" type="text" ng-model="vm.teacher.accountHolderIdentification" required>
+                            <p class="error" ng-if="financialData.accountHolderIdentification.$invalid && financialData.accountHolderIdentification.$dirty">
+                                Por favor escriba la cedula del titular de la cuenta.
                             </p>
                         </div>
                     </div>
