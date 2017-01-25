@@ -22,6 +22,13 @@
                 <img id="login-logo" src="images/home/logo.jpg" alt="">
             </div>
         </div>
+        <div class="row" ng-if="vm.showError">
+            <div class="small-12 large-4 large-centered columns">
+                <div class="alert callout" data-closable>
+                    Usuario o Contraseña invalidos
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="small-12 large-4 large-centered columns">
                 <input type="text" placeholder="Usuario" ng-model="vm.email">
@@ -35,6 +42,11 @@
         <div class="row">
             <div class="small-12 large-4 large-centered columns">
                 <button class="button expand" ng-click="vm.login()">Iniciar Sesión</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="small-12 large-4 large-centered columns">
+                <a href="">Recuperar contraseña</a>
             </div>
         </div>
     </form>

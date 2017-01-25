@@ -1,7 +1,7 @@
-(function() {
+(function () {
 
     'use strict';
-    angular.isUndefinedOrNull = function(val) {
+    angular.isUndefinedOrNull = function (val) {
         return angular.isUndefined(val) || val === null
     }
 
@@ -14,40 +14,39 @@
         'teacherProfileModule'
     ])
 
-    .config(function($routeProvider, $cookiesProvider) {
+        .config(function ($routeProvider, $cookiesProvider) {
 
 
-        $cookiesProvider.defaults.path = '/';
+            $cookiesProvider.defaults.path = '/';
 
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/home/home.html'
-            })
-            .when('/team', {
-                templateUrl: 'views/home/team.html'
-            })
-            .when('/login', {
-                templateUrl: 'views/session/login.html'
-            })
-            .when('/teacher-sign-up', {
-                templateUrl: 'views/session/teacherSignUp.html'
-            })
-            .when('/teacher-profile', {
-                templateUrl: 'views/teacherProfile/teacherProfile.html'
-            })
-            .otherwise({
-                templateUrl: '/'
+            $routeProvider
+                .when('/', {
+                    templateUrl: 'views/home/home.html'
+                })
+                .when('/team', {
+                    templateUrl: 'views/home/team.html'
+                })
+                .when('/login', {
+                    templateUrl: 'views/session/login.html'
+                })
+                .when('/teacher-sign-up', {
+                    templateUrl: 'views/session/teacherSignUp.html'
+                })
+                .when('/teacher-profile', {
+                    templateUrl: 'views/teacherProfile/teacherProfile.html'
+                })
+                .otherwise({
+                    templateUrl: '/'
+                });
+
+        })
+
+        .run(function ($rootScope) {                       
+
+            $rootScope.$apply(function () {
+                angular.element(document).foundation();
             });
 
-    })
-
-    .run(function($rootScope) {
-
-        $rootScope.$apply(function() {
-            $rootScope.routeApi = 'http://localhost:8080'
-            angular.element(document).foundation();
         });
-
-    });
 
 })();

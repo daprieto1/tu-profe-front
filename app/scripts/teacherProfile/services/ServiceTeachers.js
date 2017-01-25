@@ -2,11 +2,12 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .factory('ServiceTeachers', function ($rootScope, $resource, $http) {
+        .factory('ServiceTeachers', function ($resource, $http, TU_PROFE_API) {
 
-            var Teacher = $resource($rootScope.routeApi + '/teacher/:id', { id: '@id' }, {
+            var Teacher = $resource(TU_PROFE_API + '/teacher/:id', { id: '@id' }, {
                 update: {
-                    url: $rootScope.routeApi + '/teacher',
+                    headers: { 'Content-Type': 'application/json' },
+                    url: TU_PROFE_API + '/teacher',
                     method: 'PUT'
                 }
             })
@@ -23,10 +24,24 @@
                 uploadCurriculum: function (file, teacherId) {
                     var fd = new FormData();
                     fd.append('file', file);
-                    fd.append('teacherId', teacherId)                    
+                    fd.append('teacherId', teacherId)
 
                     return $http({
-                        url: $rootScope.routeApi + '/teacher/upload-curriculum',
+                        url: TU_PROFE_API + '/teacher/upload-curriculum',
+                        method: 'POST',
+                        data: fd,
+                        headers: { 'Content-Type': undefined },
+                        transformRequest: angular.identity
+                    });
+                },
+
+                uploadPhoto: function (file, teacherId) {
+                    var fd = new FormData();
+                    fd.append('file', file);
+                    fd.append('teacherId', teacherId)
+
+                    return $http({
+                        url: TU_PROFE_API + '/teacher/upload-photo',
                         method: 'POST',
                         data: fd,
                         headers: { 'Content-Type': undefined },

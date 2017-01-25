@@ -1,4 +1,5 @@
 <div id="schedule" ng-controller="TeacherScheduleController as vm">
+    <button class="button" ng-click="vm.updateSchedule()">Actualizar</button>
     <div class="row">
         <table>
             <thead>
@@ -12,16 +13,21 @@
                     <th width="200">Sábado</th>
                     <th width="200">Domingo</th>
                     <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="hour in vm.schedule track by $index">
                     <td>{{vm.getScheduleTime($index)}}</td>
                     <td class="no-padding" ng-repeat="section in hour track by $index">
-                        <div class="callout hvr-grow-shadow" ng-class="section ? 'success' : ''" ng-click="section = !section">
+                        <div class="callout hvr-grow-shadow" ng-class="section ? 'success' : ''" ng-click="vm.changeSpecificSession($index, $parent.$index, !section)">
                         </div>
                     </td>
                     <td>{{vm.getScheduleTime($index)}}</td>
+                    <td>
+                        <div class="callout warning hvr-grow-shadow" ng-click="vm.changeSection($index)">
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>

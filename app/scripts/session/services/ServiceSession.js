@@ -1,29 +1,28 @@
-(function() {
+(function () {
 
     'use strict';
 
     angular.module('sessionModule')
-        .factory('ServiceSession', function($http, $resource, $rootScope) {
+        .factory('ServiceSession', function ($http, $resource, TU_PROFE_API) {
 
-            var Session = $resource($rootScope.routeApi + '/session', {}, {
+            var Session = $resource(TU_PROFE_API + '/session', {}, {
                 signUpTeacher: {
                     method: 'POST',
-                    url: $rootScope.routeApi + '/session/signup-teacher'
+                    url: TU_PROFE_API + '/session/teacher/signup'
                 },
-                login: {
+                loginTeacher: {
                     method: 'POST',
                     params: { username: '@username', password: '@password' },
-                    url: $rootScope.routeApi + '/session/login',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+                    url: TU_PROFE_API + '/session/teacher/login'
                 }
             });
 
             return {
-                login: function(username, password) {
-                    return Session.login({ username: username, password: password }).$promise;
+                loginTeacher: function (username, password) {
+                    return Session.loginTeacher({ username: username, password: password }).$promise;
                 },
 
-                signUpTeacher: function(teacher) {
+                signUpTeacher: function (teacher) {
                     return Session.signUpTeacher({}, teacher).$promise;
                 }
 

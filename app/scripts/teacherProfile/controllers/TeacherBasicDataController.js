@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function (ServiceTeachers) {
+        .controller('TeacherBasicDataController', function ($scope, $cookies, ServiceTeachers) {
             var vm = this;
 
             vm.edit = function (section) {
@@ -13,6 +13,7 @@
             };
 
             function initCtrl() {
+                vm.teacherId = $cookies.get('userId');
                 vm.editData = {
                     account: false,
                     personal: false,
@@ -20,7 +21,7 @@
                     financial: false
                 }
 
-                ServiceTeachers.getTeacher('2896ca6d-fff5-457f-a542-707d90a91e29')
+                ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function (response) {
                         vm.teacher = response.toJSON();
                     });

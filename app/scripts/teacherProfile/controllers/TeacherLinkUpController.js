@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherLinkUpController', function ($scope, $timeout, ServiceTeachers) {
+        .controller('TeacherLinkUpController', function ($scope, $timeout, $cookies, ServiceTeachers) {
             var vm = this;
 
             /**
@@ -14,7 +14,7 @@
 
             $scope.$watch('vm.fileContent', function () {
                 var aux = angular.element(document.querySelector('#real-input-file'));
-                if (angular.isDefined(aux)) {
+                if (angular.isDefined(aux) && angular.isDefined(aux.prop("files"))) {
                     var file = aux.prop("files")[0];
                     ServiceTeachers.uploadCurriculum(file, vm.teacher.id)
                         .then(function () {
@@ -24,7 +24,8 @@
             });
 
             function initCtrl() {
-                ServiceTeachers.getTeacher('2896ca6d-fff5-457f-a542-707d90a91e29')
+                vm.teacherId = $cookies.get('userId');
+                ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function (response) {
                         vm.teacher = response.toJSON();
                         console.log(vm.teacher);

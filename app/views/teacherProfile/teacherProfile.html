@@ -4,8 +4,9 @@
         <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
             <div class="row column">
                 <br>
-                <img src="images/teacherProfile/teacher.svg">
-                <h5>Fidel Olarte</h5>
+                <input id="real-input-photo-file" name="file" type="file" ng-show="false" accept=".jpg" file-reader="vm.photoFile">
+                <img ng-src="https://d1e8nogtjho65.cloudfront.net/teacher/profile_photos/{{vm.teacher.id}}.jpg" ng-click="vm.editPhoto()" imageonload>
+                <h5>{{vm.teacher.name}}</h5>
             </div>
             <ul id="menu">
                 <li ng-click="vm.section = 'linkUp'">
