@@ -9,7 +9,7 @@
         <div class="row column">
             <h1>Bienvenido Profe.</h1>
             <p class="lead">
-                Este Perfil nos ayudará a conocerte y poder presatr un mejor servicio en nuestra plataforma, te invitamos a mantener esa información actualizada ya que así mismo te permitirá obtener mejores beneficios.
+                Este Perfil nos ayudará a conocerte y poder prestar un mejor servicio en nuestra plataforma, te invitamos a mantener esta información actualizada ya que así mismo te permitirá obtener mejores beneficios.
             </p>
         </div>
     </div>
@@ -246,19 +246,28 @@
 
         </div>
         <div class="large-6 columns">
-            <form action="">
+            <form name="subjectData">
                 <h3>Materias</h3>
-                <label for="">Selecciona</label>
-                <div class="input-group">
-                    <span class="input-group-label">+</span>
-                    <input class="input-group-field" type="text">
+                <div ng-if="vm.editData.subjects">
+                    <label for="">Selecciona</label>
+                    <div class="input-group">
+                        <span class="input-group-label">+</span>
+                        <multiple-autocomplete ng-model="vm.teacher.subjects" object-property="course" suggestions-arr="vm.subjects">
+                        </multiple-autocomplete>
+                    </div>
+                    <button class="button" ng-click="vm.editData.subjects = false">
+                        Guardar
+                    </button>
                 </div>
-                <div class="callout">
-                    <span class="label secondary"><i class="fi-x-circle"></i> Matemáticas</span>
-                    <span class="label secondary"><i class="fi-x-circle"></i> Español</span>
-                    <span class="label secondary"><i class="fi-x-circle"></i> Cálculo</span>
-                    <span class="label secondary"><i class="fi-x-circle"></i> Geometría</span>
-                    <span class="label secondary"><i class="fi-x-circle"></i> Inglés</span>
+                <div ng-if="!vm.editData.subjects">
+                    <div class="callout">
+                        <span class="label secondary" ng-repeat="subject in vm.teacher.subjects track by $index">
+                            {{subject.course}}
+                        </span>
+                    </div>
+                    <button class="button hollow" ng-click="vm.editData.subjects = true">
+                        Editar
+                    </button>
                 </div>
             </form>
 

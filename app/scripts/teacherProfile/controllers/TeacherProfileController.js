@@ -3,6 +3,10 @@
         .controller('TeacherProfileController', function($scope, $timeout, $route, $cookies, ServiceTeachers) {
             var vm = this;
 
+            vm.menuLiClass = function(name) {
+                return vm.section === name ? 'selected' : '';
+            };
+
             vm.editPhoto = function() {
                 $timeout(function() {
                     angular.element('#real-input-photo-file').click();

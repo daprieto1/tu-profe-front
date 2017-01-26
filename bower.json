@@ -1,27 +1,28 @@
 {
-  "name": "muroute",
-  "private": true,
-  "dependencies": {
-    "jquery": "~2.1.1",
-    "modernizr": "~2.8.1",
-    "angular": "^1.5.8",
-    "angular-cookies": "^1.5.8",
-    "angular-resource": "^1.5.8",
-    "angular-route": "^1.5.8",
-    "angular-sanitize": "^1.5.8",
-    "foundation-sites": "^6.2.3",
-    "underscore": "^1.8.3",
-    "angular-foundation-6": "^0.10.12",
-    "foundation-icons": "*",
-    "foundation-icon-fonts": "*",
-    "moment": "^2.15.1",
-    "font-awesome": "fontawesome#^4.7.0",
-    "openlayers3": "^3.0.0",
-    "animate.css": "^3.5.2",
-    "hover": "Hover#^2.1.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "mocha": "^3.0.2"
-  }
+    "name": "muroute",
+    "private": true,
+    "dependencies": {
+        "jquery": "~2.1.1",
+        "modernizr": "~2.8.1",
+        "angular": "^1.5.8",
+        "angular-cookies": "^1.5.8",
+        "angular-resource": "^1.5.8",
+        "angular-route": "^1.5.8",
+        "angular-sanitize": "^1.5.8",
+        "foundation-sites": "^6.2.3",
+        "underscore": "^1.8.3",
+        "angular-foundation-6": "^0.10.12",
+        "foundation-icons": "*",
+        "foundation-icon-fonts": "*",
+        "moment": "^2.15.1",
+        "font-awesome": "fontawesome#^4.7.0",
+        "openlayers3": "^3.0.0",
+        "animate.css": "^3.5.2",
+        "hover": "Hover#^2.1.0",
+        "angularMultipleSelect": "angular-multiple-select#^1.1.2"
+    },
+    "devDependencies": {
+        "chai": "^3.5.0",
+        "mocha": "^3.0.2"
+    }
 }

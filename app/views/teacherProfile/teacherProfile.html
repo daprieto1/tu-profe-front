@@ -9,20 +9,23 @@
                 <h5>{{vm.teacher.name}}</h5>
             </div>
             <ul id="menu">
-                <li ng-click="vm.section = 'linkUp'">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Vinculación
+                <li ng-click="vm.section = 'linkUp'" ng-class="vm.menuLiClass('linkUp')">
+                    <i class="fa fa-link" aria-hidden="true"></i> Vinculación
                 </li>
-                <li ng-click="vm.section = 'basicData'">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Datos
+                <li ng-click="vm.section = 'basicData'" ng-class="vm.menuLiClass('basicData')">
+                    <i class="fa fa-address-book" aria-hidden="true"></i> Datos
                 </li>
-                <li ng-click="vm.section = 'schedule'">
+                <li ng-click="vm.section = 'schedule'" ng-class="vm.menuLiClass('schedule')">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Horario
                 </li>
-                <li ng-click="vm.section = 'gameRules'">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Reglas de juego
+                <li ng-click="vm.section = 'gameRules'" ng-class="vm.menuLiClass('gameRules')">
+                    <i class="fa fa-gavel" aria-hidden="true"></i> Reglas de juego
                 </li>
-                <li ng-click="vm.section = 'trainings'">
-                    <i class="fa fa-calendar" aria-hidden="true"></i> Capacitaciones
+                <li ng-click="vm.section = 'trainings'" ng-class="vm.menuLiClass('trainings')">
+                    <i class="fa fa-book" aria-hidden="true"></i> Capacitaciones
+                </li>
+                <li ng-click="">
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar sesión
                 </li>
             </ul>
         </div>
