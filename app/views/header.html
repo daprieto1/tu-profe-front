@@ -14,8 +14,8 @@
             </div>
             <div class="top-bar-right">
                 <ul class="dropdown menu" dropdown-menu>
-                    <li><a href="#/login">SOLICITA TU ASESORÍA</a></li>
-                    <li ng-if="!isAuthenticated()"><a href="#/login">Iniciar sesión</a></li>
+                    <li><a href="/login">SOLICITA TU ASESORÍA</a></li>
+                    <li ng-if="!isAuthenticated()"><a href="#!/login">Iniciar sesión</a></li>
                     <li ng-if="isAuthenticated()">
                         <a href="">{{user.name}}</a>
                         <ul class="menu">

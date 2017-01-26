@@ -15,7 +15,7 @@
         'teacherProfileModule'
     ])
 
-    .config(function($routeProvider, $cookiesProvider) {
+    .config(function($routeProvider, $locationProvider, $cookiesProvider) {
 
 
         $cookiesProvider.defaults.path = '/';
