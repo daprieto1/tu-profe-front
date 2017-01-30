@@ -1,7 +1,11 @@
 (function() {
     angular.module('teacherProfileModule')
-        .controller('TeacherProfileController', function($scope, $timeout, $route, $cookies, ServiceTeachers) {
+        .controller('TeacherProfileController', function($scope, $timeout, $route, $cookies, $rootScope, ServiceTeachers) {
             var vm = this;
+
+            vm.logout = function() {
+                $rootScope.logout();
+            };
 
             vm.menuLiClass = function(name) {
                 return vm.section === name ? 'selected' : '';

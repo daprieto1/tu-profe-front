@@ -1,6 +1,6 @@
 (function() {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function($scope, $cookies, ServiceTeachers) {
+        .controller('TeacherBasicDataController', function($scope, $cookies, ServiceTeachers, CourseServices) {
             var vm = this;
 
             vm.edit = function(section) {
@@ -53,6 +53,11 @@
                     financial: false,
                     subjects: false
                 }
+
+                CourseServices.getAll()
+                    .then(function(response) {
+                        console.log(response);
+                    });
 
                 ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function(response) {

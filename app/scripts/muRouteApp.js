@@ -12,6 +12,7 @@
         'mm.foundation',
         'multipleSelect',
         'sessionModule',
+        'courseModule',
         'teacherProfileModule'
     ])
 
