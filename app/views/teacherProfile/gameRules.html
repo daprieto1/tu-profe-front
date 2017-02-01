@@ -1,4 +1,4 @@
-<div id="game-rules" class="row">
+<div id="game-rules" class="row" ng-controller="TeacherGameRulesController as vm">
     <div class="large-6 columns">
         <h2>Reglas de Juego</h2>
         <p>
@@ -15,7 +15,7 @@
             <cite>Teacher Name</cite>
         </blockquote>
         <fieldset>
-            <input id="acceptGameRules" type="checkbox"><label for="acceptGameRules">Al hacer click en este botón automáticamente acepta todo lo dicho en el parráfo anterior</label>
+            <input id="acceptGameRules" type="checkbox" ng-model="$parent.teacher.acceptGameRules" ng-disabled="$parent.teacher.acceptGameRules" ng-click="vm.acceptGameRules()"><label for="acceptGameRules">Al hacer click en este botón automáticamente acepta todo lo dicho en el parráfo anterior</label>
         </fieldset>
     </div>
 </div>

@@ -20,7 +20,7 @@
                 <div>
                     <h3>Hoja de vida</h3>
                     <p ng-if="vm.teacher.state !== 0">Gracias por subir tu hoja de vida, ten por seguro que la leeremos con detalle.</p>
-                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
+                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="https://d1ql3lvdg7tehd.cloudfront.net/formats/hoja-vida-profesores.docx">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
                         es importante que seas honesto y detallado ya que nos ayudará a buscar la mejor manera de trabajar
                         juntos.
                     </p>
@@ -51,7 +51,7 @@
                     <p>Felicitaciones profe, ya que eres parte del equipo de invitamos a las ventanas de Horario y Datos para
                         que completes tu perfil y empecemos a trabajar juntos con la mejor energía. Cuando estes listo presiona
                         en el botón activar cuenta, esto permitirá que empieces a tomar asesorías</p>
-                    <button class="button success" ng-if="vm.teacher.state === 3">
+                    <button class="button success" ng-if="vm.teacher.state === 3" ng-click="vm.activateAccount()">
                             Activar Cuenta
                         </button>
                 </div>

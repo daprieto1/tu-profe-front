@@ -1,16 +1,30 @@
-(function() {
+(function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function($scope, $cookies, ServiceTeachers, CourseServices) {
+        .controller('TeacherBasicDataController', function ($scope, $cookies, ServiceTeachers, CourseServices) {
             var vm = this;
 
-            vm.edit = function(section) {
+            vm.edit = function (section) {
                 ServiceTeachers.update(vm.teacher)
-                    .then(function() {
-                        section = false;
+                    .then(function () {
+                        switch (section) {
+                            case 1:
+                                vm.editData.account = false;
+                                break;
+                            case 2:
+                                vm.editData.personal = false;
+                                break;
+                            case 3:
+                                vm.editData.academical = false;
+                                break;
+                            case 4:
+                                vm.editData.financial = false;
+                                break;
+                        }
+                        alertify.success('Tus datos han sido actualizados');
                     });
             };
 
-            vm.removeSubject = function(index) {
+            vm.removeSubject = function (index) {
                 vm.teacher.subjects.splice(index, 1);
             };
 
@@ -55,12 +69,11 @@
                 }
 
                 CourseServices.getAll()
-                    .then(function(response) {
-                        console.log(response);
+                    .then(function (response) {
                     });
 
                 ServiceTeachers.getTeacher(vm.teacherId)
-                    .then(function(response) {
+                    .then(function (response) {
                         vm.teacher = response.toJSON();
                     });
             }

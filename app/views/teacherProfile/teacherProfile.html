@@ -12,16 +12,16 @@
                 <li ng-click="vm.section = 'linkUp'" ng-class="vm.menuLiClass('linkUp')">
                     <i class="fa fa-link" aria-hidden="true"></i> Vinculación
                 </li>
-                <li ng-click="vm.section = 'basicData'" ng-class="vm.menuLiClass('basicData')">
+                <li ng-click="vm.section = 'basicData'" ng-class="vm.menuLiClass('basicData')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-address-book" aria-hidden="true"></i> Datos
                 </li>
-                <li ng-click="vm.section = 'schedule'" ng-class="vm.menuLiClass('schedule')">
+                <li ng-click="vm.section = 'schedule'" ng-class="vm.menuLiClass('schedule')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Horario
                 </li>
-                <li ng-click="vm.section = 'gameRules'" ng-class="vm.menuLiClass('gameRules')">
+                <li ng-click="vm.section = 'gameRules'" ng-class="vm.menuLiClass('gameRules')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-gavel" aria-hidden="true"></i> Reglas de juego
                 </li>
-                <li ng-click="vm.section = 'trainings'" ng-class="vm.menuLiClass('trainings')">
+                <li ng-click="vm.section = 'trainings'" ng-class="vm.menuLiClass('trainings')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-book" aria-hidden="true"></i> Capacitaciones
                 </li>
                 <li ng-click="vm.logout()">

@@ -9,6 +9,16 @@
                     headers: { 'Content-Type': 'application/json' },
                     url: TU_PROFE_API + '/teacher',
                     method: 'PUT'
+                },
+                activateAccount: {
+                    url: TU_PROFE_API + '/teacher/activate-account/:id',
+                    params: { id: '@id' },
+                    method: 'POST'
+                },
+                acceptGameRules: {
+                    url: TU_PROFE_API + '/teacher/accept-game-rules/:id',
+                    params: { id: '@id' },
+                    method: 'POST'
                 }
             })
 
@@ -19,6 +29,14 @@
 
                 update: function (teacher) {
                     return Teacher.update({}, teacher).$promise;
+                },
+
+                activateAccount: function (teacherId) {
+                    return Teacher.activateAccount({ id: teacherId }).$promise;
+                },
+
+                acceptGameRules: function (teacherId) {
+                    return Teacher.acceptGameRules({ id: teacherId }).$promise;
                 },
 
                 uploadCurriculum: function (file, teacherId) {

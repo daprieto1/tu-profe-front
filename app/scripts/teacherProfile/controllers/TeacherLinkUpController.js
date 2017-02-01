@@ -12,6 +12,15 @@
                 }, 0);
             };
 
+            vm.activateAccount = function () {
+                ServiceTeachers.activateAccount(vm.teacherId)
+                    .then(function () {
+                        alertify.success('Tu cuenta ahora está activa');
+                    }, function (error) {
+                        alertify.error('No ha sido posible activar tu cuenta, contacta al administrador');
+                    });
+            };
+
             $scope.$watch('vm.fileContent', function () {
                 var aux = angular.element(document.querySelector('#real-input-file'));
                 if (angular.isDefined(aux) && angular.isDefined(aux.prop("files"))) {
@@ -28,7 +37,6 @@
                 ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function (response) {
                         vm.teacher = response.toJSON();
-                        console.log(vm.teacher);
                     });
             }
 
