@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('muRouteApp')
+    angular.module('tuProfeApp')
 
     /**
      * Directive to read a file in a input.

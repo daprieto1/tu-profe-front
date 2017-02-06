@@ -2,7 +2,7 @@
 
     'use strict';
 
-    angular.module('muRouteApp')
+    angular.module('tuProfeApp')
 
         .constant('TU_PROFE_API', 'http://localhost:8080')
 

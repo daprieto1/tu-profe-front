@@ -252,17 +252,17 @@
                     <label for="">Selecciona</label>
                     <div class="input-group">
                         <span class="input-group-label">+</span>
-                        <multiple-autocomplete ng-model="vm.teacher.subjects" object-property="course" suggestions-arr="vm.subjects">
+                        <multiple-autocomplete ng-model="vm.teacher.courses" object-property="courseName" suggestions-arr="vm.subjects">
                         </multiple-autocomplete>
                     </div>
-                    <button class="button" ng-click="vm.editData.subjects = false">
+                    <button class="button" ng-click="vm.editCourses()">
                         Guardar
                     </button>
                 </div>
                 <div ng-if="!vm.editData.subjects">
                     <div class="callout">
-                        <span class="label secondary" ng-repeat="subject in vm.teacher.subjects track by $index">
-                            {{subject.course}}
+                        <span class="label secondary" ng-repeat="subject in vm.teacher.courses track by $index">
+                            {{subject.courseName}}
                         </span>
                     </div>
                     <button class="button hollow" ng-click="vm.editData.subjects = true">

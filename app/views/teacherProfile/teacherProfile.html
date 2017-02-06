@@ -44,7 +44,7 @@
             <ng-include src="'views/teacherProfile/gameRules.html'" ng-show="vm.section === 'gameRules'">
             </ng-include>
 
-            <ng-include src="'views/teacherProfile/trainings.html'" ng-show="vm.section === 'trainings'">
+            <ng-include src="'views/teacherProfile/trainings.html'" ng-if="vm.section === 'trainings'">
             </ng-include>
 
         </div>

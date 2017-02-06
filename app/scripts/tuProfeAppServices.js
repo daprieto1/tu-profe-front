@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('muRouteApp')
+  angular.module('tuProfeApp')
     .factory('ServiceUtils', function () {
       return {
         /**

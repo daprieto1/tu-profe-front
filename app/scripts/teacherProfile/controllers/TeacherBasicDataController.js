@@ -24,42 +24,26 @@
                     });
             };
 
+            vm.editCourses = function () {
+                vm.editData.subjects = false;
+                var teacher = angular.copy(vm.teacher);
+                teacher.courses = teacher.courses.map(function (course) {
+                    return course.id;
+                });
+                ServiceTeachers.update(teacher)
+                    .then(function (teacher) {
+                        alertify.success('El cambio en las materias ha sido guardado');
+                    }, function () {
+                        alertify.error('Un error ha ocurrido, contacte al administrador.');
+                    });
+            };
+
             vm.removeSubject = function (index) {
-                vm.teacher.subjects.splice(index, 1);
+                vm.teacher.courses.splice(index, 1);
             };
 
             function initCtrl() {
                 vm.teacherId = $cookies.get('userId');
-                vm.subjects = [{
-                    area: "Idioma",
-                    classification: "Especializado",
-                    course: "Alemán",
-                    id: "1"
-                }, {
-                    area: "Idioma",
-                    classification: "Especializado",
-                    course: "Ingles",
-                    id: "2"
-                }, {
-                    area: "Idioma",
-                    classification: "Especializado",
-                    course: "Frances",
-                    id: "3"
-                }, {
-                    area: "Idioma",
-                    classification: "Especializado",
-                    course: "Ruso",
-                    id: "4"
-                }, {
-                    area: "Idioma",
-                    classification: "Especializado",
-                    course: "Español",
-                    id: "5"
-                }];
-                vm.teacher = {
-                    subjects: []
-                };
-                vm.teacher.subjects.push(vm.subjects[0]);
                 vm.editData = {
                     account: false,
                     personal: false,
@@ -70,12 +54,16 @@
 
                 CourseServices.getAll()
                     .then(function (response) {
+                        vm.subjects = response;
+                        ServiceTeachers.getTeacher(vm.teacherId)
+                            .then(function (response) {
+                                vm.teacher = response.toJSON();
+                                vm.teacher.courses = vm.subjects.filter(function (course) {
+                                    return vm.teacher.courses.indexOf(course.id) > -1;
+                                });
+                            });
                     });
 
-                ServiceTeachers.getTeacher(vm.teacherId)
-                    .then(function (response) {
-                        vm.teacher = response.toJSON();
-                    });
             }
 
             initCtrl();

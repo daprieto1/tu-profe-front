@@ -19,6 +19,11 @@
                     url: TU_PROFE_API + '/teacher/accept-game-rules/:id',
                     params: { id: '@id' },
                     method: 'POST'
+                },
+                takeExam: {
+                    url: TU_PROFE_API + '/teacher/take-exam/:id',
+                    params: { id: '@id' },
+                    method: 'POST'
                 }
             })
 
@@ -37,6 +42,10 @@
 
                 acceptGameRules: function (teacherId) {
                     return Teacher.acceptGameRules({ id: teacherId }).$promise;
+                },
+
+                takeExam: function (teacherId, exam) {
+                    return Teacher.takeExam({ id: teacherId }, exam).$promise;
                 },
 
                 uploadCurriculum: function (file, teacherId) {

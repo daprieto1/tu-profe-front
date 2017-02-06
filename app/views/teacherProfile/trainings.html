@@ -1,25 +1,35 @@
 <div id="trainings" data-sticky-container ng-controller="TeacherTrainingsController as vm">
-    <div class="row question" ng-if="!vm.hadFinished">
+
+    <div class="row question" ng-if="!vm.hadFinished && vm.startTraining">
         <div class="large-6 large-centered columns">
             <p>{{vm.exam.questions[vm.currentQuestion].questionText}}</p>
-            <div ng-repeat="answer in vm.exam.questions[vm.currentQuestion].answers track by $index" class="{{vm.getAnswerClass(answer)}}" ng-click="vm.response(answer)">
+            <div ng-repeat="answer in vm.exam.questions[vm.currentQuestion].answers track by $index" class="{{vm.getAnswerClass(answer)}}"
+                ng-click="vm.response(answer)">
                 <span class="badge">{{$index + 1}}</span> {{answer.answerText}}
                 <small ng-if="answer.isValid && vm.currentAnswer === answer">Buen trabajo, pasa a la siguiente pregunta</small>
                 <small ng-if="!answer.isValid && vm.currentAnswer === answer">La respuesta no es correcta, consulta el material de nuevo</small>
             </div>
+            <p>
+                Pregunta {{vm.currentQuestion + 1}} de {{vm.exam.questions.length}}
+            </p>
+            <button class="button success" ng-if="vm.hadResponse" ng-click="vm.nextQuestion()">
+                {{vm.currentQuestion + 1 === vm.exam.questions.length ? 'Terminar':'Siguiente'}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
+
     <div ng-if="vm.hadFinished">
         <div class="summary-header">
             <div class="row">
                 <div class="large-6 large-centered columns">
                     <h2>Revisa el material para ampliar tu aprendizaje.</h2>
-                    <p>Has contestado {{vm.correctAnswers.length}} de {{vm.exam.questions.length}} correctas a la primera.</p>
+                    <p ng-if="!vm.teacher.exam.passExam">Has contestado {{vm.correctAnswers.length}} de {{vm.exam.questions.length}} correctas.</p>
+                    <p ng-if="vm.teacher.exam.passExam">Ya has aprovado el examen con éxito</p>
                 </div>
             </div>
         </div>
 
-        <div class="row summary">
+        <div class="row summary" ng-if="vm.startTraining">
             <div class="large-6 large-centered columns">
                 <dl>
                     <dt><i class="fa fa-check" aria-hidden="true"></i> Lo que sabes</dt>
@@ -33,14 +43,25 @@
                 </dl>
             </div>
         </div>
+        <div class="row summary" ng-if="!vm.teacher.exam.passExam">
+            <div class="large-6 large-centered columns">
+                <button class="button success" ng-click="vm.restart()">
+                    Reintentar prueba
+                </button>
+            </div>
+        </div>        
     </div>
 
-    <div id="controllers">
-        <div class="float-right">
-            Pregunta {{vm.currentQuestion + 1}} de {{vm.exam.questions.length}}
-            <button class="button success" ng-if="vm.hadResponse" ng-click="vm.nextQuestion()">
-                {{vm.currentQuestion + 1 === vm.exam.questions.length ? 'Terminar':'Siguiente'}} <i class="fa fa-chevron-right" aria-hidden="true"></i>
-            </button>
+    <div ng-if="vm.isFisrtTime && !vm.startTraining">
+        <div class="row">
+            <div class="large-centered large-6 columns">
+                <h3>{{vm.exam.type}}</h3>
+                <p>{{vm.exam.questions.length}} Preguntas</p>
+                <button class="button success" ng-click="vm.startTraining = true">
+                    Empezar prueba
+                </button>
+            </div>
         </div>
     </div>
+
 </div>

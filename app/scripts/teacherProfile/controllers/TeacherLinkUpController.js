@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherLinkUpController', function ($scope, $timeout, $cookies, ServiceTeachers) {
+        .controller('TeacherLinkUpController', function ($scope, $timeout, $cookies, ServiceTeachers, TEACHER_STATES) {
             var vm = this;
 
             /**
@@ -13,12 +13,18 @@
             };
 
             vm.activateAccount = function () {
-                ServiceTeachers.activateAccount(vm.teacherId)
-                    .then(function () {
-                        alertify.success('Tu cuenta ahora está activa');
-                    }, function (error) {
-                        alertify.error('No ha sido posible activar tu cuenta, contacta al administrador');
-                    });
+                var message = '¿Seguro deseas activar tu cuenta?.<br/><br/>Recuerda que debes haber realizado las siguientes acciones:<ul><li>Aceptar las reglas de juego</li><li>Completar tu información personal</li><li>Seleccionar las materias que vas a dictar</li><li>Configurar tu horario</li><li>Pasar el examen de vinculación</li></ul>';
+                alertify.confirm(message, function (e) {
+                    if (e) {
+                        ServiceTeachers.activateAccount(vm.teacherId)
+                            .then(function () {
+                                alertify.success('Tu cuenta ahora está activa');
+                                vm.teacher.state = TEACHER_STATES.active.id;
+                            }, function (error) {
+                                alertify.log('No ha sido posible activar tu cuenta: ' + error.data.message, 'error', 0);
+                            });
+                    }
+                });
             };
 
             $scope.$watch('vm.fileContent', function () {

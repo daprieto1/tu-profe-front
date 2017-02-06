@@ -5,7 +5,7 @@
         return angular.isUndefined(val) || val === null
     }
 
-    angular.module('muRouteApp', [
+    angular.module('tuProfeApp', [
         'ngRoute',
         'ngCookies',
         'ngResource',
@@ -13,6 +13,7 @@
         'multipleSelect',
         'sessionModule',
         'courseModule',
+        'interviewModule',
         'trainingModule',
         'teacherProfileModule'
     ])
