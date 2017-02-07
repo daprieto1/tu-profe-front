@@ -46,7 +46,6 @@
             restrict: 'A',
             link: function(scope, element, attrs) {
                 element.bind('error', function() {
-                    console.log('here');
                     attrs.$set('src', 'https://d1ql3lvdg7tehd.cloudfront.net/teacher/profile-photo/teacher.svg')
                 });
             }

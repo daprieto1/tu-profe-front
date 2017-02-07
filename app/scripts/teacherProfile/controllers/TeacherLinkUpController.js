@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherLinkUpController', function ($scope, $timeout, $cookies, ServiceTeachers, TEACHER_STATES) {
+        .controller('TeacherLinkUpController', function ($scope, $timeout, $cookies, $modal, ServiceTeachers, TEACHER_STATES) {
             var vm = this;
 
             /**
@@ -12,6 +12,10 @@
                 }, 0);
             };
 
+            /**
+             * Activate account.
+             * The process is successful if the teacher accomplish all the restrictions.
+             */
             vm.activateAccount = function () {
                 var message = '¿Seguro deseas activar tu cuenta?.<br/><br/>Recuerda que debes haber realizado las siguientes acciones:<ul><li>Aceptar las reglas de juego</li><li>Completar tu información personal</li><li>Seleccionar las materias que vas a dictar</li><li>Configurar tu horario</li><li>Pasar el examen de vinculación</li></ul>';
                 alertify.confirm(message, function (e) {
@@ -24,6 +28,44 @@
                                 alertify.log('No ha sido posible activar tu cuenta: ' + error.data.message, 'error', 0);
                             });
                     }
+                });
+            };
+
+            vm.openSelectInterviewModal = function () {
+                var params = {
+                    templateUrl: 'views/teacherProfile/modals/selectInterviewModal.html',
+                    resolve: {
+                        teacherId: function () {
+                            return vm.teacher.id;
+                        },
+                    },
+                    controller: function ($scope, $modalInstance, teacherId, InterviewServices) {
+                        $scope.teacherId = teacherId;
+                        InterviewServices.getAllActive()
+                            .then(function (interviewsResponse) {
+                                $scope.interviews = interviewsResponse;
+                                $scope.interviews.forEach(function (interview) {
+                                    interview.momentDate = moment(interview.startDateTime).format('LLL');
+                                });
+                            });
+
+                        $scope.takePlace = function (interviewId) {
+                            InterviewServices.takePlace($scope.teacherId, interviewId)
+                                .then(function () {
+                                    alertify.success('La entrevista ha sido agendada con éxito.');
+                                    $modalInstance.close();
+                                }, function (error) {
+                                    alertify.error('La entrevista no ha podido ser agendada: ' + error.data.message);
+                                });
+                        };
+
+                    }
+                };
+                var modalInstance = $modal.open(params);
+                modalInstance.result.then(function (selectedItem) {
+                    vm.teacher.state = TEACHER_STATES.interview.id;
+                }, function () {
+                    alertify.error('Recuerda agendar tu entrevista pronto, los cupos no son ilimitados');
                 });
             };
 
@@ -40,9 +82,11 @@
 
             function initCtrl() {
                 vm.teacherId = $cookies.get('userId');
+                vm.interviews = [];
+
                 ServiceTeachers.getTeacher(vm.teacherId)
-                    .then(function (response) {
-                        vm.teacher = response.toJSON();
+                    .then(function (teacherResponse) {
+                        vm.teacher = teacherResponse.toJSON();
                     });
             }
 
