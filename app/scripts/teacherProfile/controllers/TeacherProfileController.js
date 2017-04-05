@@ -43,6 +43,7 @@
 
             function initCtrl() {
                 vm.teacherId = $cookies.get('userId');
+                console.log(vm.teacherId);
                 vm.teacher = {};
                 vm.photoFile = undefined;
                 vm.section = 'linkUp';

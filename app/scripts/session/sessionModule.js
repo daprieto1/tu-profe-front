@@ -54,14 +54,7 @@
 
             $rootScope.isAuthenticated = function () {
                 return angular.isDefined($cookies.getObject('user'));
-            };
-
-            $rootScope.logout = function () {
-                $cookies.remove('username');
-                $cookies.remove('token');
-                $cookies.remove('userId');
-                $location.path('/login');
-            };
+            };            
 
             $rootScope.$on('$routeChangeStart', function (event, p1, p2) {
                 if ($rootScope.isAuthenticated()) {
@@ -86,9 +79,17 @@
                 }
             });
 
+            $rootScope.logout = function () {
+                $cookies.remove('username');
+                $cookies.remove('token');
+                $cookies.remove('userId');
+                $location.path('/login');
+            };
+
             $rootScope.loginTeacher = function (username, password) {
                 return ServiceSession.loginTeacher(username, password)
                     .then(function (resource) {
+                        console.log(resource);
                         $cookies.put('username', resource.username);
                         $cookies.put('token', resource.token);
                         $cookies.put('userId', resource.userId);

@@ -4,7 +4,7 @@
 
     angular.module('tuProfeApp')
 
-        .constant('TU_PROFE_API', 'http://localhost:8080')
+        .constant('TU_PROFE_API', 'http://localhost:8080/api')
 
         .constant('TEACHER_STATES', {
             signUp: {
