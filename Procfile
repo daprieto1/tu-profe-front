@@ -1,1 +1,1 @@
-web: gulp && cp -R bower_components/ dist/ && node server.js
+web: node server.js
