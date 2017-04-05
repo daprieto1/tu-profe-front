@@ -1,1 +1,1 @@
-web: sudo gulp && sudo cp -R bower_components/ dist/ && node server.js
+web: gulp && cp -R bower_components/ dist/ && node server.js
