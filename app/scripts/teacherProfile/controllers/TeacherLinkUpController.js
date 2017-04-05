@@ -71,8 +71,8 @@
 
             $scope.$watch('vm.fileContent', function () {
                 var aux = angular.element(document.querySelector('#real-input-file'));
-                if (angular.isDefined(aux) && angular.isDefined(aux.prop("files"))) {
-                    var file = aux.prop("files")[0];
+                if (angular.isDefined(aux) && angular.isDefined(aux.prop('files'))) {
+                    var file = aux.prop('files')[0];
                     ServiceTeachers.uploadCurriculum(file, vm.teacher.id)
                         .then(function () {
                             vm.teacher.state = 1;

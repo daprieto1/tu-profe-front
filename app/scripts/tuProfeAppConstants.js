@@ -1,7 +1,6 @@
 (function () {
 
     'use strict';
-
     angular.module('tuProfeApp')
 
         .constant('TU_PROFE_API', 'http://localhost:8080/api')

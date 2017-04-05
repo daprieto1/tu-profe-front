@@ -32,8 +32,8 @@
 
             $scope.$watch('vm.photoFile', function () {
                 var aux = angular.element(document.querySelector('#real-input-photo-file'));
-                if (angular.isDefined(aux) && angular.isDefined(aux.prop("files")[0])) {
-                    var file = aux.prop("files")[0];
+                if (angular.isDefined(aux) && angular.isDefined(aux.prop('files')[0])) {
+                    var file = aux.prop('files')[0];
                     ServiceTeachers.uploadPhoto(file, vm.teacher.id)
                         .then(function () {
                             $route.reload();
