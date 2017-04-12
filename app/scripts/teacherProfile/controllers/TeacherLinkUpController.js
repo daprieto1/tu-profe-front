@@ -82,6 +82,7 @@
 
             function initCtrl() {
                 vm.teacherId = $cookies.get('userId');
+                vm.teacherId = '6774e98a-fe53-4ae3-940d-bc9734b6197f';
                 vm.interviews = [];
 
                 ServiceTeachers.getTeacher(vm.teacherId)

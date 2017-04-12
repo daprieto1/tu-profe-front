@@ -3,22 +3,22 @@
 
     angular.module('interviewModule')
         .factory('InterviewServices', function ($resource, TU_PROFE_API) {
-            var Interview = $resource(TU_PROFE_API + '/interview/:id', { id: '@id' }, {
+            var Interview = $resource(TU_PROFE_API + '/interviews/:id', { id: '@id' }, {
                 update: {
                     headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/interview',
+                    url: TU_PROFE_API + '/interviews',
                     method: 'PUT'
                 },
                 getAllActive: {
                     headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/interview/active',
+                    url: TU_PROFE_API + '/interviews/active/all',
                     isArray: true,
                     method: 'GET'
                 },
                 takePlace: {
                     params: { teacherId: '@teacherId', interviewId: '@interviewId' },
                     headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/interview/take-place',
+                    url: TU_PROFE_API + '/interviews/take-place',
                     method: 'POST'
                 }
             })

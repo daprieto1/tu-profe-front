@@ -90,9 +90,10 @@
                 return ServiceSession.loginTeacher(username, password)
                     .then(function (resource) {
                         console.log(resource);
-                        $cookies.put('username', resource.username);
+                        $cookies.put('username', username);
                         $cookies.put('token', resource.token);
-                        $cookies.put('userId', resource.userId);
+                        $cookies.put('userId', resource.id);
+                        console.log($cookies.get('userId'));
                         $location.path('teacher-profile');
                     });
             };

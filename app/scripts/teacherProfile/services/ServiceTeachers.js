@@ -51,10 +51,9 @@
                 uploadCurriculum: function (file, teacherId) {
                     var fd = new FormData();
                     fd.append('file', file);
-                    fd.append('teacherId', teacherId)
 
                     return $http({
-                        url: TU_PROFE_API + '/teacher/upload-curriculum',
+                        url: TU_PROFE_API + '/teachers/curriculum/'+teacherId,
                         method: 'POST',
                         data: fd,
                         headers: { 'Content-Type': undefined },
