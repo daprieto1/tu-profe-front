@@ -14,6 +14,7 @@
         'sessionModule',
         'courseModule',
         'schoolModule',
+        'professionModule',
         'interviewModule',
         'trainingModule',
         'teacherProfileModule'
