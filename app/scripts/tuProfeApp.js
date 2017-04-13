@@ -13,6 +13,7 @@
         'multipleSelect',
         'sessionModule',
         'courseModule',
+        'schoolModule',
         'interviewModule',
         'trainingModule',
         'teacherProfileModule'

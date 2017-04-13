@@ -4,13 +4,7 @@
     angular.module('courseModule')
         .factory('CourseServices', function($resource, TU_PROFE_API) {
 
-            var Course = $resource(TU_PROFE_API + '/course/:id', { id: '@id' }, {
-                update: {
-                    headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/course',
-                    method: 'PUT'
-                }
-            })
+            var Course = $resource(TU_PROFE_API + '/courses/:id', { id: '@id' });
 
             return {
 

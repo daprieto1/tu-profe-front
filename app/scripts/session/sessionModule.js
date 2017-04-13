@@ -93,7 +93,6 @@
                         $cookies.put('username', username);
                         $cookies.put('token', resource.token);
                         $cookies.put('userId', resource.id);
-                        console.log($cookies.get('userId'));
                         $location.path('teacher-profile');
                     });
             };

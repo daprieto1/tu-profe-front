@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function ($scope, $cookies, ServiceTeachers, CourseServices) {
+        .controller('TeacherBasicDataController', function ($scope, $cookies, ServiceTeachers, CourseServices, SchoolServices) {
             var vm = this;
 
             vm.edit = function (section) {
@@ -52,15 +52,21 @@
                     subjects: false
                 }
 
+                SchoolServices.getAll()
+                    .then(schools => {
+                        vm.schools = schools;
+                    });
+
                 CourseServices.getAll()
                     .then(function (response) {
+                        console.log(response);
                         vm.subjects = response;
                         ServiceTeachers.getTeacher(vm.teacherId)
-                            .then(function (response) {
+                            .then(function (response) {                                
                                 vm.teacher = response.toJSON();
-                                vm.teacher.courses = vm.subjects.filter(function (course) {
+                                /*vm.teacher.courses = vm.subjects.filter(function (course) {
                                     return vm.teacher.courses.indexOf(course.id) > -1;
-                                });
+                                });*/
                             });
                     });
 

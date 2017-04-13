@@ -7,7 +7,7 @@
             var Teacher = $resource(TU_PROFE_API + '/teachers/:id', { id: '@id' }, {
                 update: {
                     headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/teacher',
+                    url: TU_PROFE_API + '/teachers',                    
                     method: 'PUT'
                 },
                 activateAccount: {
@@ -33,7 +33,7 @@
                 },
 
                 update: function (teacher) {
-                    return Teacher.update({}, teacher).$promise;
+                    return Teacher.update({ id: teacher.id }, teacher).$promise;
                 },
 
                 activateAccount: function (teacherId) {
@@ -53,7 +53,7 @@
                     fd.append('file', file);
 
                     return $http({
-                        url: TU_PROFE_API + '/teachers/curriculum/'+teacherId,
+                        url: TU_PROFE_API + '/teachers/curriculum/' + teacherId,
                         method: 'POST',
                         data: fd,
                         headers: { 'Content-Type': undefined },

@@ -18,7 +18,7 @@
                 takePlace: {
                     params: { teacherId: '@teacherId', interviewId: '@interviewId' },
                     headers: { 'Content-Type': 'application/json' },
-                    url: TU_PROFE_API + '/interviews/take-place',
+                    url: TU_PROFE_API + '/interviews/active/take-place',
                     method: 'POST'
                 }
             })

@@ -171,10 +171,6 @@
                         <p>{{vm.teacher.university}}</p>
                     </div>
                     <div class="large-12 columns">
-                        <strong>Dirección Universidad: </strong>
-                        <p>{{vm.teacher.universityAddress}}</p>
-                    </div>
-                    <div class="large-12 columns">
                         <strong>Profesión: </strong>
                         <p>{{vm.teacher.profession}}</p>
                     </div>
@@ -202,15 +198,6 @@
                             </p>
                         </div>
                         <div class="large-6 columns">
-                            <label for="universityAddress">Dirección Universidad</label>
-                            <input id="universityAddress" name="universityAddress" type="text" ng-model="vm.teacher.universityAddress" required>
-                            <p class="error" ng-if="academicalForm.universityAddress.$invalid && academicalForm.universityAddress.$dirty">
-                                Por favor escriba la dirección d su Universidad.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns">
                             <label for="profession">Profesión</label>
                             <input id="profession" name="profession" type="text" ng-model="vm.teacher.profession" required>
                             <p class="error" ng-if="academicalForm.profession.$invalid && academicalForm.profession.$dirty">
@@ -278,23 +265,23 @@
                 <div class="row" ng-if="!vm.editData.financial">
                     <div class="large-12 columns">
                         <strong>Banco: </strong>
-                        <p>{{vm.teacher.bank}}</p>
+                        <p>{{vm.teacher.bankAccount.bank}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Número de Cuenta: </strong>
-                        <p>{{vm.teacher.accountNumber}}</p>
+                        <p>{{vm.teacher.bankAccount.number}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Tipo de Cuenta: </strong>
-                        <p>{{vm.teacher.accountType}}</p>
+                        <p>{{vm.teacher.bankAccount.type}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Nombre titular de la cuenta: </strong>
-                        <p>{{vm.teacher.accountHolderName}}</p>
+                        <p>{{vm.teacher.bankAccount.holderName}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Cedula titular de la cuenta: </strong>
-                        <p>{{vm.teacher.accountHolderIdentification}}</p>
+                        <p>{{vm.teacher.bankAccount.holderIdentification}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.financial = true">
@@ -306,7 +293,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="bank">Banco</label>
-                            <input id="bank" name="bank" type="text" ng-model="vm.teacher.bank" required>
+                            <input id="bank" name="bank" type="text" ng-model="vm.teacher.bankAccount.bank" required>
                             <p class="error" ng-if="financialData.bank.$invalid && financialData.bank.$dirty">
                                 Por favor seleccione su banco.
                             </p>
@@ -315,7 +302,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="accountNumber">Número de Cuenta</label>
-                            <input id="accountNumber" name="accountNumber" type="text" ng-model="vm.teacher.accountNumber" required>
+                            <input id="accountNumber" name="accountNumber" type="text" ng-model="vm.teacher.bankAccount.number" required>
                             <p class="error" ng-if="financialData.accountNumber.$invalid && financialData.accountNumber.$dirty">
                                 Por favor escriba el número de su cuenta.
                             </p>
@@ -324,7 +311,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="accountType">Tipo de Cuenta</label>
-                            <input id="accountType" name="accountType" type="text" ng-model="vm.teacher.accountType" required>
+                            <input id="accountType" name="accountType" type="text" ng-model="vm.teacher.bankAccount.type" required>
                             <p class="error" ng-if="financialData.accountType.$invalid && financialData.accountType.$dirty">
                                 Por favor seleccione su tipo de cuenta.
                             </p>
@@ -333,7 +320,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="accountHolderName">Nombre titular de la cuenta</label>
-                            <input id="accountHolderName" name="accountHolderName" type="text" ng-model="vm.teacher.accountHolderName" required>
+                            <input id="accountHolderName" name="accountHolderName" type="text" ng-model="vm.teacher.bankAccount.holderName" required>
                             <p class="error" ng-if="financialData.accountHolderName.$invalid && financialData.accountHolderName.$dirty">
                                 Por favor escriba el nombre del titular de la cuenta.
                             </p>
@@ -342,7 +329,7 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="accountHolderIdentification">Cedula titular de la cuenta</label>
-                            <input id="accountHolderIdentification" name="accountHolderIdentification" type="text" ng-model="vm.teacher.accountHolderIdentification" required>
+                            <input id="accountHolderIdentification" name="accountHolderIdentification" type="text" ng-model="vm.teacher.bankAccount.holderIdentification" required>
                             <p class="error" ng-if="financialData.accountHolderIdentification.$invalid && financialData.accountHolderIdentification.$dirty">
                                 Por favor escriba la cedula del titular de la cuenta.
                             </p>

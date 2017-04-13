@@ -3,7 +3,8 @@
     'use strict';
     angular.module('tuProfeApp')
 
-        .constant('TU_PROFE_API', 'https://tu-profe-api-node-diegoprieto.c9users.io:8080/api')
+        //.constant('TU_PROFE_API', 'https://tu-profe-api-node-diegoprieto.c9users.io:8080/api')
+        .constant('TU_PROFE_API', 'http://localhost:8080/api')
 
         .constant('TEACHER_STATES', {
             signUp: {
