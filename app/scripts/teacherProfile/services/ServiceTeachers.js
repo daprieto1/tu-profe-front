@@ -11,17 +11,17 @@
                     method: 'PUT'
                 },
                 activateAccount: {
-                    url: TU_PROFE_API + '/teacher/activate-account/:id',
+                    url: TU_PROFE_API + '/teachers/activate-account/:id',
                     params: { id: '@id' },
                     method: 'POST'
                 },
                 acceptGameRules: {
-                    url: TU_PROFE_API + '/teacher/accept-game-rules/:id',
+                    url: TU_PROFE_API + '/teachers/accept-game-rules/:id',
                     params: { id: '@id' },
                     method: 'POST'
                 },
                 takeExam: {
-                    url: TU_PROFE_API + '/teacher/take-exam/:id',
+                    url: TU_PROFE_API + '/teachers/take-exam/:id',
                     params: { id: '@id' },
                     method: 'POST'
                 }
