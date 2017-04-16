@@ -1,6 +1,6 @@
 {
     "scripts": {
-      "start": "node app",
+      "start": "node server.js",
       "postinstall": "npm install bower && bower install && cp -R bower_components dist"
     },
     "private": true,
