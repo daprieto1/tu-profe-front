@@ -75,12 +75,13 @@
                 vm.isFisrtTime = false;
                 vm.startTraining = false;
 
-                TrainingServices.get('1')
+                TrainingServices.get('61ed01c4-2ed5-4f46-a19e-d2ffa0a18331')
                             .then(function (response) {
                                 vm.exam = response.toJSON();
                             });
 
-                if (vm.teacher.exam.idExam !== null && angular.isDefined(vm.teacher.exam.idExam) && /\S/.test(vm.teacher.exam.idExam)) {
+                console.log(vm.teacher);
+                if (angular.isDefined(vm.teacher.exam) && vm.teacher.exam.idExam !== null && /\S/.test(vm.teacher.exam.idExam)) {
                     vm.hadFinished = true;
                     vm.correctAnswers = new Array(vm.teacher.exam.correctAnswers);
                     vm.wrongAnswers = new Array(vm.teacher.exam.wrongAnswers);

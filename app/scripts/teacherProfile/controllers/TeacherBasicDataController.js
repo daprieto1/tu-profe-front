@@ -64,9 +64,9 @@
                         ServiceTeachers.getTeacher(vm.teacherId)
                             .then(function (response) {                                
                                 vm.teacher = response.toJSON();
-                                /*vm.teacher.courses = vm.subjects.filter(function (course) {
+                                vm.teacher.courses = vm.subjects.filter(function (course) {
                                     return vm.teacher.courses.indexOf(course.id) > -1;
-                                });*/
+                                });
                             });
                     });
 
