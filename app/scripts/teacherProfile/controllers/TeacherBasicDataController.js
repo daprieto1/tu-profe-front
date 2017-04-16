@@ -1,40 +1,25 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function ($scope, $cookies, ServiceTeachers, CourseServices, SchoolServices) {
+        .controller('TeacherBasicDataController', function ($scope, $cookies, $q, ServiceTeachers, CourseServices, SchoolServices, ProfessionServices) {
             var vm = this;
 
             vm.edit = function (section) {
-                ServiceTeachers.update(vm.teacher)
-                    .then(function () {
-                        switch (section) {
-                            case 1:
-                                vm.editData.account = false;
-                                break;
-                            case 2:
-                                vm.editData.personal = false;
-                                break;
-                            case 3:
-                                vm.editData.academical = false;
-                                break;
-                            case 4:
-                                vm.editData.financial = false;
-                                break;
-                        }
-                        alertify.success('Tus datos han sido actualizados');
-                    });
-            };
-
-            vm.editCourses = function () {
-                vm.editData.subjects = false;
                 var teacher = angular.copy(vm.teacher);
+                teacher.university = undefined || teacher.university.id
+                teacher.profession = undefined || teacher.profession.id
                 teacher.courses = teacher.courses.map(function (course) {
                     return course.id;
                 });
                 ServiceTeachers.update(teacher)
-                    .then(function (teacher) {
-                        alertify.success('El cambio en las materias ha sido guardado');
-                    }, function () {
-                        alertify.error('Un error ha ocurrido, contacte al administrador.');
+                    .then(function () {
+                        vm.editData = {
+                            account: false,
+                            personal: false,
+                            academical: false,
+                            financial: false,
+                            subjects: false
+                        }
+                        alertify.success('Tus datos han sido actualizados');
                     });
             };
 
@@ -52,24 +37,34 @@
                     subjects: false
                 }
 
-                SchoolServices.getAll()
-                    .then(schools => {
-                        vm.schools = schools;
-                    });
+                $q.all([
+                    SchoolServices.getAll(),
+                    ProfessionServices.getAll(),
+                    CourseServices.getAll()
+                ])
+                    .then(([schools, professions, courses]) => {
+                        vm.universities = schools;
+                        vm.professions = professions;
+                        vm.subjects = courses;
 
-                CourseServices.getAll()
-                    .then(function (response) {
-                        console.log(response);
-                        vm.subjects = response;
                         ServiceTeachers.getTeacher(vm.teacherId)
-                            .then(function (response) {                                
-                                vm.teacher = response.toJSON();
+                            .then(function (teacher) {
+                                vm.teacher = teacher;
+                                vm.teacher.gradeDate = new Date(vm.teacher.gradeDate);
+
                                 vm.teacher.courses = vm.subjects.filter(function (course) {
                                     return vm.teacher.courses.indexOf(course.id) > -1;
                                 });
+
+                                vm.teacher.university = vm.universities.find(school => {
+                                    return school.id === vm.teacher.university;
+                                });
+
+                                vm.teacher.profession = vm.professions.find(profession => {
+                                    return profession.id === vm.teacher.profession;
+                                });
                             });
                     });
-
             }
 
             initCtrl();

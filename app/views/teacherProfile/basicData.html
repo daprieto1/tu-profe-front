@@ -9,7 +9,8 @@
         <div class="row column">
             <h1>Bienvenido Profe.</h1>
             <p class="lead">
-                Este Perfil nos ayudará a conocerte y poder prestar un mejor servicio en nuestra plataforma, te invitamos a mantener esta información actualizada ya que así mismo te permitirá obtener mejores beneficios.
+                Este Perfil nos ayudará a conocerte y poder prestar un mejor servicio en nuestra plataforma, te invitamos a mantener esta
+                información actualizada ya que así mismo te permitirá obtener mejores beneficios.
             </p>
         </div>
     </div>
@@ -168,11 +169,11 @@
                 <div class="row" ng-if="!vm.editData.academical">
                     <div class="large-12 columns">
                         <strong>Universidad: </strong>
-                        <p>{{vm.teacher.university}}</p>
+                        <p>{{vm.teacher.university.name}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Profesión: </strong>
-                        <p>{{vm.teacher.profession}}</p>
+                        <p>{{vm.teacher.profession.name}}</p>
                     </div>
                     <div class="large-12 columns">
                         <strong>Semestre: </strong>
@@ -191,15 +192,18 @@
                 <form name="academicalForm" ng-if="vm.editData.academical">
                     <div class="row">
                         <div class="large-6 columns">
-                            <label for="university">Universidad</label>
-                            <input id="university" name="university" type="text" ng-model="vm.teacher.university" required>
+                            <label for="university">Universidad</label>                            
+                            <select id="university" name="university" ng-options="university as university.name for university in vm.universities track by university.id" ng-model="vm.teacher.university"
+                                required>                                
+                            </select>
                             <p class="error" ng-if="academicalForm.university.$invalid && academicalForm.university.$dirty">
                                 Por favor escriba el nombre de su Universidad.
                             </p>
                         </div>
                         <div class="large-6 columns">
                             <label for="profession">Profesión</label>
-                            <input id="profession" name="profession" type="text" ng-model="vm.teacher.profession" required>
+                            <select id="profession" name="profession" ng-options="profession as profession.name for profession in vm.professions track by profession.id" ng-model="vm.teacher.profession" required>                                
+                            </select>
                             <p class="error" ng-if="academicalForm.profession.$invalid && academicalForm.profession.$dirty">
                                 Por favor seleccione su profesion.
                             </p>
@@ -242,7 +246,7 @@
                         <multiple-autocomplete ng-model="vm.teacher.courses" object-property="courseName" suggestions-arr="vm.subjects">
                         </multiple-autocomplete>
                     </div>
-                    <button class="button" ng-click="vm.editCourses()">
+                    <button class="button" ng-click="vm.edit()">
                         Guardar
                     </button>
                 </div>
@@ -329,7 +333,8 @@
                     <div class="row">
                         <div class="large-12 columns">
                             <label for="accountHolderIdentification">Cedula titular de la cuenta</label>
-                            <input id="accountHolderIdentification" name="accountHolderIdentification" type="text" ng-model="vm.teacher.bankAccount.holderIdentification" required>
+                            <input id="accountHolderIdentification" name="accountHolderIdentification" type="text" ng-model="vm.teacher.bankAccount.holderIdentification"
+                                required>
                             <p class="error" ng-if="financialData.accountHolderIdentification.$invalid && financialData.accountHolderIdentification.$dirty">
                                 Por favor escriba la cedula del titular de la cuenta.
                             </p>
