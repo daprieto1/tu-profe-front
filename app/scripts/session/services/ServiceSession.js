@@ -3,8 +3,9 @@
     'use strict';
 
     angular.module('sessionModule')
-        .factory('ServiceSession', function ($http, $resource, TU_PROFE_API) {
+        .factory('ServiceSession', function ($http, $resource, envService) {
 
+            var TU_PROFE_API = envService.read('apiUrl');
             var Session = $resource(TU_PROFE_API + '/session', {}, {
                 signUpTeacher: {
                     method: 'POST',

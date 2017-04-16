@@ -20,7 +20,8 @@
     "animate.css": "^3.5.2",
     "hover": "Hover#^2.1.0",
     "angularMultipleSelect": "angular-multiple-select#^1.1.2",
-    "alertify.js": "^0.3.11"
+    "alertify.js": "^0.3.11",
+    "angular-environment": "^1.0.4"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('trainingModule')
-        .factory('TrainingServices', function ($resource, TU_PROFE_API) {
+        .factory('TrainingServices', function ($resource, envService) {
+            var TU_PROFE_API = envService.read('apiUrl');
             var Training = $resource(TU_PROFE_API + '/trainings/:id', { id: '@id' })
 
             return {

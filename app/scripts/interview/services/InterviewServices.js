@@ -2,7 +2,8 @@
     'use strict';
 
     angular.module('interviewModule')
-        .factory('InterviewServices', function ($resource, TU_PROFE_API) {
+        .factory('InterviewServices', function ($resource, envService) {
+            var TU_PROFE_API = envService.read('apiUrl');
             var Interview = $resource(TU_PROFE_API + '/interviews/:id', { id: '@id' }, {
                 update: {
                     headers: { 'Content-Type': 'application/json' },
