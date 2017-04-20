@@ -2,21 +2,21 @@
     'use strict';
 
     angular.module('sessionModule')
-        .controller('TeacherSignUpController', function ($rootScope, $location, ServiceSession) {
+        .controller('StudentSignUpController', function ($rootScope, $location, ServiceSession) {
             var vm = this;
 
             vm.signUp = function () {
-                ServiceSession.signUpTeacher(vm.teacher)
+                ServiceSession.signUpStudent(vm.student)
                     .then(function (resource) {
                         console.log(resource);
-                        $rootScope.loginTeacher(vm.teacher.email, vm.teacher.password);
+                        $rootScope.loginTeacher(vm.student.email, vm.student.password);
                     }, function (error) {
                         console.log(error);
                     });
             }
 
             function initCtrl() {
-                vm.teacher = {};
+                vm.student = {};
             }
 
             initCtrl();

@@ -5,6 +5,18 @@
     angular.module('sessionModule', [])
 
         .config(function ($routeProvider, $locationProvider, $httpProvider) {
+
+            $routeProvider
+                .when('/login', {
+                    templateUrl: 'views/session/login.html'
+                })
+                .when('/teacher-sign-up', {
+                    templateUrl: 'views/session/teacherSignUp.html'
+                })
+                .when('/student-sign-up', {
+                    templateUrl: 'views/session/studentSignUp.html'
+                });
+
             var AuthAppConfig = {
                 useAuthTokenHeader: true
             };
