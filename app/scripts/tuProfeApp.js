@@ -33,6 +33,9 @@
                 .when('/team', {
                     templateUrl: 'views/home/team.html'
                 })
+                .when('/quote', {
+                    templateUrl: 'views/home/priceQuote.html'
+                })
                 .when('/login', {
                     templateUrl: 'views/session/login.html'
                 })

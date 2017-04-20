@@ -34,5 +34,11 @@
 
                 return hide;
             }
+        })
+
+        .controller('PriceQuoteController', function() {
+            var vm = this;
+
+            
         });
 })();
