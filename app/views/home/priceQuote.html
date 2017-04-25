@@ -4,7 +4,8 @@
             Simple, Precios flexibles
         </h1>
         <p>
-            Send up to <strong>40,000 emails for free</strong> with our 30-day trial—no credit card required. <a href="">Try for Free ›</a>
+            Puedes cotizar nuestros servicios <strong>tu mismo</strong> o puedes <a href="">iniciar sesión</a> para pedir
+            ya tu asesoria.
         </p>
     </section>
 
@@ -12,13 +13,22 @@
         <div class="row">
             <div class="large-7 columns">
                 <div class="row">
-                    <div id="slider" class="slider" data-slider data-initial-start="10">
-                        <span class="slider-handle" data-slider-handle role="slider" tabindex="1" aria-controls="val"></span>
-                        <span class="slider-fill" data-slider-fill></span>
-                    </div>
+                    <p>¿Cuál es el número de estudiantes?</p>
+                </div>
+                <div class="row">
+                    <rzslider rz-slider-model="vm.numberStudentsSlider.value" rz-slider-options="vm.numberStudentsSlider.options">
+                    </rzslider>
+                </div>
+                <br>
+                <div class="row">
+                    <p>¿Cuál es el número de horas?</p>
+                </div>
+                <div class="row">
+                    <rzslider rz-slider-model="vm.numberHoursSlider.value" rz-slider-options="vm.numberHoursSlider.options"></rzslider>
                 </div>
             </div>
             <div class="large-5 columns">
+                <br>
                 <div class="card">
                     <div class="card-section">
                         Estima el número de horas que requieres para la asesoría y el núumero de estudiantes que desean asistir, así Tu Profe puede
@@ -29,6 +39,29 @@
                             Solicitar Servicio
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="price-quote-section-3">
+        <div class="row">
+            <div class="large-4 columns">
+                <div class="callout secondary">
+                    <h4>Acompañamiento</h4>
+                    <div class="stat animated flash" ng-show="vm.showPrices">$ {{vm.advisoryServices[0].cost.baseCost.toLocaleString()}}</div>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="callout secondary">
+                    <h4>Acompañamiento</h4>
+                    <div class="stat animated flash" ng-show="vm.showPrices">$ {{vm.advisoryServices[1].cost.baseCost.toLocaleString()}}</div>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="callout secondary">
+                    <h4>Materias Especializadas</h4>
+                    <div class="stat animated flash" ng-show="vm.showPrices">$ {{vm.advisoryServices[2].cost.baseCost.toLocaleString()}}</div>
                 </div>
             </div>
         </div>

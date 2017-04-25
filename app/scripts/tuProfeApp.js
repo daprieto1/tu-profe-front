@@ -11,6 +11,7 @@
         'ngResource',
         'mm.foundation',
         'multipleSelect',
+        'rzModule',
         'environment',
         'sessionModule',
         'courseModule',
@@ -18,7 +19,8 @@
         'professionModule',
         'interviewModule',
         'trainingModule',
-        'teacherProfileModule'
+        'teacherProfileModule',
+        'advisoryServiceModule'
     ])
 
         .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider) {
@@ -52,8 +54,8 @@
             envServiceProvider.config({
                 domains: {
                     local: ['localhost'],
-                    c9: ['tu-profe-api-node-diegoprieto.c9users.io' ],
-                    heroku:['tu-profe-front.herokuapp.com']
+                    c9: ['tu-profe-api-node-diegoprieto.c9users.io'],
+                    heroku: ['tu-profe-front.herokuapp.com']
                 },
                 vars: {
                     local: {
@@ -67,7 +69,7 @@
                     }
                 }
             });
-            
+
             envServiceProvider.check();
 
         })
