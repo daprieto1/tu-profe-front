@@ -109,5 +109,16 @@
                     });
             };
 
+            $rootScope.loginStudent = function (username, password) {
+                return ServiceSession.loginStudent(username, password)
+                    .then(function (resource) {
+                        console.log(resource);
+                        $cookies.put('username', username);
+                        $cookies.put('token', resource.token);
+                        $cookies.put('userId', resource.id);
+                        $location.path('student-profile');
+                    });
+            };
+
         });
 })();

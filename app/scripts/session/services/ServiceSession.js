@@ -15,6 +15,15 @@
                     method: 'POST',
                     params: { username: '@username', password: '@password' },
                     url: TU_PROFE_API + '/session/teacher/login'
+                },
+                signUpStudent: {
+                    method: 'POST',
+                    url: TU_PROFE_API + '/session/student/signup'
+                },
+                loginStudent: {
+                    method: 'POST',
+                    params: { username: '@username', password: '@password' },
+                    url: TU_PROFE_API + '/session/student/login'
                 }
             });
 
@@ -25,6 +34,14 @@
 
                 signUpTeacher: function (teacher) {
                     return Session.signUpTeacher({}, teacher).$promise;
+                },
+
+                loginStudent: function (username, password) {
+                    return Session.loginStudent({ username: username, password: password }).$promise;
+                },
+
+                signUpStudent: function (student) {
+                    return Session.signUpStudent({}, student).$promise;
                 }
 
             };

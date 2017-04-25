@@ -10,12 +10,15 @@
 
             vm.login = function () {
                 if (vm.isTeacher) {
-                    $rootScope.loginTeacher(vm.email, vm.password).
-                        then(function () { }, function () {
+                    $rootScope.loginTeacher(vm.email, vm.password)
+                        .then(function () { }, function () {
                             vm.showError = true;
                         });
                 } else if (vm.isStudent) {
-
+                    $rootScope.loginStudent(vm.email, vm.password)
+                        .then(function () { }, function () {
+                            vm.showError = true;
+                        });
                 }
             };
 

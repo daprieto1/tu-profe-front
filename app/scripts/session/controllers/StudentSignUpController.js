@@ -6,10 +6,10 @@
             var vm = this;
 
             vm.signUp = function () {
+                console.log(vm.student);
                 ServiceSession.signUpStudent(vm.student)
-                    .then(function (resource) {
-                        console.log(resource);
-                        $rootScope.loginTeacher(vm.student.email, vm.student.password);
+                    .then(function (resource) {                        
+                        $rootScope.loginStudent(vm.student.email, vm.student.password);
                     }, function (error) {
                         console.log(error);
                     });
