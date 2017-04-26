@@ -1,0 +1,151 @@
+<div id="profile" ng-controller="ProfileController as vm">
+    <div class="row">
+        <div class="large-12 columns">
+            <h1>
+                Perfil
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-3 columns">
+            <div class="card">
+                <div class="card-section">
+                    <img id="profile-img" src="https://d1w2poirtb3as9.cloudfront.net/1a0567876e037b56d16a.jpeg" alt="">
+                </div>
+                <div class="card-section">
+                    <a href="" class="button expanded" ng-click="vm.editData = true"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Editar</a>
+                </div>
+            </div>
+        </div>
+        <div class="large-9 columns" ng-show="!vm.editData">
+            <div class="card">
+                <div class="card-divider">
+                    <h4>Datos de la Cuenta</h4>
+                </div>
+                <div class="card-section">
+                    <div class="row">
+                        <div class="large-4 columns">
+                            <p><strong>Nombre:</strong> Diego</p>
+                        </div>
+                        <div class="large-4 columns">
+                            <p><strong>Apellido:</strong> Prieto Torres</p>
+                        </div>
+                        <div class="large-4 columns">
+                            <p><strong>Cedula:</strong> 1020788372</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-4 columns">
+                            <p><strong>Ciudad:</strong> Bogotá</p>
+                        </div>
+                        <div class="large-4 columns">
+                            <p><strong>Barrio:</strong> Verbenal</p>
+                        </div>
+                        <div class="large-4 columns">
+                            <p><strong>Dirección:</strong> Calle 186a # 19 - 26</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-4 columns">
+                            <p><strong>Télefono:</strong> 7048092</p>
+                        </div>
+                        <div class="large-8 columns">
+                            <p><strong>Celular:</strong> 3156162527</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="large-9 columns" ng-show="vm.editData">
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>Editar datos de la Cuenta</h4>
+                        </div>
+                        <div class="card-section">
+                            <form name="editPersonalData" novalidate>
+                                <div class="row">
+                                    <div class="large-6 columns">
+                                        <label for="name">Nombre</label>
+                                        <input id="name" name="name" type="text" ng-model="vm.student.name" required>
+                                        <p class="error" ng-if="editPersonalData.name.$invalid && editPersonalData.name.$dirty">
+                                            Por favor ingrese su nombre.
+                                        </p>
+                                    </div>
+                                    <div class="large-6 columns">
+                                        <label for="lastName">Apellidos</label>
+                                        <input id="lastName" name="lastName" type="text" ng-model="vm.student.lastName" required>
+                                        <p class="error" ng-if="editPersonalData.lastName.$invalid && editPersonalData.lastName.$dirty">
+                                            Por favor ingrese sus apellidos.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-6 columns">
+                                        <label for="identification">Identificación</label>
+                                        <input id="identification" name="identification" type="text" ng-model="vm.student.identification" required>
+                                        <p class="error" ng-if="editPersonalData.identification.$invalid && editPersonalData.identification.$dirty">
+                                            Por favor ingrese su identificación.
+                                        </p>
+                                    </div>
+                                    <div class="large-6 columns">
+                                        <label for="address">Dirección</label>
+                                        <input id="address" name="address" type="text" ng-model="vm.student.address" required>
+                                        <p class="error" ng-if="editPersonalData.address.$invalid && editPersonalData.address.$dirty">
+                                            Por favor ingrese su Dirección.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-6 columns">
+                                        <label for="neighborhood">Barrio</label>
+                                        <input id="neighborhood" name="neighborhood" type="text" ng-model="vm.student.neighborhood" required>
+                                        <p class="error" ng-if="editPersonalData.neighborhood.$invalid && editPersonalData.neighborhood.$dirty">
+                                            Por favor ingrese su Barrio.
+                                        </p>
+                                    </div>
+                                    <div class="large-6 columns">
+                                        <label for="lastName">Apellidos</label>
+                                        <input id="lastName" name="lastName" type="text" ng-model="vm.student.lastName" required>
+                                        <p class="error" ng-if="editPersonalData.lastName.$invalid && editPersonalData.lastName.$dirty">
+                                            Por favor ingrese sus apellidos.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-6 columns">
+                                        <label for="phone">Teléfono</label>
+                                        <input id="phone" name="phone" type="number" ng-model="vm.student.phone" required>
+                                        <p class="error" ng-if="editPersonalData.phone.$invalid && editPersonalData.phone.$dirty">
+                                            Por favor ingrese su teléfono.
+                                        </p>
+                                    </div>
+                                    <div class="large-6 columns">
+                                        <label for="cellPhone">Celular</label>
+                                        <input id="cellPhone" name="cellPhone" type="number" ng-model="vm.student.cellPhone" required>
+                                        <p class="error" ng-if="editPersonalData.cellPhone.$invalid && editPersonalData.cellPhone.$dirty">
+                                            Por favor ingrese su celular.
+                                        </p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-12 columns">
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>Editar Foto</h4>                            
+                        </div>
+                        <div class="card-section">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

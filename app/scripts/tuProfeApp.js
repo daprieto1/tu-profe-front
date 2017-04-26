@@ -20,6 +20,7 @@
         'interviewModule',
         'trainingModule',
         'teacherProfileModule',
+        'studentProfileModule',
         'advisoryServiceModule'
     ])
 
@@ -46,6 +47,9 @@
                 })
                 .when('/teacher-profile', {
                     templateUrl: 'views/teacherProfile/teacherProfile.html'
+                })
+                .when('/student-profile', {
+                    templateUrl: 'views/studentProfile/studentProfile.html'
                 })
                 .otherwise({
                     templateUrl: '/'

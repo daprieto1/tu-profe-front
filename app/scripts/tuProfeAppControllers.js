@@ -6,7 +6,7 @@
             var vm = this;
 
             vm.hideHeader = function () {
-                var routes = ['teacher-profile'];
+                var routes = ['teacher-profile','student-profile'];
                 var route = $location.absUrl();
                 var hide = false;
                 routes.forEach(function (routeItem) {
@@ -23,7 +23,7 @@
             var vm = this;
 
             vm.hideFooter = function () {
-                var routes = ['teacher-profile'];
+                var routes = ['teacher-profile','student-profile'];
                 var route = $location.absUrl();
                 var hide = false;
                 routes.forEach(function (routeItem) {
