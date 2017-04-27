@@ -18,6 +18,9 @@
                 <li ng-click="vm.section = 'request-advisory'" ng-class="vm.menuLiClass('request-advisory')">
                     <i class="fa fa-link" aria-hidden="true"></i> Pedir Asesoría
                 </li>
+                <li ng-click="vm.section = 'notifications'" ng-class="vm.menuLiClass('notifications')">
+                    <i class="fa fa-link" aria-hidden="true"></i> Notificaciones
+                </li>
                 <li ng-click="vm.logout()">
                     <i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar sesión
                 </li>
@@ -30,7 +33,13 @@
             </ng-include>
 
             <ng-include src="'views/studentProfile/servicehistory.html'" ng-show="vm.section === 'service-history'">
-            </ng-include>            
+            </ng-include>  
+            
+            <ng-include src="'views/studentProfile/requestAdvisory.html'" ng-show="vm.section === 'request-advisory'">
+            </ng-include>  
+            
+            <ng-include src="'views/studentProfile/notifications.html'" ng-show="vm.section === 'notifications'">
+            </ng-include>  
 
         </div>
 

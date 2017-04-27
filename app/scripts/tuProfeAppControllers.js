@@ -70,7 +70,7 @@
                     value: 1,
                     options: {
                         floor: 1,
-                        ceil: 4,
+                        ceil: 3,
                         showTicks: true,
                         showTicksValues: true
                     }

@@ -1,0 +1,36 @@
+<div id="request-advisory" ng-controller="RequestAdvisoryController as vm">
+    <div class="row">
+        <div class="large-6 columns"></div>
+        <div class="large-6 columns">
+            <form name="requestAdvisory" novalidate>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="name">Materia</label>
+                        <input id="name" name="name" type="text" ng-model="vm.teacher.name" required>
+                        <p class="error" ng-if="accountForm.name.$invalid && accountForm.name.$dirty">
+                            Por favor escriba su nombre.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="addInformation">Información Adicional</label>
+                        <textarea id="addInformation" name="addInformation" rows="4"></textarea>
+                        <p class="error" ng-if="accountForm.name.$invalid && accountForm.name.$dirty">
+                            Por favor escriba su nombre.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="numberStudents">Número de Estudiantes</label>
+                         <rzslider rz-slider-model="vm.numberStudentsSlider.value" rz-slider-options="vm.numberStudentsSlider.options">
+                        </rzslider>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
