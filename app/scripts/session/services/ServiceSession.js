@@ -4,7 +4,7 @@
 
     angular.module('sessionModule')
         .factory('ServiceSession', function ($http, $resource, envService) {
-
+console.log(envService);
             var TU_PROFE_API = envService.read('apiUrl');
             var Session = $resource(TU_PROFE_API + '/session', {}, {
                 signUpTeacher: {
