@@ -1,13 +1,32 @@
 <div id="request-advisory" ng-controller="RequestAdvisoryController as vm">
     <div class="row">
-        <div class="large-6 columns"></div>
+        <h1>
+            Solicitar Asesoria
+        </h1>
+    </div>
+    <section id="request-advisory-section-2" class="row" data-equalizer>
         <div class="large-6 columns">
-            <form name="requestAdvisory" novalidate>
+            <div id="map" data-equalizer-watch style="width: 100%; height: 506px;">
+                
+            </div>
+        </div>
+        <div class="large-6 columns">
+            <form name="requestAdvisory" class="callout" novalidate data-equalizer-watch>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <label for="address">Dirección</label>
+                        <input id="address" name="address" type="text" ng-model="vm.advisorySevice.address" required>
+                        <p class="error" ng-if="requestAdvisory.address.$invalid && requestAdvisory.address.$dirty">
+                            Por favor escriba su nombre.
+                        </p>
+                    </div>
+                </div>
+                
                 <div class="row">
                     <div class="large-12 columns">
                         <label for="name">Materia</label>
                         <input id="name" name="name" type="text" ng-model="vm.teacher.name" required>
-                        <p class="error" ng-if="accountForm.name.$invalid && accountForm.name.$dirty">
+                        <p class="error" ng-if="requestAdvisory.name.$invalid && requestAdvisory.name.$dirty">
                             Por favor escriba su nombre.
                         </p>
                     </div>
@@ -17,7 +36,7 @@
                     <div class="large-12 columns">
                         <label for="addInformation">Información Adicional</label>
                         <textarea id="addInformation" name="addInformation" rows="4"></textarea>
-                        <p class="error" ng-if="accountForm.name.$invalid && accountForm.name.$dirty">
+                        <p class="error" ng-if="requestAdvisory.addInformation.$invalid && requestAdvisory.addInformation.$dirty">
                             Por favor escriba su nombre.
                         </p>
                     </div>
@@ -26,11 +45,74 @@
                 <div class="row">
                     <div class="large-12 columns">
                         <label for="numberStudents">Número de Estudiantes</label>
-                         <rzslider rz-slider-model="vm.numberStudentsSlider.value" rz-slider-options="vm.numberStudentsSlider.options">
+                        <rzslider rz-slider-model="vm.numberStudentsSlider.value" rz-slider-options="vm.numberStudentsSlider.options">
                         </rzslider>
                     </div>
                 </div>
+                
+                <section id="files" class="row">
+                    <div class="large-6 columns">
+                        <ul>
+                            <li>
+                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.pdf</p>
+                            </li>
+                            <li>
+                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.docx</p>
+                            </li>
+                            <li>
+                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.xslx</p>
+                            </li>
+                            <li>
+                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.png</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="large-6 columns">
+                        <button class="button expanded">
+                            Cargar Archivo
+                        </button>
+                    </div>
+                </section>
             </form>
         </div>
-    </div>
+    </section>
+    
+    <section id="request-advisory-section-3" class="row">
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th width="100">Sesión</th>
+                    <th width="100">Fecha y Hora</th>
+                    <th width="600">Tiempo</th>
+                    <th width="50"></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="session in vm.sessions track by $index">
+                <td>
+                    Sesión {{$index + 1}}
+                </td>
+                <td>
+                    <input type="date">
+                </td>
+                <td class="bold">
+                    <rzslider rz-slider-model="session.hours" rz-slider-options="vm.numberHoursSlider.options">
+                    </rzslider>
+                </td>
+                <td>
+                    <button class="button alert" ng-click="vm.deleteSession($index)">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+            <div class="large-offset-5 large-2 end">
+                <button class="button expanded" ng-click="vm.addSession()">
+                    Agregar Sesión
+                </button>
+            </div>
+        </div>
+    </section>
 </div>
