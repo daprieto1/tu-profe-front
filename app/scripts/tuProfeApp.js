@@ -21,7 +21,8 @@
         'trainingModule',
         'teacherProfileModule',
         'studentProfileModule',
-        'advisoryServiceModule'
+        'advisoryServiceModule',
+        'notificationModule'
     ])
 
         .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider) {

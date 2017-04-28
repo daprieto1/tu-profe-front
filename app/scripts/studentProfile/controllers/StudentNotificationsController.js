@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('StudentNotificationsController', function ($scope, NOTIFICATION_TYPES) {
+        .controller('StudentNotificationsController', function ($scope, NotificationServices, NOTIFICATION_TYPES) {
             var vm = this;
             
             vm.selectNotification = notification => {
@@ -85,6 +85,17 @@
                    });
                    return notification;
                 });
+                
+                NotificationServices.getByUserId("2")
+                    .then(notifications => {
+                        console.log(notifications);
+                        vm.notifications = notifications.map(notification => {
+                            notification.type = vm.notificationTypes.find(type => {
+                               return type.id === notification.type;
+                            });
+                            return notification;
+                        });
+                    });
             }
 
             initCtrl();
