@@ -1,4 +1,4 @@
-<div id="service-history">
+<div id="service-history" ng-controller="StudentServiceHistoryController as vm">
     <div class="row">
         <h1>
             Historial de Asesorias
@@ -7,27 +7,81 @@
 
     <div class="row">
         <div class="large-12 columns">
-            <table>
+            <table class="dashboard-table">
+                <colgroup>
+                    <col width="60">
+                    <col width="100">
+                    <col width="200">
+                    <col width="60">
+                    <col width="60">
+                    <col width="100">
+                    <col width="150">
+                </colgroup>
                 <thead>
                     <tr>
                         <th></th>
-                        <th>Fecha</th>
-                        <th>Profesor</th>
-                        <th>Estudiantes</th>
-                        <th>Horas</th>
-                        <th>Ciudad</th>
-                        <th>Valor</th>
+                        <th><a href="#">Fecha <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Profesor <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Estudiantes <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Horas <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Ciudad <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Valor <i class="fa fa-caret-down"></i></a></th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td></td>
-                        <td>13/04/2017</td>
-                        <td>Fidel Olarte</td>
-                        <td>4</td>
-                        <td>3</td>
-                        <td>Bogotá</td>
-                        <td>$ 45.000</td>
+                <tbody ng-repeat="service in vm.services track by $index">
+
+                    <tr ng-click="vm.selectService(service)">
+                        <td>
+                            <i ng-if="service !== vm.selectedService" class="fa fa-chevron-right" aria-hidden="true"></i>
+                            <i ng-if="service === vm.selectedService" class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </td>
+                        <td>
+                            <div class="flex-container align-justify align-top">
+                                <span class="dashboard-table-timestamp">{{service.date}}</span>
+                            </div>
+                        </td>
+                        <td class="bold">{{service.teacher}}</td>
+                        <td>{{service.numStudents}}</td>
+                        <td>{{service.numHours}}</td>
+                        <td>
+                            {{service.city}}
+                        </td>
+                        <td class="listing-inquiry-status">
+                            $ {{service.cost}}
+                        </td>
+                    </tr>
+                    <tr ng-show="vm.selectedService === service">
+                        <td colspan="7">
+                            <div class="row">
+                                <div class="large-3 columns">
+                                    <h5>Resumen del Servicio</h5>
+                                    <img src="images/studentProfile/serviceHistory/learning.svg" alt="">
+                                </div>
+                                <div class="large-9 columns">
+                                    <h5>Sesiones</h5>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Duración</th>
+                                                <th>Profesor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="session in service.sessions track by $index">
+                                                <td>Sesión {{$index + 1}}</td>
+                                                <td>{{session.date}}</td>
+                                                <td>{{session.time}}</td>
+                                                <td>{{session.numHours}} Horas</td>
+                                                <td>{{session.teacher}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
             </table>
