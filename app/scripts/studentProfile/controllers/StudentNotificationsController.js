@@ -88,7 +88,7 @@
                 
                 NotificationServices.getByUserId("2")
                     .then(notifications => {
-                        console.log(notifications);
+                        
                         vm.notifications = notifications.map(notification => {
                             notification.type = vm.notificationTypes.find(type => {
                                return type.id === notification.type;
