@@ -13,7 +13,7 @@
                 id: 1
             }, interview: {
                 id: 2
-            }, inactive: { 
+            }, inactive: {
                 id: 3
             }, active: {
                 id: 4
@@ -21,32 +21,62 @@
                 id: 5
             }
         })
-        
-        .constant('NOTIFICATION_TYPES',[
+
+        .constant('NOTIFICATION_TYPES', [
             {
-                id:1,
-                label:'error',
-                style:'alert',
+                id: 1,
+                label: 'error',
+                style: 'alert',
             },
             {
-                id:2,
-                label:'super',
-                style:'success',
+                id: 2,
+                label: 'super',
+                style: 'success',
             },
             {
-                id:3,
-                label:'alerta',
-                style:'warning',
+                id: 3,
+                label: 'alerta',
+                style: 'warning',
             },
             {
-                id:4,
-                label:'información',
-                style:'',
+                id: 4,
+                label: 'información',
+                style: '',
             },
             {
-                id:5,
-                label:'importante',
-                style:'primary',
+                id: 5,
+                label: 'importante',
+                style: 'primary',
+            }
+        ])
+
+        .constant('DAYS_OF_WEEK', [
+            {
+                id: 1,
+                label: 'Lunes'
+            },
+            {
+                id: 2,
+                label: 'Martes'
+            },
+            {
+                id: 3,
+                label: 'Miércoles'
+            },
+            {
+                id: 4,
+                label: 'Jueves'
+            },
+            {
+                id: 5,
+                label: 'Viernes'
+            },
+            {
+                id: 6,
+                label: 'Sábado'
+            }, {
+                id: 7,
+                label: 'Domingo'
             }
         ]);
 })();

@@ -35,13 +35,12 @@
 
             function initCtrl() {
                 vm.editData = false;
-                vm.editPhoto = true;
+                vm.editPhoto = false;
                 vm.photoFile = undefined;
 
                 ServiceStudents.getStudent('82cb217e-51e9-413a-899d-2f6f61fc5262')
                     .then(student => {
                         vm.student = student;
-                        console.log(vm.student);
                     })
                     .catch(err => {
                         console.log('err');

@@ -22,7 +22,8 @@
     "angularMultipleSelect": "angular-multiple-select#^1.1.2",
     "alertify.js": "^0.3.11",
     "angular-environment": "^1.0.4",
-    "angularjs-slider": "^6.1.1"
+    "angularjs-slider": "^6.1.1",
+    "wickedpicker": "^0.4.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

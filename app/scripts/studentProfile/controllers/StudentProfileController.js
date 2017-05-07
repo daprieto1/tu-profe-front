@@ -5,7 +5,7 @@
             var vm = this;
 
             function initCtrl() {
-                vm.section = 'profile';
+                vm.section = 'request-advisory';
             }
 
             initCtrl();

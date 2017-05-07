@@ -1,15 +1,39 @@
 #request-advisory
-
-    form
-        section
-            &#files
-                button
-                    margin-top: 20px
-                ul
-                    margin-top: 20px
-                    list-style-type: none
-                    p
-                        margin-bottom: 0
+  .callout  
+    border: 1px solid #e1e1e1
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15)
+  #summary
+    li
+      margin-bottom: 10px
+      p
+        display: inline
+      .stat
+        display: inline
+        float: right
+  .marketing-site-hero 
+    background: url('https://images.pexels.com/photos/8264/pexels-photo.jpg?h=350&auto=compress&cs=tinysrgb') top right no-repeat
+    padding: 50px 0
+    margin: 0 0 100px 0
+    background-size: cover
+    display: flex
+    align-items: center
+    @media screen and (min-width: 40em) 
+      background-position: center center
+  .marketing-site-hero-content 
+    max-width: $global-width
+    margin: 0 auto
+    padding-left: 5%
+    padding-right: 5%
+    h1 
+      font-size: 32px
+    .button.round 
+      border-radius: 5000px
+      text-transform: uppercase
+      font-size: 12px
+      margin-bottom: 0
+    @media screen and (min-width: 40em) 
+      padding-left: 50%
+    
     #request-advisory-section-3
         .button
             margin: 10px 0 0 0

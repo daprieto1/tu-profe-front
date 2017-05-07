@@ -1,118 +1,298 @@
 <div id="request-advisory" ng-controller="RequestAdvisoryController as vm">
-    <div class="row">
-        <h1>
-            Solicitar Asesoria
-        </h1>
-    </div>
-    <section id="request-advisory-section-2" class="row" data-equalizer>
-        <div class="large-6 columns">
-            <div id="map" data-equalizer-watch style="width: 100%; height: 506px;">
-                
-            </div>
-        </div>
-        <div class="large-6 columns">
-            <form name="requestAdvisory" class="callout" novalidate data-equalizer-watch>
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label for="address">Dirección</label>
-                        <input id="address" name="address" type="text" ng-model="vm.advisorySevice.address" required>
-                        <p class="error" ng-if="requestAdvisory.address.$invalid && requestAdvisory.address.$dirty">
-                            Por favor escriba su nombre.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label for="name">Materia</label>
-                        <input id="name" name="name" type="text" ng-model="vm.teacher.name" required>
-                        <p class="error" ng-if="requestAdvisory.name.$invalid && requestAdvisory.name.$dirty">
-                            Por favor escriba su nombre.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label for="addInformation">Información Adicional</label>
-                        <textarea id="addInformation" name="addInformation" rows="4"></textarea>
-                        <p class="error" ng-if="requestAdvisory.addInformation.$invalid && requestAdvisory.addInformation.$dirty">
-                            Por favor escriba su nombre.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="row">
-                    <div class="large-12 columns">
-                        <label for="numberStudents">Número de Estudiantes</label>
-                        <rzslider rz-slider-model="vm.numberStudentsSlider.value" rz-slider-options="vm.numberStudentsSlider.options">
-                        </rzslider>
-                    </div>
-                </div>
-                
-                <section id="files" class="row">
-                    <div class="large-6 columns">
-                        <ul>
-                            <li>
-                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.pdf</p>
-                            </li>
-                            <li>
-                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.docx</p>
-                            </li>
-                            <li>
-                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.xslx</p>
-                            </li>
-                            <li>
-                                <p><i class="fa fa-file" aria-hidden="true"></i> FileName.png</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="large-6 columns">
-                        <button class="button expanded">
-                            Cargar Archivo
-                        </button>
-                    </div>
-                </section>
-            </form>
-        </div>
-    </section>
-    
-    <section id="request-advisory-section-3" class="row">
-        <table class="dashboard-table">
-            <thead>
-                <tr>
-                    <th width="100">Sesión</th>
-                    <th width="100">Fecha y Hora</th>
-                    <th width="600">Tiempo</th>
-                    <th width="50"></th>
-                </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="session in vm.sessions track by $index">
-                <td>
-                    Sesión {{$index + 1}}
-                </td>
-                <td>
-                    <input type="date">
-                </td>
-                <td class="bold">
-                    <rzslider rz-slider-model="session.hours" rz-slider-options="vm.numberHoursSlider.options">
-                    </rzslider>
-                </td>
-                <td>
-                    <button class="button alert" ng-click="vm.deleteSession($index)">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </td>
-            </tr>
-          </tbody>
-        </table>
+    <!--
+    <div id="select-advisroy-type">
         <div class="row">
-            <div class="large-offset-5 large-2 end">
-                <button class="button expanded" ng-click="vm.addSession()">
-                    Agregar Sesión
-                </button>
+            <div class="large-12 columns">
+                <div class="marketing-site-hero">
+                    <div class="marketing-site-hero-content">
+                        <h1>Acompañamiento</h1>
+                        <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui
+                            minus!
+                        </p>
+                        <a href="" class="round button">Seleccionar</a>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="row">
+            <div class="large-12 columns">
+                <div class="marketing-site-hero">
+                    <div class="marketing-site-hero-content">
+                        <h1>Tema Específico</h1>
+                        <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui
+                            minus!
+                        </p>
+                        <a href="" class="round button">Seleccionar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+-->
+<!--
+    <div id="tutor-service">
+        <div class="summary-header">
+            <div class="marketing-site-hero">
+                <div class="marketing-site-hero-content">
+                    <h1>Acompañamiento</h1>
+                    <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui minus!
+                    </p>
+                    <a href="" class="round button">Solicitar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" data-equalizer>
+            <div class="large-8 columns">
+                <div class="callout" data-equalizer-watch>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Número de Meses</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <select ng-model="vm.service.months">
+                                <option ng-repeat="n in [] | range:12" value="{{$index+1}}">{{$index+1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
+                                <option ng-repeat="n in [] | range:4" value="{{$index+2}}">{{$index+2}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Fecha de Inicio</label>
+                        </div>
+                        <div class="large-4 end columns">                            
+                            <input type="date" id="middle-label" ng-model="vm.service.startDate" min="{{vm.today}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="startTime" class="text-right middle">Hora de Inicio</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <input type="text" id="startTime" placeholder="Right- and middle-aligned text input">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="button-group">
+                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="callout" data-equalizer-watch>
+                    <div class="row">
+                        <div class="large-offset-2 large-8 columns">
+                            <div class="callout warning">
+                                <p>Costo total del servicio</p>
+                                <div class="stat">$ 12.000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="summary" class="row">
+                        <div class="large-12 columns">
+                            <ul>                                
+                                <li><p>Numero de Meses: <div class="stat">{{vm.service.months}}</div></p></li>
+                                <li><p>Numero de Sesiones por Semana: <div class="stat">{{vm.service.sessionsPerWeek}}</div></p></li>
+                                <li><p>Total de Sesiones: <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div></p></li>                                                               
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-offset-2 large-8 end columns">
+                            <button class="button success expanded">Solicitar Servicio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="large-offset-5 large-2 end columns">
+                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Personalizar sesiones</button>
+                <button class="button primary expanded" ng-if="vm.showSessions" ng-click="vm.showSessions = false">Cerrar Vista</button>
+            </div>
+        </div>
+
+        <div class="row" ng-if="vm.showSessions">
+            <div class="large-8 end columns">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th width="300">Sesión</th>
+                            <th width="300">Fecha</th>
+                            <th width="300">Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="session in vm.sessions track by $index">
+                            <td>
+                                Sesión {{$index + 1}}
+                            </td>
+                            <td>
+                                {{session.startDateToShow}}
+                            </td>
+                            <td>
+                                {{vm.startTime.wickedpicker('time')}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+-->
+<div id="specific-subject-service">
+        <div class="summary-header">
+            <div class="marketing-site-hero">
+                <div class="marketing-site-hero-content">
+                    <h1>Tema Específico</h1>
+                    <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui minus!
+                    </p>
+                    <a href="" class="round button">Solicitar</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" data-equalizer>
+            <div class="large-8 columns">
+                <div class="callout" data-equalizer-watch>                    
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
+                                <option ng-repeat="n in [] | range:4" value="{{$index+2}}">{{$index+2}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Duración por sesión</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
+                                <option ng-repeat="n in [] | range:7" value="{{$index+2}}">{{$index+2}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Fecha de Inicio</label>
+                        </div>
+                        <div class="large-4 end columns">                            
+                            <input type="date" id="middle-label" ng-model="vm.service.startDate" min="{{vm.today}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="startTime" class="text-right middle">Hora de Inicio</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <input type="text" id="startTime" placeholder="Right- and middle-aligned text input">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <label for="description">Descripción</label>
+                            <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes."></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
+                            <div class="button-group">
+                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="large-4 columns">
+                <div class="callout" data-equalizer-watch>
+                    <div class="row">
+                        <div class="large-offset-2 large-8 columns">
+                            <div class="callout warning">
+                                <p>Costo total del servicio</p>
+                                <div class="stat">$ 12.000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="summary" class="row">
+                        <div class="large-12 columns">
+                            <ul>                                
+                                <li><p>Numero de Meses: <div class="stat">{{vm.service.months}}</div></p></li>
+                                <li><p>Numero de Sesiones por Semana: <div class="stat">{{vm.service.sessionsPerWeek}}</div></p></li>
+                                <li><p>Total de Sesiones: <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div></p></li>                                                               
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="large-offset-2 large-8 end columns">
+                            <button class="button success expanded">Solicitar Servicio</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="large-offset-5 large-2 end columns">
+                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Personalizar sesiones</button>
+                <button class="button primary expanded" ng-if="vm.showSessions" ng-click="vm.showSessions = false">Cerrar Vista</button>
+            </div>
+        </div>
+
+        <div class="row" ng-if="vm.showSessions">
+            <div class="large-8 end columns">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th width="300">Sesión</th>
+                            <th width="300">Fecha</th>
+                            <th width="300">Tiempo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="session in vm.sessions track by $index">
+                            <td>
+                                Sesión {{$index + 1}}
+                            </td>
+                            <td>
+                                {{session.startDateToShow}}
+                            </td>
+                            <td>
+                                {{vm.startTime.wickedpicker('time')}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
