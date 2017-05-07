@@ -56,12 +56,13 @@
         },
 
         timeToMilitarFormat: time => {
+          console.log(time);
           var result = time
-            .replace(':', '')
+            .replace(/ /g,'')
             .replace('AM', '')
             .replace('PM', '')
-            .split('  ');
-
+            .split(':');
+          
           if (time.includes('PM') && result[0] !== '12') {
             result[0] = (parseInt(result[0]) + 12) + '';
           } else if (time.includes('AM') && result[0] === '12') {

@@ -25,14 +25,16 @@
                 vm.service.daysOfWeek = [false, false, false, false, false, false, false];
             };
 
-            vm.createService = () => {                                                 
-                var service = angular.copy(vm.service);                
-                service.sessionsExtended = angular.copy(vm.sessions);
+            vm.createService = () => {
+                var service = angular.copy(vm.service);
+
                 service.type = 1;
                 service.months = parseInt(service.months);
                 service.sessionsPerWeek = parseInt(service.sessionsPerWeek);
                 service.startDate.setHours(0, 0, 0, 0);
-                service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));    
+                service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));
+                service.sessionsExtended = angular.copy(vm.sessions);
+                service.sessionsExtended.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
                 console.log(JSON.stringify(service));
             };
 
