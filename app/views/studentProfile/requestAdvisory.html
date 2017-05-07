@@ -29,7 +29,7 @@
         </div>
     </div>
 -->
-<!--
+    
     <div id="tutor-service">
         <div class="summary-header">
             <div class="marketing-site-hero">
@@ -119,7 +119,7 @@
 
                     <div class="row">
                         <div class="large-offset-2 large-8 end columns">
-                            <button class="button success expanded">Solicitar Servicio</button>
+                            <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
                         </div>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                                 {{session.startDateToShow}}
                             </td>
                             <td>
-                                {{vm.startTime.wickedpicker('time')}}
+                                {{session.startTime}}
                             </td>
                         </tr>
                     </tbody>
@@ -162,8 +162,9 @@
             </div>
         </div>
     </div>
--->
-<div id="specific-subject-service">
+
+<!--
+    <div id="specific-subject-service">
         <div class="summary-header">
             <div class="marketing-site-hero">
                 <div class="marketing-site-hero-content">
@@ -177,7 +178,7 @@
 
         <div class="row" data-equalizer>
             <div class="large-8 columns">
-                <div class="callout" data-equalizer-watch>                    
+                <div class="callout" data-equalizer-watch>
                     <div class="row">
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
@@ -202,7 +203,7 @@
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Fecha de Inicio</label>
                         </div>
-                        <div class="large-4 end columns">                            
+                        <div class="large-4 end columns">
                             <input type="date" id="middle-label" ng-model="vm.service.startDate" min="{{vm.today}}">
                         </div>
                     </div>
@@ -242,10 +243,22 @@
                     </div>
                     <div id="summary" class="row">
                         <div class="large-12 columns">
-                            <ul>                                
-                                <li><p>Numero de Meses: <div class="stat">{{vm.service.months}}</div></p></li>
-                                <li><p>Numero de Sesiones por Semana: <div class="stat">{{vm.service.sessionsPerWeek}}</div></p></li>
-                                <li><p>Total de Sesiones: <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div></p></li>                                                               
+                            <ul>
+                                <li>
+                                    <p>Numero de Meses:
+                                        <div class="stat">{{vm.service.months}}</div>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Numero de Sesiones por Semana:
+                                        <div class="stat">{{vm.service.sessionsPerWeek}}</div>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Total de Sesiones:
+                                        <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -295,4 +308,5 @@
             </div>
         </div>
     </div>
+    -->
 </div>

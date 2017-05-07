@@ -25,6 +25,17 @@
                 vm.service.daysOfWeek = [false, false, false, false, false, false, false];
             };
 
+            vm.createService = () => {                                                 
+                var service = angular.copy(vm.service);                
+                service.sessionsExtended = angular.copy(vm.sessions);
+                service.type = 1;
+                service.months = parseInt(service.months);
+                service.sessionsPerWeek = parseInt(service.sessionsPerWeek);
+                service.startDate.setHours(0, 0, 0, 0);
+                service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));    
+                console.log(JSON.stringify(service));
+            };
+
             $scope.$watch('vm.service', function (old, newd) {
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
                     vm.showSessions = false;
@@ -46,7 +57,7 @@
                         var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
                         vm.sessions.push({
                             startDate: sessionDate.toDate(),
-                            startTime: '123',
+                            startTime: vm.startTime.wickedpicker('time'),
                             startDateToShow: sessionDate.format('LL')
                         });
                         j++;
@@ -64,15 +75,15 @@
                 vm.disable;
                 vm.sessions = [];
                 vm.today = ServiceUtils.getToday();
-                vm.startTime = angular.element('#startTime').wickedpicker({now: "12:00",minutesInterval: 30}),
+                vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
                 vm.service = {
                     numStudents: 0,
                     months: 0,
                     sessionsPerWeek: 0,
-                    startDate: new Date(),                    
+                    startDate: new Date(),
                     description: '',
                     daysOfWeek: [false, false, false, false, false, false, false]
-                };                
+                };
 
             }
 

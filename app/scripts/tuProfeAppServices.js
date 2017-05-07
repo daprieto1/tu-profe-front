@@ -53,6 +53,22 @@
 
           today = yyyy + '-' + mm + '-' + dd;
           return today;
+        },
+
+        timeToMilitarFormat: time => {
+          var result = time
+            .replace(':', '')
+            .replace('AM', '')
+            .replace('PM', '')
+            .split('  ');
+
+          if (time.includes('PM') && result[0] !== '12') {
+            result[0] = (parseInt(result[0]) + 12) + '';
+          } else if (time.includes('AM') && result[0] === '12') {
+            result[0] = '00';
+          }
+
+          return result.join(':');
         }
       };
     });
