@@ -60,7 +60,9 @@
                         vm.sessions.push({
                             startDate: sessionDate.toDate(),
                             startTime: vm.startTime.wickedpicker('time'),
-                            startDateToShow: sessionDate.format('LL')
+                            startDateToShow: sessionDate.format('LL'),
+                            duration:120,
+                            dayOfWeek:days[j]
                         });
                         j++;
                         if (j === days.length) {
