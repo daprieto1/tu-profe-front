@@ -28,17 +28,22 @@
             vm.createService = () => {
                 var service = angular.copy(vm.service);
 
-                service.type = 1;
-                service.months = parseInt(service.months);
+                if (vm.service.type === 1) {
+                    service.months = parseInt(service.months);
+                } else if (vm.service.type === 2) {
+
+                }
+
                 service.sessionsPerWeek = parseInt(service.sessionsPerWeek);
                 service.startDate.setHours(0, 0, 0, 0);
                 service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));
-                service.sessionsExtended = angular.copy(vm.sessions);
-                service.sessionsExtended.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
+                service.sessions = angular.copy(vm.sessions);
+                //service.sessions.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
                 console.log(JSON.stringify(service));
             };
 
             $scope.$watch('vm.service', function (old, newd) {
+                console.log(vm.service.daysOfWeek.filter(day => { return day; }).length, parseInt(vm.service.sessionsPerWeek));
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
                     vm.showSessions = false;
                     vm.sessions = [];
@@ -78,7 +83,7 @@
                     vm.sessions = [];
                     for (var i = 0; i < vm.service.numSessions; i++) {
                         vm.sessions.push({
-                            
+
                         });
                     }
                 }
@@ -97,6 +102,7 @@
                     numSessions: 0,
                     numStudents: 0,
                     months: 0,
+                    timePerSession: 0,
                     sessionsPerWeek: 0,
                     startDate: new Date(),
                     description: '',

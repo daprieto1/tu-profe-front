@@ -218,7 +218,7 @@
                                 <label for="middle-label" class="text-right middle">Duración por sesión</label>
                             </div>
                             <div class="large-3 end columns">
-                                <select ng-model="vm.service.sessionsPerWeek" required>
+                                <select ng-model="vm.service.timePerSession" required>
                                 <option ng-repeat="n in [] | range:7" value="{{$index+2}}">{{$index+2}} horas</option>
                             </select>
                             </div>
@@ -344,9 +344,9 @@
                         </div>
                     </div>
 
-                    <div class="row" ng-show="vm.specificStep===3">
+                    <div class="row">
                         <div class="large-offset-2 large-8 end columns">
-                            <button class="button success expanded">Solicitar Servicio</button>
+                            <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
                         </div>
                     </div>
                 </div>
