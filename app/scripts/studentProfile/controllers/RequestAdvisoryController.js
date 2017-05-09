@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, ServiceUtils, DAYS_OF_WEEK) {
+        .controller('RequestAdvisoryController', function ($scope, ServiceUtils, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
 
             vm.disableDayOfWeekButton = index => {
@@ -61,8 +61,8 @@
                             startDate: sessionDate.toDate(),
                             startTime: vm.startTime.wickedpicker('time'),
                             startDateToShow: sessionDate.format('LL'),
-                            duration:120,
-                            dayOfWeek:days[j]
+                            duration: 120,
+                            dayOfWeek: days[j]
                         });
                         j++;
                         if (j === days.length) {
@@ -73,7 +73,19 @@
                 }
             }, true);
 
+            $scope.$watch('vm.specificStep', () => {
+                if (vm.specificStep === 2) {
+                    vm.sessions = [];
+                    for (var i = 0; i < vm.service.numSessions; i++) {
+                        vm.sessions.push({
+                            
+                        });
+                    }
+                }
+            });
+
             function initCtrl() {
+                vm.specificStep = 1;
                 vm.showSessions = false;
                 vm.daysOfWeek = DAYS_OF_WEEK;
                 vm.disable;
@@ -81,6 +93,8 @@
                 vm.today = ServiceUtils.getToday();
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
                 vm.service = {
+                    type: 2,
+                    numSessions: 0,
                     numStudents: 0,
                     months: 0,
                     sessionsPerWeek: 0,

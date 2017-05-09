@@ -78,5 +78,16 @@
                 id: 7,
                 label: 'Domingo'
             }
+        ])
+
+        .constant('ADVISORY_SERVICES_TYPE', [
+            {
+                id: 1,
+                label: 'acompañamiento'
+            },
+            {
+                id: 2,
+                label: 'tema especifico'
+            }
         ]);
 })();
