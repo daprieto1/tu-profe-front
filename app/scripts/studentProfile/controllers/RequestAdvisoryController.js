@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, $timeout, ServiceUtils, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
+        .controller('RequestAdvisoryController', function ($scope, $timeout, ServiceUtils, AdvisoryServiceServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
 
             vm.disableDayOfWeekButton = index => {
@@ -44,6 +44,13 @@
                 service.startDate.setHours(0, 0, 0, 0);
                 service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));
 
+                AdvisoryServiceServices.create(service)
+                    .then(advisoryService => {
+                        console.log(advisoryService);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
 
                 console.log(JSON.stringify(service));
             };
@@ -94,7 +101,7 @@
                     }
                     $timeout(() => {
                         for (var i = 0; i < vm.service.numSessions; i++) {
-                            vm.sessions[i].startTime = angular.element('#startTime' + i).wickedpicker({ now: "12:00", minutesInterval: 30 });                            
+                            vm.sessions[i].startTime = angular.element('#startTime' + i).wickedpicker({ now: "12:00", minutesInterval: 30 });
                         }
                     }, 100);
                 }
@@ -108,9 +115,9 @@
                 vm.sessions = [];
                 vm.today = ServiceUtils.getToday();
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
-                
+
                 vm.service = {
-                    type: 2,
+                    type: undefined,
                     numSessions: 0,
                     numStudents: 0,
                     months: 0,

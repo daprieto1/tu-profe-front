@@ -89,10 +89,12 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <div class="button-group">
-                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
-                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
-                            </div>
+                            <center>
+                                <div class="button-group">
+                                    <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                        ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -300,10 +302,12 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <div class="button-group">
-                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
-                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
-                            </div>
+                            <center>
+                                <div class="button-group">
+                                    <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                        ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>
