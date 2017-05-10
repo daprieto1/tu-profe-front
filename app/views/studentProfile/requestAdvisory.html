@@ -226,7 +226,8 @@
                         <div class="row">
                             <div class="large-12 columns">
                                 <label for="description">Descripción</label>
-                                <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes." required></textarea>
+                                <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes."
+                                    required></textarea>
                             </div>
                         </div>
                         <div class="row">
@@ -263,7 +264,7 @@
                                     <input type="date" ng-model="session.startDate">
                                 </td>
                                 <td>
-                                    <input type="text" ng-model="session.startTime">
+                                    <input type="text" id="startTime{{$index}}">
                                 </td>
                             </tr>
                         </tbody>
@@ -294,7 +295,7 @@
                             <label for="startTime" class="text-right middle">Hora de Inicio</label>
                         </div>
                         <div class="large-3 end columns">
-                            <input type="text" id="startTime" placeholder="">
+                            <input type="text" id="startTime">
                         </div>
                     </div>
                     <div class="row">
