@@ -43,11 +43,11 @@
             };
 
             $scope.$watch('vm.service', function (old, newd) {
-                console.log(vm.service.daysOfWeek.filter(day => { return day; }).length, parseInt(vm.service.sessionsPerWeek));
+
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
                     vm.showSessions = false;
                     vm.sessions = [];
-                    var numSessions = vm.service.months * 4 * vm.service.sessionsPerWeek;
+                    var numSessions = vm.service.type === 1 ? vm.service.months * 4 * vm.service.sessionsPerWeek : vm.service.numSessions;
                     var dayINeed = 1;
                     var dateInit;
                     if (moment().isoWeekday() <= dayINeed) {
@@ -62,6 +62,7 @@
                     var j = 0;
                     for (var i = 0; i < numSessions; i++) {
                         var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
+                        console.log(sessionDate);
                         vm.sessions.push({
                             startDate: sessionDate.toDate(),
                             startTime: vm.startTime.wickedpicker('time'),
