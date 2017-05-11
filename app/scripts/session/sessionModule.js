@@ -66,7 +66,7 @@
 
             $rootScope.isAuthenticated = function () {
                 return angular.isDefined($cookies.getObject('user'));
-            };            
+            };
 
             $rootScope.$on('$routeChangeStart', function (event, p1, p2) {
                 if ($rootScope.isAuthenticated()) {
@@ -100,22 +100,22 @@
 
             $rootScope.loginTeacher = function (username, password) {
                 return ServiceSession.loginTeacher(username, password)
-                    .then(function (resource) {
-                        console.log(resource);
-                        $cookies.put('username', username);
-                        $cookies.put('token', resource.token);
-                        $cookies.put('userId', resource.id);
+                    .then(function (token) {
+                        console.log(token);
+                        $cookies.put('username', token.user.username);
+                        $cookies.put('token', token.token);
+                        $cookies.put('userId', token.user.userId);
                         $location.path('teacher-profile');
                     });
             };
 
             $rootScope.loginStudent = function (username, password) {
                 return ServiceSession.loginStudent(username, password)
-                    .then(function (resource) {
-                        console.log(resource);
-                        $cookies.put('username', username);
-                        $cookies.put('token', resource.token);
-                        $cookies.put('userId', resource.id);
+                    .then(function (token) {
+                        console.log(token);
+                        $cookies.put('username', token.user.username);
+                        $cookies.put('token', token.token);
+                        $cookies.put('userId', token.user.userId);
                         $location.path('student-profile');
                     });
             };
