@@ -8,10 +8,20 @@
                 calculate: {
                     method: 'POST',
                     url: TU_PROFE_API + '/advisory-services/calculate'
+                },
+                getAllByStudentId: {
+                    url: TU_PROFE_API + '/advisory-services/get-by-student/:studentId',
+                    params: { studentId: '@studentId' },
+                    method: 'GET',
+                    isArray: true
                 }
             });
 
             return {
+
+                getAllByStudentId: studentId => {
+                    return AdvisoryService.getAllByStudentId({ studentId: studentId }).$promise;
+                },
 
                 create: advisoryService => {
                     return AdvisoryService.save(advisoryService).$promise;

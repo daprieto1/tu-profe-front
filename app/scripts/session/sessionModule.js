@@ -100,8 +100,7 @@
 
             $rootScope.loginTeacher = function (username, password) {
                 return ServiceSession.loginTeacher(username, password)
-                    .then(function (token) {
-                        console.log(token);
+                    .then(function (token) {                        
                         $cookies.put('username', token.user.username);
                         $cookies.put('token', token.token);
                         $cookies.put('userId', token.user.userId);
@@ -111,8 +110,7 @@
 
             $rootScope.loginStudent = function (username, password) {
                 return ServiceSession.loginStudent(username, password)
-                    .then(function (token) {
-                        console.log(token);
+                    .then(function (token) {                        
                         $cookies.put('username', token.user.username);
                         $cookies.put('token', token.token);
                         $cookies.put('userId', token.user.userId);

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, $timeout, ServiceUtils, AdvisoryServiceServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
+        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
 
             vm.disableDayOfWeekButton = index => {
@@ -118,6 +118,7 @@
 
                 vm.service = {
                     type: undefined,
+                    studentId: $cookies.get('userId'),
                     numSessions: 0,
                     numStudents: 0,
                     months: 0,
