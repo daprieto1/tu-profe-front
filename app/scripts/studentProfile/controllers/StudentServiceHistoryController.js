@@ -14,7 +14,8 @@
 
             function initCtrl() {
                 vm.selectedService = undefined;
-                AdvisoryServiceServices.getBySudent('1')
+
+                AdvisoryServiceServices.getAllByStudentId('c57df860-2ce8-489a-9e61-53577172a9fe')
                     .then(services=>{
                         vm.services = services.map(service => {
                             service.createdAt = moment(service.createdAt).format('LL');
@@ -26,6 +27,7 @@
                             return service;
                         });
                     });
+
             }
 
             initCtrl();

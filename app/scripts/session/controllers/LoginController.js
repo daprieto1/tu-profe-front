@@ -16,7 +16,7 @@
                         });
                 } else if (vm.isStudent) {
                     $rootScope.loginStudent(vm.email, vm.password)
-                        .then(function () { }, function () {
+                        .then(token => console.log(token), function () {
                             vm.showError = true;
                         });
                 }

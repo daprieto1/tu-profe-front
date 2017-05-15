@@ -1,6 +1,6 @@
 <div id="request-advisory" ng-controller="RequestAdvisoryController as vm">
-    <!--
-    <div id="select-advisroy-type">
+    <!-- SERVICE TYPE SELECTION -->
+    <div id="select-advisroy-type" ng-if="vm.service.type === undefined">
         <div class="row">
             <div class="large-12 columns">
                 <div class="marketing-site-hero">
@@ -9,7 +9,7 @@
                         <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui
                             minus!
                         </p>
-                        <a href="" class="round button">Seleccionar</a>
+                        <a href="" class="round button" ng-click="vm.service.type = 1">Seleccionar</a>
                     </div>
                 </div>
             </div>
@@ -22,22 +22,22 @@
                         <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui
                             minus!
                         </p>
-                        <a href="" class="round button">Seleccionar</a>
+                        <a href="" class="round button" ng-click="vm.service.type = 2">Seleccionar</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
--->
-    
-    <div id="tutor-service">
+
+    <!-- TUTOR SERVICE -->
+    <div id="tutor-service" ng-show="vm.service.type === 1">
         <div class="summary-header">
             <div class="marketing-site-hero">
                 <div class="marketing-site-hero-content">
                     <h1>Acompañamiento</h1>
                     <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui minus!
                     </p>
-                    <a href="" class="round button">Solicitar</a>
+                    <a href="" class="round button" ng-click="vm.service.type = undefined">Volver</a>
                 </div>
             </div>
         </div>
@@ -69,7 +69,7 @@
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Fecha de Inicio</label>
                         </div>
-                        <div class="large-4 end columns">                            
+                        <div class="large-4 end columns">
                             <input type="date" id="middle-label" ng-model="vm.service.startDate" min="{{vm.today}}">
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                             <label for="startTime" class="text-right middle">Hora de Inicio</label>
                         </div>
                         <div class="large-3 end columns">
-                            <input type="text" id="startTime" placeholder="Right- and middle-aligned text input">
+                            <input type="text" id="startTime" placeholder="">
                         </div>
                     </div>
                     <div class="row">
@@ -89,10 +89,12 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <div class="button-group">
-                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
-                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
-                            </div>
+                            <center>
+                                <div class="button-group">
+                                    <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                        ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>
@@ -109,10 +111,22 @@
                     </div>
                     <div id="summary" class="row">
                         <div class="large-12 columns">
-                            <ul>                                
-                                <li><p>Numero de Meses: <div class="stat">{{vm.service.months}}</div></p></li>
-                                <li><p>Numero de Sesiones por Semana: <div class="stat">{{vm.service.sessionsPerWeek}}</div></p></li>
-                                <li><p>Total de Sesiones: <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div></p></li>                                                               
+                            <ul>
+                                <li>
+                                    <p>Numero de Meses:
+                                        <div class="stat">{{vm.service.months}}</div>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Numero de Sesiones por Semana:
+                                        <div class="stat">{{vm.service.sessionsPerWeek}}</div>
+                                    </p>
+                                </li>
+                                <li>
+                                    <p>Total de Sesiones:
+                                        <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div>
+                                    </p>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -163,22 +177,103 @@
         </div>
     </div>
 
-<!--
-    <div id="specific-subject-service">
+    <!-- SPECIFIC TOPIC SERVICE -->
+    <div id="specific-subject-service" ng-show="vm.service.type === 2">
         <div class="summary-header">
             <div class="marketing-site-hero">
                 <div class="marketing-site-hero-content">
                     <h1>Tema Específico</h1>
                     <p class="subheader">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam omnis, maxime libero natus qui minus!
                     </p>
-                    <a href="" class="round button">Solicitar</a>
+                    <a href="" class="round button" ng-click="vm.service.type=undefined">Volver</a>
                 </div>
             </div>
         </div>
 
         <div class="row" data-equalizer>
-            <div class="large-8 columns">
+
+            <div class="large-8 columns" ng-show="vm.specificStep===1">
                 <div class="callout" data-equalizer-watch>
+                    <form name="specificStep1" novalidate>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Número de estudiantes</label>
+                            </div>
+                            <div class="large-3 end columns">
+                                <select ng-model="vm.service.numStudents" required>
+                                <option ng-repeat="n in [] | range:4" value="{{$index+1}}">{{$index+1}}</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Número de sesiones</label>
+                            </div>
+                            <div class="large-3 end columns">
+                                <select ng-model="vm.service.numSessions" required>
+                                <option ng-repeat="n in [] | range:20" value="{{$index+1}}">{{$index+1}}</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Duración por sesión</label>
+                            </div>
+                            <div class="large-3 end columns">
+                                <select ng-model="vm.service.timePerSession" required>
+                                <option ng-repeat="n in [] | range:7" value="{{$index+2}}">{{$index+2}} horas</option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <label for="description">Descripción</label>
+                                <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes."
+                                    required></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-2 large-offset-5 columns">
+                                <button class="button expanded" ng-click="vm.specificStep=2" ng-disabled="specificStep1.$invalid">Continuar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="large-8 columns" ng-show="vm.specificStep===2">
+                <tabset>
+                    <tab heading="Especifico" active="vm.tabSpecific">
+                    </tab>
+                    <tab heading="Estático" active="vm.tabStatic">
+                    </tab>
+                </tabset>
+                <div class="callout" ng-show="vm.tabSpecific">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th width="300">Sesión</th>
+                                <th width="300">Fecha de Inicio</th>
+                                <th width="300">Hora de Inicio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="session in vm.sessions track by $index">
+                                <td>
+                                    Sesión {{$index + 1}}
+                                </td>
+                                <td>
+                                    <input type="date" ng-model="session.startDate">
+                                </td>
+                                <td>
+                                    <input type="text" id="startTime{{$index}}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="callout" ng-show="vm.tabStatic">
                     <div class="row">
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
@@ -186,16 +281,6 @@
                         <div class="large-3 end columns">
                             <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
                                 <option ng-repeat="n in [] | range:4" value="{{$index+2}}">{{$index+2}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-6 columns">
-                            <label for="middle-label" class="text-right middle">Duración por sesión</label>
-                        </div>
-                        <div class="large-3 end columns">
-                            <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
-                                <option ng-repeat="n in [] | range:7" value="{{$index+2}}">{{$index+2}}</option>
                             </select>
                         </div>
                     </div>
@@ -212,24 +297,30 @@
                             <label for="startTime" class="text-right middle">Hora de Inicio</label>
                         </div>
                         <div class="large-3 end columns">
-                            <input type="text" id="startTime" placeholder="Right- and middle-aligned text input">
+                            <input type="text" id="startTime">
                         </div>
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
-                            <label for="description">Descripción</label>
-                            <textarea name="description" id="description" rows="5" ng-model="vm.service.description" placeholder="Usa este espacio para contarnos todos los detalles de las necesidades que tienes."></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="large-12 columns">
-                            <div class="button-group">
-                                <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
-                                    ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
-                            </div>
+                            <center>
+                                <div class="button-group">
+                                    <a ng-repeat="day in vm.daysOfWeek track by $index" class="button" ng-disabled="vm.disableDayOfWeekButton($index)" ng-class="vm.service.daysOfWeek[$index] ? 'success' : ''"
+                                        ng-click="vm.selectDayOfWeek($index)">{{day.label}}</a>
+                                </div>
+                            </center>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="large-4 large-centered columns">
+                        <button class="button secondary" ng-click="vm.specificStep=1">Atras</button>
+                        <button class="button" ng-click="vm.specificStep=3">Siguiente</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="large-8 columns" ng-show="vm.specificStep===3">
+
             </div>
             <div class="large-4 columns">
                 <div class="callout" data-equalizer-watch>
@@ -245,18 +336,13 @@
                         <div class="large-12 columns">
                             <ul>
                                 <li>
-                                    <p>Numero de Meses:
-                                        <div class="stat">{{vm.service.months}}</div>
+                                    <p>Numero de Estudiantes:
+                                        <div class="stat">{{vm.service.numStudents}}</div>
                                     </p>
                                 </li>
                                 <li>
-                                    <p>Numero de Sesiones por Semana:
-                                        <div class="stat">{{vm.service.sessionsPerWeek}}</div>
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>Total de Sesiones:
-                                        <div class="stat">{{vm.service.months * 4 * vm.service.sessionsPerWeek}}</div>
+                                    <p>Numero de Sesiones:
+                                        <div class="stat">{{vm.service.numSessions}}</div>
                                     </p>
                                 </li>
                             </ul>
@@ -265,7 +351,7 @@
 
                     <div class="row">
                         <div class="large-offset-2 large-8 end columns">
-                            <button class="button success expanded">Solicitar Servicio</button>
+                            <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
                         </div>
                     </div>
                 </div>
@@ -274,39 +360,6 @@
 
         <hr>
 
-        <div class="row">
-            <div class="large-offset-5 large-2 end columns">
-                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Personalizar sesiones</button>
-                <button class="button primary expanded" ng-if="vm.showSessions" ng-click="vm.showSessions = false">Cerrar Vista</button>
-            </div>
-        </div>
 
-        <div class="row" ng-if="vm.showSessions">
-            <div class="large-8 end columns">
-                <table class="dashboard-table">
-                    <thead>
-                        <tr>
-                            <th width="300">Sesión</th>
-                            <th width="300">Fecha</th>
-                            <th width="300">Tiempo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="session in vm.sessions track by $index">
-                            <td>
-                                Sesión {{$index + 1}}
-                            </td>
-                            <td>
-                                {{session.startDateToShow}}
-                            </td>
-                            <td>
-                                {{vm.startTime.wickedpicker('time')}}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
     </div>
-    -->
 </div>
