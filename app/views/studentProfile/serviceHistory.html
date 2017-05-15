@@ -20,10 +20,10 @@
                 <thead>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th><a href="#">Fecha <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Profesor <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="#">Estudiantes <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Horas <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="#">Sesiones <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="#">Ciudad <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="#">Valor <i class="fa fa-caret-down"></i></a></th>
                     </tr>
@@ -36,13 +36,15 @@
                             <i ng-if="service === vm.selectedService" class="fa fa-chevron-down" aria-hidden="true"></i>
                         </td>
                         <td>
+                            <img src="images/studentProfile/serviceHistory/learning.svg" alt="" style="max-width:45px">
+                        </td>
+                        <td>
                             <div class="flex-container align-justify align-top">
-                                <span class="dashboard-table-timestamp">{{service.date}}</span>
+                                <span class="dashboard-table-timestamp">{{service.createdAt}}</span>
                             </div>
                         </td>
-                        <td class="bold">{{service.teacher}}</td>
                         <td>{{service.numStudents}}</td>
-                        <td>{{service.numHours}}</td>
+                        <td>{{service.sessions.length}}</td>
                         <td>
                             {{service.city}}
                         </td>
@@ -55,7 +57,12 @@
                             <div class="row">
                                 <div class="large-3 columns">
                                     <h5>Resumen del Servicio</h5>
-                                    <img src="images/studentProfile/serviceHistory/learning.svg" alt="">
+                                    <div class="row">
+                                        <div class="large-12 columns">
+                                            <label for="">Descripción</label>
+                                            <p>{{service.description}}</p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="large-9 columns">
                                     <h5>Sesiones</h5>
@@ -72,8 +79,8 @@
                                         <tbody>
                                             <tr ng-repeat="session in service.sessions track by $index">
                                                 <td>Sesión {{$index + 1}}</td>
-                                                <td>{{session.date}}</td>
-                                                <td>{{session.time}}</td>
+                                                <td>{{session.startDateToShow}}</td>
+                                                <td>{{session.startTime}}</td>
                                                 <td>{{session.numHours}} Horas</td>
                                                 <td>{{session.teacher}}</td>
                                             </tr>

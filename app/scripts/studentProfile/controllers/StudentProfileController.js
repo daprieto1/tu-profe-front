@@ -5,7 +5,7 @@
             var vm = this;
 
             function initCtrl() {
-                vm.section = 'request-advisory';
+                vm.section = 'service-history';
             }
 
             initCtrl();
