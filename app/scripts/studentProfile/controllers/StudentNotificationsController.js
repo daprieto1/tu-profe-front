@@ -4,6 +4,10 @@
         .controller('StudentNotificationsController', function ($scope, NotificationServices, NOTIFICATION_TYPES) {
             var vm = this;
             
+            vm.deleteNotification=notificationId=>{
+                NotificationServices.delete(notificationId);
+            };
+            
             vm.selectNotification = notification => {
                 vm.selectedNotification = notification;  
                 if(!vm.selectedNotification.read){

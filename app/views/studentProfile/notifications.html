@@ -10,7 +10,7 @@
         <div class="large-5 columns">
           <div ng-repeat="notification in vm.notifications track by $index" data-closable class="callout alert-callout-border" ng-class="notification.read ? 'secondary' : notification.type.style" ng-click="vm.selectNotification(notification)">
             <strong>{{notification.type.label}}!</strong> - {{notification.title}}.
-            <button class="close-button" aria-label="Dismiss alert" type="button" data-close>
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close ng-click="vm.deleteNotification(notification.id)">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>

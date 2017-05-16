@@ -28,6 +28,10 @@
                     return Notification.update({ id: notification.id }, notification).$promise;
                 },
                 
+                delete: notificationId=>{
+                    return Notification.remove({ id: notificationId }).$promise;  
+                },
+                
                 getByUserId: userId => {
                     return Notification.getByUserId({userId:userId}).$promise;
                 }
