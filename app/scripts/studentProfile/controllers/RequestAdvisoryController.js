@@ -26,99 +26,7 @@
             };
 
             vm.createService = () => {
-                var advisoryService = {
-  "studentId": "1",
-  "numStudents": 0,
-  "months": 1,
-  "sessionsPerWeek": 2,
-  "startDate": "2018-05-08T05:00:00.000Z",
-  "description": "sdf",
-  "daysOfWeek": [
-    true,
-    true,
-    false,
-    false,
-    false,
-    false,
-    false
-  ],
-  "type": 1,
-  "startTime": "12:00",
-  "sessions": [
-    {
-      "id": 1,
-      "startDate": "2018-05-08T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 2
-    },
-    {
-      "id": 2,
-      "startDate": "2018-05-09T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 3
-    },
-    {
-      "id": 3,
-      "startDate": "2018-05-15T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 2
-    },
-    {
-      "id": 4,
-      "startDate": "2018-05-16T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 3
-    },
-    {
-      "id": 5,
-      "startDate": "2018-05-22T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 2
-    },
-    {
-      "id": 6,
-      "startDate": "2018-05-23T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 3
-    },
-    {
-      "id": 7,
-      "startDate": "2018-05-29T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 2
-    },
-    {
-      "id": 8,
-      "startDate": "2018-05-30T05:00:00.000Z",
-      "startTime": "12:00",
-      "duration": 120,
-      "dayOfWeek": 3
-    }
-  ],
-  "cost": {
-    "baseCost": 0
-  },
-  "id": "5f95efe9-099e-45f8-9747-26ee0ff7c79e",
-  "createdAt": "2017-05-16T23:28:49.276Z",
-  "numberHours": 2,
-  "courses": []
-}
-                vm.successCreateService = true;
-                advisoryService.createdAt = moment(advisoryService.createdAt).format('LL'); 
-                advisoryService.sessions = advisoryService.sessions.map(session=>{
-                    session.startDate = moment(session.startDate).format('LL');
-                    return session;
-                })
-                vm.createdService = advisoryService;                        
-                console.log(vm.createdService);
-                /*
+                
                 var service = angular.copy(vm.service);
                 service.sessions = angular.copy(vm.sessions);
 
@@ -126,6 +34,8 @@
                     service.months = parseInt(service.months);
                     service.sessions.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
                 } else if (vm.service.type === 2) {
+                    service.timePerSession = parseInt(service.timePerSession);
+                    service.numSessions = parseInt(service.numSessions);
                     if (vm.tabSpecific) {
                         service.sessions.forEach((session, index) => { session.startTime = ServiceUtils.timeToMilitarFormat(vm.sessions[index].startTime.wickedpicker('time')); });
                     } else if (vm.tabStatic) {
@@ -133,20 +43,27 @@
                     }
                 }
 
+                service.numStudents = parseInt(service.numStudents);
                 service.sessionsPerWeek = parseInt(service.sessionsPerWeek);
                 service.startDate.setHours(0, 0, 0, 0);
                 service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));
 
                 AdvisoryServiceServices.create(service)
                     .then(advisoryService => {
-                        
+                        vm.successCreateService = true;
+                        advisoryService.createdAt = moment(advisoryService.createdAt).format('LL'); 
+                        advisoryService.sessions = advisoryService.sessions.map(session=>{
+                            session.startDate = moment(session.startDate).format('LL');
+                            return session;
+                        })
+                        vm.createdService = advisoryService;                        
                         console.log(vm.createdService);
                         alertify.success('El servicio se ha creado exitosamente!');
                     })
                     .catch(err => {
                         alertify.error('Lo sentimos, no hemos podido crear el servicio, por favor comunicate con servicio al cliente.');
                     });
-*/
+
             };
 
             $scope.$watch('vm.service', function (old, newd) {
