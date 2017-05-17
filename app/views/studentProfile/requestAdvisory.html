@@ -30,7 +30,7 @@
     </div>
 
     <!-- TUTOR SERVICE -->
-    <div id="tutor-service" ng-show="vm.service.type === 1">
+    <div id="tutor-service" ng-show="vm.service.type === 1 && !vm.successCreateService">
         <div class="summary-header">
             <div class="marketing-site-hero">
                 <div class="marketing-site-hero-content">
@@ -136,6 +136,7 @@
                             <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -178,7 +179,7 @@
     </div>
 
     <!-- SPECIFIC TOPIC SERVICE -->
-    <div id="specific-subject-service" ng-show="vm.service.type === 2">
+    <div id="specific-subject-service" ng-show="vm.service.type === 2 && !vm.successCreateService">
         <div class="summary-header">
             <div class="marketing-site-hero">
                 <div class="marketing-site-hero-content">
@@ -361,5 +362,46 @@
         <hr>
 
 
+    </div>
+    
+    <!-- SUMMARY SERVICE -->
+    <div id="summary-service" ng-show="vm.successCreateService">
+        <div class="row">
+            <div class="large-6 large-offset-3 end columns">
+                <div class="card">
+                    <div class="card-divider">
+                        Resumen del Servicio
+                    </div>
+                    <div class="card-section">
+                        <p>Fecha de Solicitud <strong class="float-right">{{vm.createdService.createdAt}}</strong></p>
+                        <p>Número de sesiones <strong class="float-right">{{vm.createdService.sessions.length}}</strong></p>
+                        <p>Fecha de la primera sesión <strong class="float-right">{{vm.createdService.sessions[0].startDate}}</strong></p>
+                        <p>Fecha de la ultima sesión <strong class="float-right">{{vm.createdService.sessions[vm.createdService.sessions.length-1].startDate}}</strong></p>
+                        <hr>
+                        <p>Costo por sesión <strong class="float-right">$ 10.000</strong></p>
+                        <p>IVA <strong class="float-right">$ 1.000</strong></p>
+                        <p>Total a Pagar <strong class="float-right">$ 100.000</strong></p>
+                    </div>
+                    <div class="card-section">
+                        <center>
+                            <form>
+                                <script src="https://s3-us-west-2.amazonaws.com/epayco/v1.0/checkoutEpayco.js" 
+                                    class="epayco-button" 
+                                    data-epayco-key="03b300d0d22bd3adb28eb20080e77e9b" 
+                                    data-epayco-amount="5000" 
+                                    data-epayco-name="Servicio de Acompañamiento Tu Profe" 
+                                    data-epayco-description="Servicio de acompañamiento de Tu Profe x 1 Mes" 
+                                    data-epayco-currency="cop" 
+                                    data-epayco-country="co" 
+                                    data-epayco-test="true"
+                                    data-epayco-response="https://ejemplo.com/respuesta.html" 
+                                    data-epayco-confirmation="https://ejemplo.com/confirmacion" >
+                                </script>
+                            </form>
+                        </center>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
