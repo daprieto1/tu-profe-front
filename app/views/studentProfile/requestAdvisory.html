@@ -47,6 +47,16 @@
                 <div class="callout" data-equalizer-watch>
                     <div class="row">
                         <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Número de Estudiantes</label>
+                        </div>
+                        <div class="large-3 end columns">
+                            <select ng-model="vm.service.numStudents">
+                                <option ng-repeat="n in [] | range:4" value="{{$index+1}}">{{$index+1}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número de Meses</label>
                         </div>
                         <div class="large-3 end columns">
