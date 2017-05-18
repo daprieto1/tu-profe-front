@@ -13,6 +13,7 @@
         'multipleSelect',
         'rzModule',
         'environment',
+        'file-model',
         'sessionModule',
         'courseModule',
         'schoolModule',

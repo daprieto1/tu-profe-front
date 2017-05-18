@@ -132,7 +132,7 @@
                         </div>
                         <div class="card-section">
                             <div class="row">
-                                <input id="real-input-photo-file" name="file" type="file" ng-show="false" accept=".jpg" file-reader="vm.photoFile">
+                                <input id="real-input-photo-file" name="file" type="file" ng-show="false" accept="image/*" file-reader="vm.photoFile">
                                 <div class="large-6 large-offset-3 end columns">
                                     <div class="input-group">
                                         <input class="input-group-field" type="text">
@@ -146,7 +146,7 @@
                             </div>
                             <div class="row">
                                 <div class="large-2 large-offset-4 columns">
-                                    <button class="button expanded">Guardar</button>
+                                    <button class="button expanded" ng-click="vm.uploadPhoto()">Guardar</button>
                                 </div>
                             </div>
                         </div>

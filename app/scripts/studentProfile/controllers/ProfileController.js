@@ -20,23 +20,23 @@
             };
 
             vm.uploadPhoto = () => {
-                ServiceStudents.uploadPhoto(file, vm.teacher.id)
+                console.log(angular.element(document.querySelector('#real-input-photo-file')));
+                console.log(angular.element('#real-input-photo-file'));
+                console.log($scope.photoFile);
+                /*ServiceStudents.uploadPhoto(file, vm.teacher.id)
                     .then(function () {
                         $route.reload();
-                    });
+                    });*/
             };
-
-            $scope.$watch('vm.photoFile', () => {                
-                var aux = angular.element(document.querySelector('#real-input-photo-file'));
-                if (angular.isDefined(aux) && angular.isDefined(aux.prop('files')[0])) {
-                    var file = aux.prop('files')[0];
-                }
+    
+            $scope.$watch('photoFile', (newValue, oldValue) => {                
+                console.log($scope.photoFile);
             });
 
             function initCtrl() {
                 vm.editData = false;
                 vm.editPhoto = false;
-                vm.photoFile = undefined;
+                $scope.photoFile = undefined;
 
                 ServiceStudents.getStudent($cookies.get('userId'))
                     .then(student => {

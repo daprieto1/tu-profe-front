@@ -6,29 +6,25 @@
     /**
      * Directive to read a file in a input.
      */
-    .directive('fileReader', function() {
+    .directive("fileReader", [function ($rootScope) {
         return {
             scope: {
-                fileReader: '='
+                fileReader: "="
             },
-            link: function(scope, element) {
-                angular.element(element).on('change', function(changeEvent) {
-                    var files = changeEvent.target.files;
-                    if (files.length) {
-                        var r = new FileReader();
-                        r.onload = function(e) {
-                            var contents = e.target.result;
-                            scope.$apply(function() {
-                                scope.fileReader = contents;
-                            });
-                        };
-
-                        r.readAsText(files[0]);
+            link: function (scope, element, attributes) {
+                element.bind("change", function (changeEvent) {
+                    var reader = new FileReader();
+                    reader.onload = function (loadEvent) {
+                        scope.$apply(function () {
+                            scope.fileReader = loadEvent.target.result;
+                            $rootScope.$broadcast('file-upload',scope.fileReader);
+                        });
                     }
+                    reader.readAsDataURL(changeEvent.target.files[0]);
                 });
             }
-        };
-    })
+        }
+    }])
 
     .directive('loader', function() {
         return {
