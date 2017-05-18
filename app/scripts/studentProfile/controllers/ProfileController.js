@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('ProfileController', function ($scope, $timeout, $route, ServiceStudents) {
+        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents) {
             var vm = this;
 
             vm.edit = () => {
@@ -38,7 +38,7 @@
                 vm.editPhoto = false;
                 vm.photoFile = undefined;
 
-                ServiceStudents.getStudent('82cb217e-51e9-413a-899d-2f6f61fc5262')
+                ServiceStudents.getStudent($cookies.get('userId'))
                     .then(student => {
                         vm.student = student;
                     })

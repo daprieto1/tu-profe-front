@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('StudentServiceHistoryController', function ($scope, AdvisoryServiceServices) {
+        .controller('StudentServiceHistoryController', function ($scope, $cookies, AdvisoryServiceServices) {
             var vm = this;
 
             vm.selectService = service => {                             
@@ -15,7 +15,7 @@
             function initCtrl() {
                 vm.selectedService = undefined;
 
-                AdvisoryServiceServices.getAllByStudentId('c57df860-2ce8-489a-9e61-53577172a9fe')
+                AdvisoryServiceServices.getAllByStudentId($cookies.get('userId'))
                     .then(services=>{
                         vm.services = services.map(service => {
                             service.createdAt = moment(service.createdAt).format('LL');
