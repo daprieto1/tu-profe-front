@@ -48,15 +48,13 @@
                         <td>
                             {{service.city}}
                         </td>
-                        <td class="listing-inquiry-status" ng-show="false">
-                            $ {{service.cost}}
-                        </td>
-                        <td>
+                        <td class="listing-inquiry-status">
+                            <div>$ {{service.cost.total}}</div>
                             <form>
                                 <script src="https://s3-us-west-2.amazonaws.com/epayco/v1.0/checkoutEpayco.js" 
                                     class="epayco-button" 
                                     data-epayco-key="03b300d0d22bd3adb28eb20080e77e9b" 
-                                    data-epayco-amount="5000" 
+                                    data-epayco-amount="304900" 
                                     data-epayco-name="Servicio de Acompañamiento Tu Profe" 
                                     data-epayco-description="Servicio de acompañamiento de Tu Profe x 1 Mes" 
                                     data-epayco-currency="cop" 
