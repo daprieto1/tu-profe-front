@@ -48,8 +48,24 @@
                         <td>
                             {{service.city}}
                         </td>
-                        <td class="listing-inquiry-status">
+                        <td class="listing-inquiry-status" ng-show="false">
                             $ {{service.cost}}
+                        </td>
+                        <td>
+                            <form>
+                                <script src="https://s3-us-west-2.amazonaws.com/epayco/v1.0/checkoutEpayco.js" 
+                                    class="epayco-button" 
+                                    data-epayco-key="03b300d0d22bd3adb28eb20080e77e9b" 
+                                    data-epayco-amount="5000" 
+                                    data-epayco-name="Servicio de Acompañamiento Tu Profe" 
+                                    data-epayco-description="Servicio de acompañamiento de Tu Profe x 1 Mes" 
+                                    data-epayco-currency="cop" 
+                                    data-epayco-country="co" 
+                                    data-epayco-test="true"
+                                    data-epayco-response="https://ejemplo.com/respuesta.html" 
+                                    data-epayco-confirmation="https://ejemplo.com/confirmacion" >
+                                </script>
+                            </form>
                         </td>
                     </tr>
                     <tr ng-show="vm.selectedService === service">
@@ -73,6 +89,7 @@
                                                 <th>Fecha</th>
                                                 <th>Hora</th>
                                                 <th>Duración</th>
+                                                <th>Estado</th>
                                                 <th>Profesor</th>
                                             </tr>
                                         </thead>
@@ -82,6 +99,7 @@
                                                 <td>{{session.startDateToShow}}</td>
                                                 <td>{{session.startTime}}</td>
                                                 <td>{{session.numHours}} Horas</td>
+                                                <td><span class="label">{{session.state.label}}</span></td>
                                                 <td>{{session.teacher}}</td>
                                             </tr>
                                         </tbody>

@@ -206,6 +206,17 @@
             <div class="large-8 columns" ng-show="vm.specificStep===1">
                 <div class="callout" data-equalizer-watch>
                     <form name="specificStep1" novalidate>
+                            <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Materia</label>
+                            </div>
+                            <div class="large-3 end columns">
+                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses track by course.id" ng-model="vm.service.course"
+                                    required>                                
+                                </select>
+                            </select>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Número de estudiantes</label>

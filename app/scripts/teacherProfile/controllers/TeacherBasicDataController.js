@@ -5,11 +5,9 @@
 
             vm.edit = function (section) {
                 var teacher = angular.copy(vm.teacher);
-                teacher.university = undefined || teacher.university.id
-                teacher.profession = undefined || teacher.profession.id
-                teacher.courses = teacher.courses.map(function (course) {
-                    return course.id;
-                });
+                teacher.university = angular.isDefined(teacher.university) ? teacher.university.id : undefined;
+                teacher.profession = angular.isDefined(teacher.profession) ? teacher.profession.id : undefined;
+                teacher.courses = teacher.courses.map(function (course) {return course.id;});
                 ServiceTeachers.update(teacher)
                     .then(function () {
                         vm.editData = {
