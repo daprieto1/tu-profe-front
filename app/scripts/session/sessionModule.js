@@ -48,6 +48,7 @@
                      * @returns {*}
                      */
                     request: function (config) {
+                        console.log(config);
                         if (angular.isDefined($cookies.get('token'))) {
                             var authToken = $cookies.get('token');
                             if (AuthAppConfig.useAuthTokenHeader) {

@@ -28,7 +28,7 @@
 
         .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider) {
 
-
+    
             $cookiesProvider.defaults.path = '/';
 
             $routeProvider
@@ -77,6 +77,7 @@
             });
 
             envServiceProvider.check();
+            
 
         })
 
