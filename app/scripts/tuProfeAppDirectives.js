@@ -17,7 +17,6 @@
                     reader.onload = function (loadEvent) {
                         scope.$apply(function () {
                             scope.fileReader = loadEvent.target.result;
-                            $rootScope.$broadcast('file-upload',scope.fileReader);
                         });
                     }
                     reader.readAsDataURL(changeEvent.target.files[0]);
