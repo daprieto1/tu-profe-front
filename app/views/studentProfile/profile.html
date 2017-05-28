@@ -114,6 +114,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="large-12 columns">
+                                        <button class="button secondary" ng-click="vm.editData=false">
+                                            Cancelar
+                                        </button>
                                         <button class="button" ng-disabled="editPersonalData.$invalid" ng-click="vm.edit()">
                                             Guardar
                                         </button>
@@ -145,9 +148,10 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="large-2 large-offset-4 columns">
-                                    <button class="button expanded" ng-click="vm.uploadPhoto()">Guardar</button>
-                                </div>
+                                <center>
+                                    <button class="button secondary" ng-click="vm.editPhoto=false">Cancelar</button>
+                                    <button class="button" ng-click="vm.uploadPhoto()">Guardar</button>
+                                </center>                                                                    
                             </div>
                         </div>
                     </div>

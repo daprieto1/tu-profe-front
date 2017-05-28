@@ -35,7 +35,7 @@
             <ng-include src="'views/studentProfile/serviceHistory.html'" ng-if="vm.section === 'service-history'">
             </ng-include>  
             
-            <ng-include src="'views/studentProfile/requestAdvisory.html'" ng-show="vm.section === 'request-advisory'">
+            <ng-include src="'views/studentProfile/requestAdvisory.html'" ng-if="vm.section === 'request-advisory'">
             </ng-include>  
             
             <ng-include src="'views/studentProfile/notifications.html'" ng-if="vm.section === 'notifications'">
