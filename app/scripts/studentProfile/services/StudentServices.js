@@ -20,14 +20,14 @@
                 update: function (student) {
                     return Student.update({ id: student.id }, student).$promise;
                 },
-                
+
                 uploadPhoto: function (file, studentId) {
                     var fd = new FormData();
                     fd.append('file', file);
                     fd.append('studentId', studentId)
 
                     return $http({
-                        url: TU_PROFE_API + '/student/upload-photo',
+                        url: TU_PROFE_API + '/students/photo/' + studentId,
                         method: 'POST',
                         data: fd,
                         headers: { 'Content-Type': undefined },

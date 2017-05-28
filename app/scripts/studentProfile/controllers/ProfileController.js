@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents) {
+        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents, envService, PROFILE_PHOTO) {
             var vm = this;
 
             vm.edit = () => {
@@ -15,32 +15,33 @@
 
             vm.selectPhoto = () => {
                 $timeout(() => {
-                    angular.element('#real-input-photo-file').click();
+                    angular.element('#real-input-profile-photo-file').click();
                 }, 0);
             };
 
             vm.uploadPhoto = () => {
-                console.log(angular.element(document.querySelector('#real-input-photo-file')));
-                console.log(angular.element('#real-input-photo-file'));
-                console.log($scope.photoFile);
-                /*ServiceStudents.uploadPhoto(file, vm.teacher.id)
+                ServiceStudents.uploadPhoto(vm.file, vm.student.id)
                     .then(function () {
                         $route.reload();
-                    });*/
+                    })
+                    .catch(err => console.log(err));
             };
-    
-            $scope.$watch('photoFile', (newValue, oldValue) => {                
-                console.log($scope.photoFile);
+
+            $scope.$watch('vm.photoFile', (newValue, oldValue) => {
+                var aux = angular.element(document.querySelector('#real-input-profile-photo-file'));
+                if (angular.isDefined(aux) && angular.isDefined(aux.prop('files'))) {
+                    vm.file = aux.prop('files')[0];
+                }
             });
 
             function initCtrl() {
                 vm.editData = false;
                 vm.editPhoto = false;
-                $scope.photoFile = undefined;
 
                 ServiceStudents.getStudent($cookies.get('userId'))
                     .then(student => {
                         vm.student = student;
+                        vm.profilePhotoUrl = envService.read('S3TuProfeBucket') + PROFILE_PHOTO + student.id + '.png';
                     })
                     .catch(err => {
                         console.log('err');

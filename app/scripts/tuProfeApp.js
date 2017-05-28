@@ -28,7 +28,7 @@
 
         .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider) {
 
-    
+
             $cookiesProvider.defaults.path = '/';
 
             $routeProvider
@@ -65,19 +65,22 @@
                 },
                 vars: {
                     local: {
-                        apiUrl: 'http://localhost:8080/api'
+                        apiUrl: 'http://localhost:8080/api',
+                        S3TuProfeBucket: 'https://s3-us-west-2.amazonaws.com/tu-profe/'
                     },
                     c9: {
-                        apiUrl: 'https://tu-profe-api-node-diegoprieto.c9users.io:8080/api'
+                        apiUrl: 'https://tu-profe-api-node-diegoprieto.c9users.io:8080/api',
+                        S3TuProfeBucket: 'https://s3-us-west-2.amazonaws.com/tu-profe/'
                     },
                     heroku: {
-                        apiUrl: 'https://tu-profe-api-node.herokuapp.com/api'
+                        apiUrl: 'https://tu-profe-api-node.herokuapp.com/api',
+                        S3TuProfeBucket: 'https://s3-us-west-2.amazonaws.com/tu-profe/'
                     }
                 }
             });
 
             envServiceProvider.check();
-            
+
 
         })
 

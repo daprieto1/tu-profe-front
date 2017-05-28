@@ -36,14 +36,16 @@
         };
     })
 
-    .directive('imageonload', function() {
+    .directive('imageonload', [function() {
         return {
-            restrict: 'A',
+            scope: {
+                imageonload: '='
+            },
             link: function(scope, element, attrs) {
                 element.bind('error', function() {
-                    attrs.$set('src', 'https://d1ql3lvdg7tehd.cloudfront.net/teacher/profile-photo/teacher.svg')
+                    attrs.$set('src', scope.imageonload)
                 });
             }
         };
-    });
+    }]);
 })();
