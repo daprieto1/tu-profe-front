@@ -21,14 +21,14 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th><a href="#">Fecha <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Estudiantes <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Sesiones <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Ciudad <i class="fa fa-caret-down"></i></a></th>
-                        <th><a href="#">Valor <i class="fa fa-caret-down"></i></a></th>
+                        <th ng-click="vm.sortBy('createdAt')"><a href="">Fecha <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="">Estudiantes <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="">Sesiones <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="">Ciudad <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="">Valor <i class="fa fa-caret-down"></i></a></th>
                     </tr>
                 </thead>
-                <tbody ng-repeat="service in vm.services track by $index">
+                <tbody ng-repeat="service in vm.services | orderBy : vm.propertyName : vm.reverse track by $index">
 
                     <tr ng-click="vm.selectService(service)">
                         <td>
@@ -36,7 +36,8 @@
                             <i ng-if="service === vm.selectedService" class="fa fa-chevron-down" aria-hidden="true"></i>
                         </td>
                         <td>
-                            <img src="images/studentProfile/serviceHistory/learning.svg" alt="" style="max-width:45px">
+                            <img src="images/studentProfile/serviceHistory/learning.svg" alt="" ng-show="service.type===1" style="max-width:45px">
+                            <img src="images/studentProfile/serviceHistory/scientist.svg" alt="" ng-show="service.type===2" style="max-width:45px">
                         </td>
                         <td>
                             <div class="flex-container align-justify align-top">
