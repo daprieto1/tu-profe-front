@@ -20,7 +20,7 @@
             function initCtrl() {
                 vm.selectedService = undefined;
                 vm.propertyName = 'createdAt';
-                vm.reverse = false;
+                vm.reverse = true;
 
                 AdvisoryServiceServices.getAllByStudentId($cookies.get('userId'))
                     .then(services => {

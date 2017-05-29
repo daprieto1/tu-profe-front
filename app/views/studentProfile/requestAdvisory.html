@@ -146,7 +146,7 @@
                             <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -205,7 +205,7 @@
             <div class="large-8 columns" ng-show="vm.specificStep===1">
                 <div class="callout" data-equalizer-watch>
                     <form name="specificStep1" novalidate>
-                            <div class="row">
+                        <div class="row">
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
@@ -213,7 +213,7 @@
                                 <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses track by course.id" ng-model="vm.service.course"
                                     required>                                
                                 </select>
-                            </select>
+                                </select>
                             </div>
                         </div>
                         <div class="row">
@@ -340,8 +340,23 @@
                 </div>
             </div>
 
-            <div class="large-8 columns" ng-show="vm.specificStep===3">
-
+            <div id="upload-files" class="large-8 columns" ng-show="vm.specificStep===3">
+                <div class="callout">
+                    <input id="file-real-input" type="file" ng-show="false" accept=".docx,.xls,.xlsx,.png,image/*" file-reader="vm.advisoryFile">
+                    <p>Para mejorar el servicio de TuProfe, puedes adjuntar cualquier archivo adicional que sea de ayuda para
+                        que el profesor pueda preparar las sesiones que tendrá contigo. Pueden ser talleres, ejemplos, ejercicios.
+                        No hay límite! Lo que más queremos es ayudarte</p>
+                    <ul>
+                        <li ng-repeat="file in vm.files">
+                            <img src="{{vm.getFileImg(file.type)}}" alt=""> {{file.name}}
+                        </li>
+                    </ul>
+                    <center>
+                        <button class="button" ng-click="vm.addFile()">
+                            Adjuntar archivo
+                        </button>
+                    </center>
+                </div>
             </div>
             <div class="large-4 columns">
                 <div class="callout" data-equalizer-watch>
@@ -383,7 +398,7 @@
 
 
     </div>
-    
+
     <!-- SUMMARY SERVICE -->
     <div id="summary-service" ng-show="vm.successCreateService">
         <div class="row">
@@ -404,7 +419,7 @@
                     </div>
                     <div class="card-section">
                         <center>
-                            <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php"> 
+                            <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">
                                 <input name="p_cust_id_cliente" type="hidden" value="13529">
                                 <input name="p_key" type="hidden" value="13b33c524c09d964014cbeb4ec1a0b0f05956354">
                                 <input name="p_id_invoice" type="hidden" value="">
@@ -414,18 +429,19 @@
                                 <input name="p_tax" id="p_tax" type="hidden" value="0">
                                 <input name="p_amount_base" id="p_amount_base" type="hidden" value="0">
                                 <input name="p_test_request" type="hidden" value="FALSE">
-                                <input name="p_url_response" type="hidden" value=""> 
-                                <input name="p_url_confirmation" type="hidden" value=""> 
-                                <input name="p_signature" type="hidden" id="signature"  value="29c56d8f58fea3832b8d6db9948662ad" />
-                                <input name="idboton"type="hidden" id="idboton"  value="2082" />  
-                                <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png" />
+                                <input name="p_url_response" type="hidden" value="">
+                                <input name="p_url_confirmation" type="hidden" value="">
+                                <input name="p_signature" type="hidden" id="signature" value="29c56d8f58fea3832b8d6db9948662ad" />
+                                <input name="idboton" type="hidden" id="idboton" value="2082" />
+                                <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png"
+                                />
                             </form>
                         </center>
                     </div>
                 </div>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="large-12 columns">
                 <center>

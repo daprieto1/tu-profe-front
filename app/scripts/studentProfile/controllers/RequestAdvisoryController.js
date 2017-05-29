@@ -2,11 +2,42 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices,CourseServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
+        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, CourseServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
-    
-            vm.reset = ()=>initCtrl();
-            
+
+            vm.reset = () => initCtrl();
+
+            vm.addFile = () => {
+                $timeout(() => {
+                    angular.element('#file-real-input').click();
+                }, 0);
+            };
+
+            vm.getFileImg = fileType => {
+                var img = 'images/studentProfile/requestAdvisory/';
+                switch (fileType) {
+                    case 'image/png':
+                        img += 'png.svg';
+                        break;
+                    case 'image/jpeg':
+                        img += 'jpg.svg';
+                        break;
+                    case 'image/svg+xml':
+                        img += 'svg.svg';
+                        break;
+                    case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                        img += 'doc.svg';
+                        break;
+                    case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+                        img += 'xls.svg';
+                        break;
+                    default:
+                        img += 'doc.svg';
+                        break;
+                }
+                return img;
+            };
+
             vm.disableDayOfWeekButton = index => {
                 var activeDays = vm.service.daysOfWeek.filter(day => { return day; }).length;
                 if (activeDays >= vm.service.sessionsPerWeek && !vm.service.daysOfWeek[index]) {
@@ -28,18 +59,20 @@
             };
 
             vm.createService = () => {
-                
+
                 var service = parseService();
 
                 AdvisoryServiceServices.create(service)
                     .then(advisoryService => {
+                        vm.files.forEach(file => { AdvisoryServiceServices.uploadFile(file, advisoryService.id); });
+
                         vm.successCreateService = true;
-                        advisoryService.createdAt = moment(advisoryService.createdAt).format('LL'); 
-                        advisoryService.sessions = advisoryService.sessions.map(session=>{
+                        advisoryService.createdAt = moment(advisoryService.createdAt).format('LL');
+                        advisoryService.sessions = advisoryService.sessions.map(session => {
                             session.startDate = moment(session.startDate).format('LL');
                             return session;
                         })
-                        vm.createdService = advisoryService;   
+                        vm.createdService = advisoryService;
                         alertify.success('El servicio se ha creado exitosamente!');
                     })
                     .catch(err => {
@@ -80,7 +113,7 @@
                             dateInit = moment(dateInit).add(1, 'weeks').isoWeekday(dayINeed);
                         }
                     }
-                    
+
                     var service = parseService();
                     AdvisoryServiceServices.calculate(service)
                         .then(advisoryService => {
@@ -105,7 +138,18 @@
                     }, 100);
                 }
             });
-            
+
+            $scope.$watch('vm.advisoryFile', (newValue, oldValue) => {
+                var aux = angular.element(document.querySelector('#file-real-input'));
+                if (angular.isDefined(aux) && angular.isDefined(aux.prop('files'))) {
+                    var file = aux.prop('files')[0];
+                    console.log(file);
+                    if (angular.isDefined(file)) {
+                        vm.files.push(file);
+                    }
+                }
+            });
+
             function parseService() {
                 var service = angular.copy(vm.service);
                 service.sessions = angular.copy(vm.sessions);
@@ -127,7 +171,7 @@
                 service.sessionsPerWeek = parseInt(service.sessionsPerWeek);
                 service.startDate.setHours(0, 0, 0, 0);
                 service.startTime = ServiceUtils.timeToMilitarFormat(vm.startTime.wickedpicker('time'));
-                
+
                 return service;
             }
 
@@ -138,8 +182,10 @@
                 vm.daysOfWeek = DAYS_OF_WEEK;
                 vm.disable;
                 vm.sessions = [];
+                vm.files = [];
                 vm.today = ServiceUtils.getToday();
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                vm.advisoryFile = undefined;
 
                 vm.service = {
                     type: undefined,
@@ -153,7 +199,7 @@
                     description: '',
                     daysOfWeek: [false, false, false, false, false, false, false]
                 };
-                
+
                 CourseServices.getAll()
                     .then(courses => vm.courses = courses);
 
