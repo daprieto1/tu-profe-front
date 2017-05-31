@@ -2,5 +2,5 @@
     'use strict';
     angular.module('studentProfileModule', [])
     
-    .constant('PROFILE_PHOTO','students/profile-photo/');
+    .constant('PROFILE_PHOTO','/students/profile-photo/');
 })();
