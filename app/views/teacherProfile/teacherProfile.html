@@ -4,8 +4,8 @@
         <div class="off-canvas position-left reveal-for-large" id="my-info" data-off-canvas data-position="left">
             <div class="row column">
                 <br>
-                <input id="real-input-photo-file" name="file" type="file" ng-show="false" accept=".jpg" file-reader="vm.photoFile">
-                <!--<img ng-src="https://d1e8nogtjho65.cloudfront.net/teacher/profile_photos/{{vm.teacher.id}}.jpg" ng-click="vm.editPhoto()" imageonload>-->
+                <input id="real-input-photo-file" name="file" type="file" ng-show="false" accept="image/*" file-reader="vm.photoFile">                
+                <img src="{{CloudFrontTuProfe + '/teachers/profile-photo/' + vm.teacher.id + '.png'}}" ng-click="vm.editPhoto()" imageonload="'images/teacherProfile/teacher.svg'">
                 <h5>{{vm.teacher.name}}</h5>
             </div>
             <ul id="menu">

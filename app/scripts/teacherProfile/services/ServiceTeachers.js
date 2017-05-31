@@ -67,7 +67,7 @@
                     fd.append('teacherId', teacherId)
 
                     return $http({
-                        url: TU_PROFE_API + '/teacher/upload-photo',
+                        url: TU_PROFE_API + '/teachers/photo/' + teacherId,
                         method: 'POST',
                         data: fd,
                         headers: { 'Content-Type': undefined },
