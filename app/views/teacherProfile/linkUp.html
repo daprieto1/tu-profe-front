@@ -19,8 +19,8 @@
                 <img src="images/teacherProfile/linkUp/file.svg" alt="">
                 <div>
                     <h3>Hoja de vida</h3>
-                    <p ng-if="vm.teacher.state !== 0">Gracias por subir tu hoja de vida, ten por seguro que la leeremos con detalle.</p>
-                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="https://d1ql3lvdg7tehd.cloudfront.net/formats/hoja-vida-profesores.docx">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
+                    <p ng-if="vm.teacher.state !== 0">Gracias por subir tu hoja de vida, ten por seguro que la leeremos con detalle.</p>                    
+                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="{{CloudFrontTuProfe + '/formats/curriculum.docx'}}">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
                         es importante que seas honesto y detallado ya que nos ayudará a buscar la mejor manera de trabajar
                         juntos.
                     </p>
