@@ -24,7 +24,7 @@
               </div>
               <div class="card-info-content">
                 <h3 class="lead"> {{vm.selectedNotification.title}}</h3>
-                <p>{{vm.selectedNotification.text}}.</p>
+                <p ng-bind-html="vm.selectedNotification.text"></p>
               </div>
             </div>
 

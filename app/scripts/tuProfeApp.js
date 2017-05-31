@@ -9,6 +9,7 @@
         'ngRoute',
         'ngCookies',
         'ngResource',
+        'ngSanitize',
         'mm.foundation',
         'multipleSelect',
         'rzModule',
