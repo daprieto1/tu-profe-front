@@ -45,7 +45,7 @@
                 vm.teacherId = $cookies.get('userId');
                 vm.teacher = {};
                 vm.photoFile = undefined;
-                vm.section = 'linkUp';
+                vm.section = 'schedule';
 
                 ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function (response) {

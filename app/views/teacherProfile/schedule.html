@@ -3,31 +3,7 @@
     <div class="row">
         <div class="large-3 columns"></div>
         <div class="large-9 columns">
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th width="200">Lunes</th>
-                        <th width="200">Martes</th>
-                        <th width="200">Miércoles</th>
-                        <th width="200">Jueves</th>
-                        <th width="200">Viernes</th>
-                        <th width="200">Sábado</th>
-                        <th width="200">Domingo</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="hour in vm.schedule track by $index">
-                        <td>{{vm.getScheduleTime($index)}}</td>
-                        <td class="no-padding" ng-repeat="section in hour track by $index">
-                            <div class="callout hvr-grow-shadow" ng-class="section ? 'success' : ''" ng-click="vm.changeSpecificSession($index, $parent.$index, !section)">
-                            </div>
-                        </td>
-                        <td>{{vm.getScheduleTime($index)}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="calendar"></div>
         </div>
     </div>
 </div>

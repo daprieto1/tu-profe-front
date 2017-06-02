@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .controller('TeacherScheduleController', function ($scope, $cookies, ServiceTeachers) {
+        .controller('TeacherScheduleController', function ($q, $scope, $cookies, ServiceTeachers, ScheduleServices) {
             var vm = this;
 
             vm.changeSpecificSession = function (day, section, value) {
@@ -41,19 +41,40 @@
 
             };
 
+            function parseTime(time) {
+                var time = time < 1000 ? '0' + time : time + '';
+                return [time.substr(0, 2), time.substr(2, 2), '00'].join(':');
+            }
+
             function initCtrl() {
 
                 vm.teacherId = $cookies.get('userId');
-                vm.scheduleTimes = [];
-                for (var i = 6; i < 30; i++) {
-                    vm.scheduleTimes.push(i + ':00');
-                    vm.scheduleTimes.push(i + ':30');
-                }
-                ServiceTeachers.getTeacher(vm.teacherId)
-                    .then(function (response) {
-                        vm.teacher = response;
-                        vm.schedule = vm.teacher.schedule.match(/.{1,7}/g).map(function (obj) {
-                            return obj.split('').map(function (value) { return !!parseInt(value) });
+
+                ScheduleServices.getSchedule(vm.teacherId)
+                    .then(schedule => {
+                        var events = [];
+                        schedule.days.forEach(day => {
+                            events = events.concat(day.sections.map(section => {
+                                var date = moment().day(section.day).format('YYYY-MM-DD');
+                                return {
+                                    title: 'Horario disponible',
+                                    start: date + 'T' + parseTime(section.startTime),
+                                    end: date + 'T' + parseTime(section.endTime),
+                                };
+                            }));
+                        });
+                       
+                        console.log(events);
+                        angular.element('#calendar').fullCalendar({
+                            header: {
+                                left: '',
+                                center: '',
+                                right: ''
+                            },
+                            defaultDate: moment().startOf('week').format('YYYY-MM-DD'),
+                            defaultView: 'agendaWeek',
+                            columnFormat: 'dddd',
+                            events: events
                         });
                     });
             }

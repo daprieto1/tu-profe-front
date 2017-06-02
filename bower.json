@@ -24,7 +24,8 @@
     "angular-environment": "^1.0.4",
     "angularjs-slider": "^6.1.1",
     "wickedpicker": "^0.4.1",
-    "angular-file-model": "^0.3.1"
+    "angular-file-model": "^0.3.1",
+    "fullcalendar": "^3.4.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
