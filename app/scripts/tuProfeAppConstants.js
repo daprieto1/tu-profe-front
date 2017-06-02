@@ -52,6 +52,10 @@
 
         .constant('DAYS_OF_WEEK', [
             {
+                id: 0,
+                label: 'Domingo'
+            },
+            {
                 id: 1,
                 label: 'Lunes'
             },
@@ -74,9 +78,6 @@
             {
                 id: 6,
                 label: 'Sábado'
-            }, {
-                id: 7,
-                label: 'Domingo'
             }
         ])
 
@@ -90,20 +91,20 @@
                 label: 'tema especifico'
             }
         ])
-        
-        .constant('SESSION_STATES',[
+
+        .constant('SESSION_STATES', [
             {
                 id: 0,
-                label:'Pendiente'
-            },  {
+                label: 'Pendiente'
+            }, {
                 id: 1,
-                label:'En Proceso'
+                label: 'En Proceso'
             }, {
                 id: 2,
-                label:'Terminada'
-            },  {
+                label: 'Terminada'
+            }, {
                 id: 3,
-                label:'Congelada'
+                label: 'Congelada'
             }
         ]);
 })();

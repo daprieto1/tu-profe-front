@@ -2,43 +2,22 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .controller('TeacherScheduleController', function ($q, $scope, $cookies, ServiceTeachers, ScheduleServices) {
+        .controller('TeacherScheduleController', function ($q, $scope, $cookies, ServiceUtils, ServiceTeachers, ScheduleServices, DAYS_OF_WEEK) {
             var vm = this;
 
-            vm.changeSpecificSession = function (day, section, value) {
-                vm.schedule[section][day] = value;
-            };
+            vm.addSection = () => {
+                var newSection = {
+                    startTime: parseInt(ServiceUtils.timeToMilitarFormat(vm.newSection.startTime.wickedpicker('time')).replace(':', '')),
+                    endTime: parseInt(ServiceUtils.timeToMilitarFormat(vm.newSection.endTime.wickedpicker('time')).replace(':', '')),
+                    day: vm.newSection.day.id
+                };
 
-            vm.changeSection = function (idSection) {
-                var positiveChange = vm.schedule[idSection].includes(false);
-                if (positiveChange) {
-                    vm.schedule[idSection] = vm.schedule[idSection].map(function (obj) {
-                        return true;
-                    });
-                    console.log(vm.schedule);
-                } else {
-                    vm.schedule[idSection] = vm.schedule[idSection].map(function (obj) {
-                        return false;
-                    });
-                }
-            };
-
-            vm.getScheduleTime = function (sectionId) {
-                return vm.scheduleTimes[sectionId];
-            };
-
-            vm.updateSchedule = function () {
-                var schedule = [].concat.apply([], vm.schedule).map(function (obj) {
-                    return obj ? '1' : '0';
-                }).join('');
-
-                vm.teacher.schedule = schedule;
-
-                ServiceTeachers.update(vm.teacher)
-                    .then(function () {
-                        console.log('OK');
-                    });
-
+                ScheduleServices.addSection(vm.teacherId, newSection)
+                    .then(schedule => {
+                        vm.calendar.fullCalendar('renderEvent', parseSectionToEvent(newSection));
+                        alertify.success('La nueva sección ha sido adicionada con éxito.');
+                    })
+                    .catch(err => alertify.error(err.data));
             };
 
             function parseTime(time) {
@@ -46,26 +25,33 @@
                 return [time.substr(0, 2), time.substr(2, 2), '00'].join(':');
             }
 
+            function parseSectionToEvent(section) {
+                var date = moment().day(section.day).format('YYYY-MM-DD');
+                return {
+                    title: 'Horario disponible',
+                    start: date + 'T' + parseTime(section.startTime),
+                    end: date + 'T' + parseTime(section.endTime),
+                };
+            }
+
             function initCtrl() {
 
+                vm.days = DAYS_OF_WEEK;
                 vm.teacherId = $cookies.get('userId');
+                vm.newSection = {};
+
+                vm.newSection.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                vm.newSection.endTime = angular.element('#endTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
 
                 ScheduleServices.getSchedule(vm.teacherId)
                     .then(schedule => {
                         var events = [];
                         schedule.days.forEach(day => {
-                            events = events.concat(day.sections.map(section => {
-                                var date = moment().day(section.day).format('YYYY-MM-DD');
-                                return {
-                                    title: 'Horario disponible',
-                                    start: date + 'T' + parseTime(section.startTime),
-                                    end: date + 'T' + parseTime(section.endTime),
-                                };
-                            }));
+                            events = events.concat(day.sections.map(section => { return parseSectionToEvent(section); }));
                         });
-                       
+
                         console.log(events);
-                        angular.element('#calendar').fullCalendar({
+                        vm.calendar = angular.element('#calendar').fullCalendar({
                             header: {
                                 left: '',
                                 center: '',

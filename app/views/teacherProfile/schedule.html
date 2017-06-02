@@ -1,8 +1,40 @@
 <div id="schedule" ng-controller="TeacherScheduleController as vm">
-    <button class="button" ng-click="vm.updateSchedule()">Actualizar</button>
     <div class="row">
-        <div class="large-3 columns"></div>
-        <div class="large-9 columns">
+        <div class="large-12 columns">
+            <h2>Horario de Disponibilidad</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns" class="callout">
+            <form id="addScheduleSection" name="addScheduleSection" novalidate>
+
+                <div class="large-5 columns">
+                    <label for="day">Día</label>
+                    <select id="day" name="day" ng-options="day as day.label for day in vm.days track by day.id" ng-model="vm.newSection.day"
+                        required>                                
+                            </select>
+                </div>
+
+                <div class="large-3 columns">
+                    <label for="day">Hora de Inicio</label>
+                    <input type="text" id="startTime" required>
+                </div>
+
+                <div class="large-3 columns">
+                    <label for="day">Hora de Fin</label>
+                    <input type="text" id="endTime" required>
+                </div>
+
+                <div class="large-1 columns">
+                    <button class="button" ng-disabled="addScheduleSection.$invalid" ng-click="vm.addSection()">
+                        Adicionar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-12 columns">
             <div id="calendar"></div>
         </div>
     </div>
