@@ -28,6 +28,7 @@
             function parseSectionToEvent(section) {
                 var date = moment().day(section.day).format('YYYY-MM-DD');
                 return {
+                    id: section.day + section.startTime + section.endTime + '',
                     title: 'Horario disponible',
                     start: date + 'T' + parseTime(section.startTime),
                     end: date + 'T' + parseTime(section.endTime),
@@ -60,7 +61,14 @@
                             defaultDate: moment().startOf('week').format('YYYY-MM-DD'),
                             defaultView: 'agendaWeek',
                             columnFormat: 'dddd',
-                            events: events
+                            events: events,
+                            eventClick: function (calEvent, jsEvent, view) {
+                                console.log(calEvent);
+                                console.log(jsEvent);
+                                console.log(view);
+                                console.log(calEvent._id);
+                                //vm.calendar.fullCalendar('removeEvents', calEvent._id);
+                            }
                         });
                     });
             }
