@@ -11,6 +11,108 @@
                 </tab>
                 <tab heading="Disponibles" active="vm.tabAvailable">
                 </tab>
+                <div ng-show="vm.tabAvailable">
+                    <table class="dashboard-table">
+                        <colgroup>
+                            <col width="60">
+                            <col width="100">
+                            <col width="200">
+                            <col width="60">
+                            <col width="60">
+                            <col width="100">
+                            <col width="150">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th><a href="">Estudiantes <i class="fa fa-caret-down"></i></a></th>
+                                <th><a href="">Sesiones <i class="fa fa-caret-down"></i></a></th>
+                                <th><a href="">Valor <i class="fa fa-caret-down"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="service in vm.services | orderBy : vm.propertyName : vm.reverse track by $index">
+        
+                            <tr ng-click="vm.selectService(service)">
+                                <td>
+                                    <i ng-if="service !== vm.selectedService" class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    <i ng-if="service === vm.selectedService" class="fa fa-chevron-down" aria-hidden="true"></i>
+                                </td>
+                                <td>
+                                    <img src="images/studentProfile/serviceHistory/learning.svg" alt="" ng-show="service.type===1" style="max-width:45px">
+                                    <img src="images/studentProfile/serviceHistory/scientist.svg" alt="" ng-show="service.type===2" style="max-width:45px">
+                                </td>
+                                <td>
+                                    <div class="flex-container align-justify align-top">
+                                        <span class="dashboard-table-timestamp">{{service.createdAt}}</span>
+                                    </div>
+                                </td>
+                                <td>{{service.numStudents}}</td>
+                                <td>{{service.sessions.length}}</td>
+                                <td>
+                                    {{service.city}}
+                                </td>
+                                <td class="listing-inquiry-status">
+                                    <div>$ {{service.cost.total.toLocaleString()}}</div>
+                                    <form ng-if="!service.paid">
+                                        <script src="https://s3-us-west-2.amazonaws.com/epayco/v1.0/checkoutEpayco.js" 
+                                            class="epayco-button" 
+                                            data-epayco-key="03b300d0d22bd3adb28eb20080e77e9b" 
+                                            data-epayco-amount="304900" 
+                                            data-epayco-name="Servicio de Acompañamiento Tu Profe" 
+                                            data-epayco-description="Servicio de acompañamiento de Tu Profe x 1 Mes" 
+                                            data-epayco-currency="cop" 
+                                            data-epayco-country="co" 
+                                            data-epayco-test="true"
+                                            data-epayco-response="https://ejemplo.com/respuesta.html" 
+                                            data-epayco-confirmation="https://ejemplo.com/confirmacion" >
+                                        </script>
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr ng-show="vm.selectedService === service">
+                                <td colspan="7">
+                                    <div class="row">
+                                        <div class="large-3 columns">
+                                            <h5>Opciones</h5>
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <center>
+                                                        <button class="button">Ver Calendario</button>
+                                                        <button class="button">Ver Lista</button>
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="large-9 columns">
+                                            <h5>Sesiones</h5>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora</th>
+                                                        <th>Duración</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="session in service.sessions track by $index">
+                                                        <td>Sesión {{$index + 1}}</td>
+                                                        <td>{{session.startDateToShow}}</td>
+                                                        <td>{{session.startTime}}</td>
+                                                        <td>{{session.numHours}} Horas</td>
+                                                        <td><span class="label">{{session.state.label}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </tabset>
         </div>
     </div>

@@ -6,7 +6,7 @@
             var vm = this;
 
             function initCtrl() {
-
+                vm.tabAvailable = true;
             }
 
             initCtrl();

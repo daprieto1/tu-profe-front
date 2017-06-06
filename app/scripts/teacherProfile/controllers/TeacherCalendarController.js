@@ -21,7 +21,7 @@
 
                     var endDate = angular.copy(startDate);
                     endDate.add(session.duration, 'm');
-                    console.log(session.startDate, startDate);
+                    
                     return {
                         title: 'Horario de clase',
                         start: startDate.format('YYYY-MM-DDTHH:mm'),
