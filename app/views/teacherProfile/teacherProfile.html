@@ -27,6 +27,9 @@
                 <li ng-click="vm.section = 'trainings'" ng-class="vm.menuLiClass('trainings')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-book" aria-hidden="true"></i> Capacitaciones
                 </li>
+                <li ng-click="vm.section = 'advisoryServices'" ng-class="vm.menuLiClass('advisoryServices')" ng-if="vm.showMenuLi()">
+                    <i class="fa fa-book" aria-hidden="true"></i> Asesorias
+                </li>
                 <li ng-click="vm.logout()">
                     <i class="fa fa-times-circle" aria-hidden="true"></i> Cerrar sesión
                 </li>
@@ -51,6 +54,9 @@
             </ng-include>
 
             <ng-include src="'views/teacherProfile/trainings.html'" ng-if="vm.section === 'trainings'">
+            </ng-include>
+
+            <ng-include src="'views/teacherProfile/advisoryServices.html'" ng-if="vm.section === 'advisoryServices'">
             </ng-include>
 
         </div>
