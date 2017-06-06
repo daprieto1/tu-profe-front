@@ -18,6 +18,9 @@
                 <li ng-click="vm.section = 'schedule'" ng-class="vm.menuLiClass('schedule')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-calendar" aria-hidden="true"></i> Horario
                 </li>
+                 <li ng-click="vm.section = 'calendar'" ng-class="vm.menuLiClass('calendar')" ng-if="vm.showMenuLi()">
+                    <i class="fa fa-calendar" aria-hidden="true"></i> Calendario
+                </li>
                 <li ng-click="vm.section = 'gameRules'" ng-class="vm.menuLiClass('gameRules')" ng-if="vm.showMenuLi()">
                     <i class="fa fa-gavel" aria-hidden="true"></i> Reglas de juego
                 </li>
@@ -32,16 +35,19 @@
 
         <div class="off-canvas-content" data-off-canvas-content>
 
-            <ng-include src="'views/teacherProfile/linkUp.html'" ng-show="vm.section === 'linkUp'">
+            <ng-include src="'views/teacherProfile/linkUp.html'" ng-if="vm.section === 'linkUp'">
             </ng-include>
 
-            <ng-include src="'views/teacherProfile/basicData.html'" ng-show="vm.section === 'basicData'">
+            <ng-include src="'views/teacherProfile/basicData.html'" ng-if="vm.section === 'basicData'">
             </ng-include>
 
-            <ng-include src="'views/teacherProfile/schedule.html'" ng-show="vm.section === 'schedule'">
+            <ng-include src="'views/teacherProfile/schedule.html'" ng-if="vm.section === 'schedule'">
             </ng-include>
 
-            <ng-include src="'views/teacherProfile/gameRules.html'" ng-show="vm.section === 'gameRules'">
+            <ng-include src="'views/teacherProfile/calendar.html'" ng-if="vm.section === 'calendar'">
+            </ng-include>
+
+            <ng-include src="'views/teacherProfile/gameRules.html'" ng-if="vm.section === 'gameRules'">
             </ng-include>
 
             <ng-include src="'views/teacherProfile/trainings.html'" ng-if="vm.section === 'trainings'">

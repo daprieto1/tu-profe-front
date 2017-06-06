@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .controller('TeacherScheduleController', function ($q, $scope, $cookies, ServiceUtils, ServiceTeachers, ScheduleServices, DAYS_OF_WEEK) {
+        .controller('TeacherScheduleController', function ($q, $scope, $cookies, ServiceUtils, ScheduleServices, DAYS_OF_WEEK) {
             var vm = this;
 
             vm.addSection = () => {

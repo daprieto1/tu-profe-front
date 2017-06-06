@@ -19,6 +19,10 @@
             });
 
             return {
+                getAdvisoryService: advisoryServiceId => {
+                    return AdvisoryService.get({ id: advisoryServiceId }).$promise;
+                },
+
                 getAllByStudentId: studentId => {
                     return AdvisoryService.getAllByStudentId({ studentId: studentId }).$promise;
                 },
