@@ -1,0 +1,33 @@
+<div id="student-notifications" ng-controller="TeacherNotificationsController as vm">
+    <div class="row">
+      <div class="large-12 columns">
+        <h1>
+          Notificaciones
+        </h1>
+      </div>
+    </div>
+    <div class="row">
+        <div class="large-5 columns">
+          <div ng-repeat="notification in vm.notifications track by $index" data-closable class="callout alert-callout-border" ng-class="notification.read ? 'secondary' : notification.type.style" ng-click="vm.selectNotification(notification)">
+            <strong>{{notification.type.label}}!</strong> - {{notification.title}}.
+            <button class="close-button" aria-label="Dismiss alert" type="button" data-close ng-click="vm.deleteNotification(notification.id)">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+        <div class="large-7 columns">
+            <div class="card-info" ng-class="vm.selectedNotification.type.style" ng-show="vm.selectedNotification !== undefined">
+              <div class="card-info-label">
+                <div class="card-info-label-text">
+                  {{vm.selectedNotification.type.label}}
+                </div>
+              </div>
+              <div class="card-info-content">
+                <h3 class="lead"> {{vm.selectedNotification.title}}</h3>
+                <p ng-bind-html="vm.selectedNotification.text"></p>
+              </div>
+            </div>
+
+        </div>
+    </div>
+</div>
