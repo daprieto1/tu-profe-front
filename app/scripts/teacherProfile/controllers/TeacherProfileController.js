@@ -4,12 +4,7 @@
             var vm = this;
 
             vm.logout = function () {
-                alertify.set({ buttonReverse: true });
-                alertify.confirm('¿Seguro deseas cerrar sesión?', function (e) {
-                    if (e) {
-                        $rootScope.logout();
-                    }
-                });
+                $rootScope.logout();
             };
 
             vm.menuLiClass = function (name) {
