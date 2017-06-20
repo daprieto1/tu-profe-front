@@ -15,10 +15,32 @@
                     params: { studentId: '@studentId' },
                     method: 'GET',
                     isArray: true
+                },
+
+                filter: {
+                    url: TU_PROFE_API + '/advisory-services/filter',
+                    method: 'POST',
+                    isArray: true
+                },
+
+                assign: {
+                    url: TU_PROFE_API + '/advisory-services/assign/:advisoryServiceId/:teacherId',
+                    params: { advisoryServiceId: '@advisoryServiceId', teacherId: '@teacherId' },
+                    method: 'POST'
                 }
             });
 
             return {
+
+                assign: (advisoryServiceId, teacherId) => {
+                    console.log(advisoryServiceId, teacherId);
+                    return AdvisoryService.assign({ advisoryServiceId: advisoryServiceId, teacherId: teacherId }).$promise;
+                },
+
+                filter: params => {
+                    return AdvisoryService.filter(params).$promise;
+                },
+
                 getAdvisoryService: advisoryServiceId => {
                     return AdvisoryService.get({ id: advisoryServiceId }).$promise;
                 },

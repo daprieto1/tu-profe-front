@@ -29,9 +29,7 @@
                             service.sessions = service.sessions.map(session => {
                                 session.startDateToShow = moment(session.startDate).format('LL');
                                 session.numHours = session.duration / 60;
-                                session.state = SESSION_STATES.find(state => {
-                                    return state.id === session.state;
-                                });
+                                session.state = SESSION_STATES.find(state => { return state.id === session.state; });
                                 return session;
                             });
                             return service;
