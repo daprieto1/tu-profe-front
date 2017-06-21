@@ -27,14 +27,24 @@
                     url: TU_PROFE_API + '/advisory-services/assign/:advisoryServiceId/:teacherId',
                     params: { advisoryServiceId: '@advisoryServiceId', teacherId: '@teacherId' },
                     method: 'POST'
+                },
+                
+                getAvailableServices:{
+                    url: TU_PROFE_API + '/advisory-services/available-services/:teacherId',
+                    params: { teacherId: '@teacherId' },
+                    method: 'GET',
+                    isArray: true
                 }
             });
 
             return {
 
                 assign: (advisoryServiceId, teacherId) => {
-                    console.log(advisoryServiceId, teacherId);
                     return AdvisoryService.assign({ advisoryServiceId: advisoryServiceId, teacherId: teacherId }).$promise;
+                },
+                
+                getAvailableServices: teacherId => {
+                    return AdvisoryService.getAvailableServices({teacherId:teacherId}).$promise;
                 },
 
                 filter: params => {

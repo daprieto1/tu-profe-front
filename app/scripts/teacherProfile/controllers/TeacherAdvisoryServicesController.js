@@ -23,15 +23,7 @@
             };
 
             function getAvailableServices() {
-                var params = {
-                    courseId: {
-                        in: vm.teacher.courses
-                    },
-                    state: {
-                        eq: 3
-                    }
-                }
-                AdvisoryServiceServices.filter(params)
+                AdvisoryServiceServices.getAvailableServices(vm.teacher.id)
                     .then(advisories => {
                         advisories.map(advisory => {
                             advisory.createdAtShow = moment(advisory.createdAt).format('MMMM Do YYYY, h:mm a');

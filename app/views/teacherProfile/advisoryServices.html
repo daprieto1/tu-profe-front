@@ -13,7 +13,6 @@
                 </tab>
                 <div ng-show="vm.tabAvailable">
                     <table class="dashboard-table">
-                        
                         <thead>
                             <tr>
                                 <th></th>
@@ -40,7 +39,13 @@
                                     </div>
                                 </td>
                                 <td>{{service.numStudents}}</td>
-                                <td>{{service.sessions.length}}</td>
+                                <td>
+                                    <ul style="list-style: none;margin-left: 0;">
+                                        <li><strong>Total:</strong> {{service.sessions.length}}</li>
+                                        <li><strong>Disponibles:</strong> {{service.matchSchedule.matchSessions}}</li>
+                                        <li><strong>Cuadra Horario:</strong> {{service.matchSchedule.matchSessions/service.matchSchedule.percentageMatchSessions}}</li>
+                                    </ul>
+                                </td>
                             </tr>
                             <tr ng-show="vm.selectedService === service">
                                 <td colspan="7">
