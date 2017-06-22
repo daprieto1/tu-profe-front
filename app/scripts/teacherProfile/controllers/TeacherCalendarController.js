@@ -21,7 +21,7 @@
 
                     var endDate = angular.copy(startDate);
                     endDate.add(session.duration, 'm');
-                    
+
                     return {
                         title: 'Horario de clase',
                         start: startDate.format('YYYY-MM-DDTHH:mm'),
@@ -40,9 +40,8 @@
                 ServiceTeachers.getTeacher(vm.teacherId)
                     .then(teacher => {
                         console.log(teacher);
-                        teacher.advisoryServices = ['4cc0e524-0e07-4f15-a570-ada26758b18e','a8d6692e-60fd-494f-91d8-c63b62555e43','718b60db-738c-43a8-a5d1-c59442bc9f40','d0b25633-ef78-4a0e-952b-3cca78aa5a9e'];
-                        var requests = teacher.advisoryServices.map(advisoryService => { return AdvisoryServiceServices.getAdvisoryService(advisoryService); });
-                        $q.all(requests)
+                        var params = { id: { in: teacher.advisoryServices } };
+                        AdvisoryServiceServices.filter(params)
                             .then(advisoryServices => {
                                 advisoryServices.forEach(advisoryService => {
                                     vm.events = vm.events.concat(parseAdvisoryServiceToEvent(advisoryService));
@@ -61,6 +60,7 @@
                                 });
                             })
                             .catch(err => console.log(err));
+
                     });
             }
 
