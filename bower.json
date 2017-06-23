@@ -25,7 +25,8 @@
     "angularjs-slider": "^6.1.1",
     "wickedpicker": "^0.4.1",
     "angular-file-model": "^0.3.1",
-    "fullcalendar": "^3.4.0"
+    "fullcalendar": "^3.4.0",
+    "angular-local-storage": "^0.7.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",

@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherProfileController', function ($scope, $timeout, $route, $cookies, $rootScope, ServiceTeachers, TEACHER_STATES) {
+        .controller('TeacherProfileController', function ($scope, $timeout, $route, $cookies, $rootScope, ServiceTeachers, localStorageService, TEACHER_STATES) {
             var vm = this;
 
             vm.logout = function () {
@@ -45,6 +45,7 @@
                 ServiceTeachers.getTeacher(vm.teacherId)
                     .then(function (response) {
                         vm.teacher = response.toJSON();
+                        localStorageService.set('teacher', vm.teacher);
                         $scope.teacher = vm.teacher;
                     });
             }

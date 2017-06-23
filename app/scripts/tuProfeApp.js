@@ -15,6 +15,7 @@
         'rzModule',
         'environment',
         'file-model',
+        'LocalStorageModule',
         'sessionModule',
         'courseModule',
         'schoolModule',
@@ -28,10 +29,14 @@
         'scheduleModule'
     ])
 
-        .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider) {
+        .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider, localStorageServiceProvider) {
 
 
             $cookiesProvider.defaults.path = '/';
+
+            localStorageServiceProvider
+                .setPrefix('tu-profe')
+                .setStorageType('localStorage');
 
             $routeProvider
                 .when('/', {

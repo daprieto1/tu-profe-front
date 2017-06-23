@@ -11,6 +11,81 @@
                 </tab>
                 <tab heading="Disponibles" active="vm.tabAvailable">
                 </tab>
+                <div ng-show="vm.tabAssigned">
+                    <table class="dashboard-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th ng-click="vm.sortBy('createdAt')"><a href="">Fecha <i class="fa fa-caret-down"></i></a></th>
+                                <th><a href="">Estudiantes <i class="fa fa-caret-down"></i></a></th>
+                                <th><a href="">Sesiones <i class="fa fa-caret-down"></i></a></th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="service in vm.assignedServices | orderBy : vm.propertyName : vm.reverse track by $index">
+
+                            <tr ng-click="vm.selectService(service)">
+                                <td>
+                                    <i ng-if="service !== vm.selectedService" class="fa fa-chevron-right" aria-hidden="true"></i>
+                                    <i ng-if="service === vm.selectedService" class="fa fa-chevron-down" aria-hidden="true"></i>
+                                </td>
+                                <td>
+                                    <img src="images/studentProfile/serviceHistory/learning.svg" alt="" ng-show="service.type===1" style="max-width:45px">
+                                    <img src="images/studentProfile/serviceHistory/scientist.svg" alt="" ng-show="service.type===2" style="max-width:45px">
+                                </td>
+                                <td>
+                                    <div class="flex-container align-justify align-top">
+                                        <span class="dashboard-table-timestamp">{{service.createdAtShow}}</span>
+                                    </div>
+                                </td>
+                                <td>{{service.numStudents}}</td>
+                                <td>
+                                    {{service.sessions.length}}
+                                </td>
+                            </tr>
+                            <tr ng-show="vm.selectedService === service">
+                                <td colspan="7">
+                                    <div class="row">
+                                        <div class="large-3 columns">
+                                            <h5>Opciones</h5>
+                                            <div class="row">
+                                                <div class="large-12 columns">
+                                                    <center>
+                                                        <button class="button">Ver Calendario</button>
+                                                        <button class="button">Ver Lista</button>                                                        
+                                                    </center>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="large-9 columns">
+                                            <h5>Sesiones</h5>
+                                            <table>
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Fecha</th>
+                                                        <th>Hora</th>
+                                                        <th>Duración</th>
+                                                        <th>Estado</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="session in service.sessions track by $index">
+                                                        <td>Sesión {{$index + 1}}</td>
+                                                        <td>{{session.startDateToShow}}</td>
+                                                        <td>{{session.startTime}}</td>
+                                                        <td>{{session.numHours}} Horas</td>
+                                                        <td><span class="label">{{session.state.label}}</span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div ng-show="vm.tabAvailable">
                     <table class="dashboard-table">
                         <thead>
@@ -22,8 +97,8 @@
                                 <th><a href="">Sesiones <i class="fa fa-caret-down"></i></a></th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="service in vm.availableAdvisories | orderBy : vm.propertyName : vm.reverse track by $index">
-        
+                        <tbody ng-repeat="service in vm.availableServices | orderBy : vm.propertyName : vm.reverse track by $index">
+
                             <tr ng-click="vm.selectService(service)">
                                 <td>
                                     <i ng-if="service !== vm.selectedService" class="fa fa-chevron-right" aria-hidden="true"></i>
@@ -42,8 +117,8 @@
                                 <td>
                                     <ul style="list-style: none;margin-left: 0;">
                                         <li><strong>Total:</strong> {{service.sessions.length}}</li>
-                                        <li><strong>Disponibles:</strong> {{service.matchSchedule.matchSessions}}</li>
-                                        <li><strong>Cuadra Horario:</strong> {{service.matchSchedule.matchSessions/service.matchSchedule.percentageMatchSessions}}</li>
+                                        <li><strong>Pendientes:</strong> {{service.pendingSessions}}</li>
+                                        <li><strong>Cuadra Horario:</strong> {{service.matchSchedule.matchSessions}}</li>
                                     </ul>
                                 </td>
                             </tr>
@@ -57,7 +132,7 @@
                                                     <center>
                                                         <button class="button">Ver Calendario</button>
                                                         <button class="button">Ver Lista</button>
-                                                        <button class="button" ng-click="vm.takeService(service)">Tomar</button>
+                                                        <button class="button warning" ng-click="vm.takeService(service)">Tomar</button>
                                                     </center>
                                                 </div>
                                             </div>

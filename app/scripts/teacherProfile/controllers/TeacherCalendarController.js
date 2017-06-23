@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .controller('TeacherCalendarController', function ($q, $cookies, ServiceTeachers, AdvisoryServiceServices) {
+        .controller('TeacherCalendarController', function ($q, $cookies, ServiceTeachers, AdvisoryServiceServices, localStorageService) {
             var vm = this;
 
             function getColor() {
@@ -36,32 +36,29 @@
                 vm.i = 0;
                 vm.events = [];
                 vm.teacherId = $cookies.get('userId');
+                vm.teacher = localStorageService.get('teacher');
 
-                ServiceTeachers.getTeacher(vm.teacherId)
-                    .then(teacher => {
-                        console.log(teacher);
-                        var params = { id: { in: teacher.advisoryServices } };
-                        AdvisoryServiceServices.filter(params)
-                            .then(advisoryServices => {
-                                advisoryServices.forEach(advisoryService => {
-                                    vm.events = vm.events.concat(parseAdvisoryServiceToEvent(advisoryService));
-                                });
-                                console.log(vm.events);
-                                vm.calendar = angular.element('#calendar').fullCalendar({
-                                    header: {
-                                        left: 'prev,next today',
-                                        center: 'title',
-                                        right: 'month,agendaWeek,agendaDay'
-                                    },
-                                    defaultDate: moment().startOf('week').format('YYYY-MM-DD'),
-                                    defaultView: 'month',
-                                    editable: true,
-                                    events: vm.events
-                                });
-                            })
-                            .catch(err => console.log(err));
+                vm.teacher.advisoryServices.push(' ');
+                var params = { id: { in: vm.teacher.advisoryServices } };
+                AdvisoryServiceServices.filter(params)
+                    .then(advisoryServices => {
+                        advisoryServices.forEach(advisoryService => {
+                            vm.events = vm.events.concat(parseAdvisoryServiceToEvent(advisoryService));
+                        });
+                        vm.calendar = angular.element('#calendar').fullCalendar({
+                            header: {
+                                left: 'prev,next today',
+                                center: 'title',
+                                right: 'month,agendaWeek,agendaDay'
+                            },
+                            defaultDate: moment().startOf('week').format('YYYY-MM-DD'),
+                            defaultView: 'month',
+                            editable: true,
+                            events: vm.events
+                        });
+                    })
+                    .catch(err => console.log(err));
 
-                    });
             }
 
             initCtrl();
