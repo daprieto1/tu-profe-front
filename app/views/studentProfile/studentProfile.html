@@ -9,6 +9,9 @@
                 <li ng-click="vm.section = 'service-history'" ng-class="vm.menuLiClass('service-history')">
                     <i class="fa fa-link" aria-hidden="true"></i> Historial de Servicios
                 </li>
+                <li ng-click="vm.section = 'calendar'" ng-class="vm.menuLiClass('calendar')">
+                    <i class="fa fa-link" aria-hidden="true"></i> Calendario
+                </li>
                 <li ng-click="vm.section = 'request-advisory'" ng-class="vm.menuLiClass('request-advisory')">
                     <i class="fa fa-link" aria-hidden="true"></i> Pedir Asesoría
                 </li>
@@ -27,6 +30,9 @@
             </ng-include>
 
             <ng-include src="'views/studentProfile/serviceHistory.html'" ng-if="vm.section === 'service-history'">
+            </ng-include>  
+            
+            <ng-include src="'views/studentProfile/calendar.html'" ng-if="vm.section === 'calendar'">
             </ng-include>  
             
             <ng-include src="'views/studentProfile/requestAdvisory.html'" ng-if="vm.section === 'request-advisory'">

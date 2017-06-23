@@ -36,7 +36,14 @@
                     isArray: true
                 }
             });
-
+    
+            var colorIndex = 0;
+            var getColor = () => {
+                var colors = ['#f86363', '#63f8ce', '#639ff8', '#8d63f8', '#f8d063'];
+                colorIndex = colorIndex === colors.length ? 0 : colorIndex + 1;
+                return colors[colorIndex];
+            }
+            
             return {
 
                 assign: (advisoryServiceId, teacherId) => {
@@ -79,6 +86,27 @@
                         headers: { 'Content-Type': undefined },
                         transformRequest: angular.identity
                     });
+                },
+                
+                parseAdvisoryServiceToEvent: (advisoryService) => {
+                    var events = [];
+                    var color = getColor();
+                    events = advisoryService.sessions.map(session => {
+                        var startTime = session.startTime.split(':');
+                        var startDate = moment(session.startDate);
+                        startDate.set({ hour: parseInt(startTime[0]), minute: parseInt(startTime[1]) });
+
+                        var endDate = angular.copy(startDate);
+                        endDate.add(session.duration, 'm');
+
+                        return {
+                            title: 'Horario de clase',
+                            start: startDate.format('YYYY-MM-DDTHH:mm'),
+                            end: endDate.format('YYYY-MM-DDTHH:mm'),
+                            color: color
+                        };
+                    });
+                    return events;
                 }
 
             }
