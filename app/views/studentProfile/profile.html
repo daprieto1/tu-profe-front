@@ -32,7 +32,7 @@
                             <p><strong>Apellido:</strong> {{vm.student.lastName}}</p>
                         </div>
                         <div class="large-4 columns">
-                            <p><strong>Cedula:</strong> {{vm.student.identification}}</p>
+                            <p><strong>Cédula:</strong> {{vm.student.identification}}</p>
                         </div>
                     </div>
                     <div class="row">
@@ -89,10 +89,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="large-6 columns">
-                                        <label for="phone">Teléfono</label>
+                                        <label for="phone">Teléfono Fijo</label>
                                         <input id="phone" name="phone" type="text" ng-model="vm.student.phone" required>
                                         <p class="error" ng-if="editPersonalData.phone.$invalid && editPersonalData.phone.$dirty">
-                                            Por favor ingrese su teléfono.
+                                            Por favor ingrese su teléfono fijo.
                                         </p>
                                     </div>
                                     <div class="large-6 columns">
@@ -105,10 +105,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="large-6 end columns">
-                                        <label for="identification">Identificación</label>
+                                        <label for="identification">Número de Identificación</label>
                                         <input id="identification" name="identification" type="text" ng-model="vm.student.identification" required>
                                         <p class="error" ng-if="editPersonalData.identification.$invalid && editPersonalData.identification.$dirty">
-                                            Por favor ingrese su identificación.
+                                            Por favor ingrese su número identificación.
                                         </p>
                                     </div>
                                 </div>
