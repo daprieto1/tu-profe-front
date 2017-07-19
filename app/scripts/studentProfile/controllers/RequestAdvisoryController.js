@@ -82,6 +82,11 @@
             };
 
             $scope.$watch('vm.service', function (old, newd) {
+                var service = parseService();
+                AdvisoryServiceServices.calculate(service)
+                    .then(advisoryService => vm.cost = advisoryService.cost)
+                    .catch(err => vm.cost = undefined);
+
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
                     vm.showSessions = false;
                     vm.sessions = [];
@@ -113,12 +118,6 @@
                             dateInit = moment(dateInit).add(1, 'weeks').isoWeekday(dayINeed);
                         }
                     }
-
-                    var service = parseService();
-                    AdvisoryServiceServices.calculate(service)
-                        .then(advisoryService => {
-                            vm.cost = advisoryService.cost;
-                        });
                 }
             }, true);
 

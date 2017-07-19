@@ -9,7 +9,7 @@
             };
 
             function initCtrl() {
-                vm.section = 'service-history';
+                vm.section = 'request-advisory';
                 if($cookies.get('userId') === undefined){
                     $location.path('/login');
                 }
