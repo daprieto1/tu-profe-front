@@ -131,6 +131,11 @@
                     <div id="summary" class="row">
                         <div class="large-12 columns">
                             <ul>
+                                <li ng-if="vm.cost">
+                                    <p>Precio por Mes:
+                                        <div class="stat">$ {{vm.cost.costPerMonth.toLocaleString()}}</div>
+                                    </p>
+                                </li>
                                 <li>
                                     <p>Numero de Meses:
                                         <div class="stat">{{vm.service.months}}</div>
@@ -219,7 +224,7 @@
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
                             <div class="large-3 end columns">
-                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses track by course.id" ng-model="vm.service.course"
+                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses | orderBy:'courseName' track by course.id" ng-model="vm.service.course"
                                     required>                                
                                 </select>
                                 </select>
@@ -361,15 +366,14 @@
                         </li>
                     </ul>
                     <center>
-                        <button class="button" ng-click="vm.addFile()">
-                            Adjuntar archivo
-                        </button>
+                        <button class="button secondary" ng-click="vm.specificStep=2">Atras</button>
+                        <button class="button" ng-click="vm.addFile()">Adjuntar archivo</button>
                     </center>
                 </div>
             </div>
             <div class="large-4 columns">
                 <div class="callout" data-equalizer-watch>
-                    <div class="row">
+                    <div class="row" ng-if="vm.cost">
                         <div class="large-offset-1 large-10 columns">
                             <div class="callout warning">
                                 <p>Costo total del servicio</p>
@@ -380,6 +384,11 @@
                     <div id="summary" class="row">
                         <div class="large-12 columns">
                             <ul>
+                                <li ng-if="vm.cost">
+                                    <p>Costo por Hora:
+                                        <div class="stat">$ {{vm.cost.costPerHour.toLocaleString()}}</div>
+                                    </p>
+                                </li>
                                 <li>
                                     <p>Numero de Estudiantes:
                                         <div class="stat">{{vm.service.numStudents}}</div>
