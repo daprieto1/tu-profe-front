@@ -5,10 +5,12 @@
             var vm = this;
 
             vm.edit = () => {
-                var student = angular.copy(vm.student);
+                var student = angular.copy(vm.studentEdit);
                 ServiceStudents.update(student)
                     .then(function () {
                         vm.editData = false;
+                        vm.student = vm.studentEdit;
+                        vm.studentEdit = angular.copy(vm.student);
                         alertify.success('Tus datos han sido actualizados');
                     });
             };
@@ -39,8 +41,9 @@
                 vm.editPhoto = false;
 
                 ServiceStudents.getStudent($cookies.get('userId'))
-                    .then(student => {
+                    .then(student => {                        
                         vm.student = student;
+                        vm.studentEdit = angular.copy(student);
                         vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';
                         console.log(vm.profilePhotoUrl);
                     })

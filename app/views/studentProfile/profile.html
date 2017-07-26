@@ -74,14 +74,14 @@
                                 <div class="row">
                                     <div class="large-6 columns">
                                         <label for="name">Nombre</label>
-                                        <input id="name" name="name" type="text" ng-model="vm.student.name" required>
+                                        <input id="name" name="name" type="text" ng-model="vm.studentEdit.name" required>
                                         <p class="error" ng-if="editPersonalData.name.$invalid && editPersonalData.name.$dirty">
                                             Por favor ingrese su nombre.
                                         </p>
                                     </div>
                                     <div class="large-6 columns">
                                         <label for="lastName">Apellidos</label>
-                                        <input id="lastName" name="lastName" type="text" ng-model="vm.student.lastName" required>
+                                        <input id="lastName" name="lastName" type="text" ng-model="vm.studentEdit.lastName" required>
                                         <p class="error" ng-if="editPersonalData.lastName.$invalid && editPersonalData.lastName.$dirty">
                                             Por favor ingrese sus apellidos.
                                         </p>
@@ -90,14 +90,14 @@
                                 <div class="row">
                                     <div class="large-6 columns">
                                         <label for="phone">Teléfono Fijo</label>
-                                        <input id="phone" name="phone" type="text" ng-model="vm.student.phone" required>
+                                        <input id="phone" name="phone" type="text" ng-model="vm.studentEdit.phone" required>
                                         <p class="error" ng-if="editPersonalData.phone.$invalid && editPersonalData.phone.$dirty">
                                             Por favor ingrese su teléfono fijo.
                                         </p>
                                     </div>
                                     <div class="large-6 columns">
                                         <label for="cellPhone">Celular</label>
-                                        <input id="cellPhone" name="cellPhone" type="text" ng-model="vm.student.cellPhone" required>
+                                        <input id="cellPhone" name="cellPhone" type="text" ng-model="vm.studentEdit.cellPhone" required>
                                         <p class="error" ng-if="editPersonalData.cellPhone.$invalid && editPersonalData.cellPhone.$dirty">
                                             Por favor ingrese su celular.
                                         </p>
@@ -106,7 +106,7 @@
                                 <div class="row">
                                     <div class="large-6 end columns">
                                         <label for="identification">Número de Identificación</label>
-                                        <input id="identification" name="identification" type="text" ng-model="vm.student.identification" required>
+                                        <input id="identification" name="identification" type="text" ng-model="vm.studentEdit.identification" required>
                                         <p class="error" ng-if="editPersonalData.identification.$invalid && editPersonalData.identification.$dirty">
                                             Por favor ingrese su número identificación.
                                         </p>
