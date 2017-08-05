@@ -44,7 +44,7 @@
                     .then(student => {                        
                         vm.student = student;
                         vm.studentEdit = angular.copy(student);
-                        vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';
+                        vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';                        
                         console.log(vm.profilePhotoUrl);
                     })
                     .catch(err => {

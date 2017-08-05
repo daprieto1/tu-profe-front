@@ -8,14 +8,13 @@
                             <img src="images/home/logo.jpg" alt="">
                         </a>
                     </li>
-                    <li ng-if="isAuthenticated()"><a href="#/dashboard">Dashboard</a></li>
-                    <li ng-if="isAuthenticated()"><a href="#/route/create">Crear Ruteo</a></li>
                 </ul>
             </div>
             <div class="top-bar-right">
-                <ul class="dropdown menu" dropdown-menu>
-                    <li><a href="/login">SOLICITA TU ASESORÍA</a></li>
-                    <li ng-if="!isAuthenticated()"><a href="#!/login">Iniciar sesión</a></li>
+                <ul id="menu-options" class="dropdown menu" dropdown-menu>
+                    <li><a href="#!/teacher-sign-up">SÉ UN PROFESOR</a></li>
+                    <li><a href="#!/student-sign-up">REGISTRATE</a></li>
+                    <li ng-if="!isAuthenticated()"><a href="#!/login">INICIAR SESIÓN</a></li>
                     <li ng-if="isAuthenticated()">
                         <a href="">{{user.name}}</a>
                         <ul class="menu">

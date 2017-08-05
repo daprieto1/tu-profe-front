@@ -181,7 +181,7 @@
                     </div>
                     <div class="large-12 columns">
                         <strong>Fecha de Grado: </strong>
-                        <p>{{vm.teacher.gradeDate}}</p>
+                        <p>{{vm.teacher.gradeDate | date:'yyyy-MM-dd'}}</p>
                     </div>
                     <div class="large-12 columns">
                         <button class="hollow button" ng-click="vm.editData.academical = true">
@@ -243,7 +243,7 @@
                     <label for="">Selecciona</label>
                     <div class="input-group">
                         <span class="input-group-label">+</span>
-                        <multiple-autocomplete ng-model="vm.teacher.courses" object-property="courseName" suggestions-arr="vm.subjects">
+                        <multiple-autocomplete id="select-courses" ng-model="vm.teacher.courses" object-property="courseName" suggestions-arr="vm.subjects">
                         </multiple-autocomplete>
                     </div>
                     <button class="button" ng-click="vm.edit()">
