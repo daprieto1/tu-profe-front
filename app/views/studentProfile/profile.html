@@ -56,6 +56,11 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
+                            <p><strong>Institución Académica:</strong> {{vm.student.school.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-12 columns">
                             <p><strong>Correo electrónico:</strong> {{vm.student.email}}</p>
                         </div>
                     </div>
@@ -111,6 +116,11 @@
                                             Por favor ingrese su número identificación.
                                         </p>
                                     </div>
+                                    <div class="large-6 end columns">
+                                        <label for="identification">Institución Académica</label>                                        
+                                        <select ng-options="school as school.name for school in vm.schools track by school.id" ng-model="vm.studentEdit.school" required>
+                                        </select>                                        
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="large-12 columns">
@@ -151,7 +161,7 @@
                                 <center>
                                     <button class="button secondary" ng-click="vm.editPhoto=false">Cancelar</button>
                                     <button class="button" ng-click="vm.uploadPhoto()">Guardar</button>
-                                </center>                                                                    
+                                </center>
                             </div>
                         </div>
                     </div>

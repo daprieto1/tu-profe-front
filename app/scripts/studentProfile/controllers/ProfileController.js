@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents, envService, PROFILE_PHOTO) {
+        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents, SchoolServices, envService, PROFILE_PHOTO) {
             var vm = this;
 
             vm.edit = () => {
@@ -40,11 +40,16 @@
                 vm.editData = false;
                 vm.editPhoto = false;
 
+                SchoolServices.getAll()
+                    .then(schools => {
+                        vm.schools = schools
+                    });
+
                 ServiceStudents.getStudent($cookies.get('userId'))
-                    .then(student => {                        
+                    .then(student => {
                         vm.student = student;
                         vm.studentEdit = angular.copy(student);
-                        vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';                        
+                        vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';
                         console.log(vm.profilePhotoUrl);
                     })
                     .catch(err => {
