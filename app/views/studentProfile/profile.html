@@ -61,6 +61,11 @@
                     </div>
                     <div class="row">
                         <div class="large-12 columns">
+                            <p><strong>Profesión:</strong> {{vm.student.profession.name}}</p>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="vm.studentEdit.school.type === 1">
+                        <div class="large-12 columns">
                             <p><strong>Correo electrónico:</strong> {{vm.student.email}}</p>
                         </div>
                     </div>
@@ -115,13 +120,20 @@
                                         <p class="error" ng-if="editPersonalData.identification.$invalid && editPersonalData.identification.$dirty">
                                             Por favor ingrese su número identificación.
                                         </p>
-                                    </div>
-                                    <div class="large-6 end columns">
-                                        <label for="identification">Institución Académica</label>                                        
+                                    </div>                                    
+                                </div>     
+                                <div class="row">
+                                    <div class="large-6 columns" ng-class="{end:vm.studentEdit.school.type === 1}">
+                                        <label for="school">Institución Académica</label>                                        
                                         <select ng-options="school as school.name for school in vm.schools track by school.id" ng-model="vm.studentEdit.school" required>
                                         </select>                                        
                                     </div>
-                                </div>
+                                    <div class="large-6 columns" ng-if="vm.studentEdit.school.type === 1">
+                                        <label for="profession">Profesión</label>                                        
+                                        <select ng-options="profession as profession.name for profession in vm.professions track by profession.id" ng-model="vm.studentEdit.profession" required>
+                                        </select>                                        
+                                    </div>
+                                </div>                           
                                 <div class="row">
                                     <div class="large-12 columns">
                                         <button class="button secondary" ng-click="vm.editData=false">
