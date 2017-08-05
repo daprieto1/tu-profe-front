@@ -97,7 +97,7 @@
         .run(function ($rootScope, $location, envService) {
 
             $rootScope.CloudFrontTuProfe = envService.read('CloudFrontTuProfe');
-            $rootScope.$apply(function () {
+            $rootScope.$apply(function () {                
                 angular.element(document).foundation();
             });
 
