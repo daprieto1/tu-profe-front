@@ -19,7 +19,7 @@
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input id="cellPhone" name="cellPhone" type="number" placeholder="Celular" min="0" max="9999999999" ng-model="vm.student.cellPhone" required>
+                    <input id="cellPhone" name="cellPhone" type="number" placeholder="Celular" ng-pattern="/^[0-9]{10,12}$/" ng-model="vm.student.cellPhone" required>
                     <p ng-if="studentSignUpForm.cellPhone.$invalid && studentSignUpForm.cellPhone.$dirty" class="error">Por favor índica un número de celularo válido</p>
                 </div>
             </div>
