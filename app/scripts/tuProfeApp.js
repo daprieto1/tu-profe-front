@@ -26,7 +26,8 @@
         'studentProfileModule',
         'advisoryServiceModule',
         'notificationModule',
-        'scheduleModule'
+        'scheduleModule',
+        'cityModule'
     ])
 
         .config(function ($routeProvider, $locationProvider, $cookiesProvider, envServiceProvider, localStorageServiceProvider) {
