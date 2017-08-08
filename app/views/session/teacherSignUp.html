@@ -2,6 +2,15 @@
     <div class="large-offset-8 large-4 columns">
         <img src="http://www.tu-profe.com/uploads/default/others_conf/b500a4f0a392ff0defd893af479a6266.jpg" alt="">
         <form name="teacherSignUpForm" novalidate>
+
+            <div class="row" ng-if="vm.showError">
+                <div class="large-12 columns">
+                    <div class="alert callout" data-closable>
+                        {{vm.error}}
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="large-6 columns">
                     <input id="name" name="name" type="text" placeholder="Nombre" ng-model="vm.teacher.name" required>
@@ -22,14 +31,16 @@
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input id="password" name="password" type="password" placeholder="Contraseña" minLength="8" ng-model="vm.teacher.password" required>
+                    <input id="password" name="password" type="password" placeholder="Contraseña" minLength="8" ng-model="vm.teacher.password"
+                        required>
                     <p ng-if="teacherSignUpForm.password.$invalid && teacherSignUpForm.password.$dirty" class="error">Por favor índica tú contraseña, debe tener mínimo 8 cáracteres</p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="large-12 columns">
-                    <input id="cellPhone" name="cellPhone" type="number" placeholder="Celular" ng-pattern="/^[0-9]{10,12}$/" ng-model="vm.teacher.cellPhone" required>
+                    <input id="cellPhone" name="cellPhone" type="number" placeholder="Celular" ng-pattern="/^[0-9]{10,12}$/" ng-model="vm.teacher.cellPhone"
+                        required>
                     <p ng-if="teacherSignUpForm.cellPhone.$invalid && teacherSignUpForm.cellPhone.$dirty" class="error">Por favor índica un número de celularo válido</p>
                 </div>
             </div>
@@ -46,8 +57,9 @@
                 <div class="large-12 columns">
                     <input type="checkbox" ng-model="vm.student.accept" required>
                     <p id="terms-and-conditions">
-                        Al proceder, acepto que Tu Profe o sus representantes pueden ponerse en contacto conmigo por correo electrónico, teléfono, mensaje de texto (incluidos medios automatizados) a la dirección de correo electrónico o al número que yo indique, incluso para
-                        fines de marketing. He leído y comprendo los terminos y condiciones.
+                        Al proceder, acepto que Tu Profe o sus representantes pueden ponerse en contacto conmigo por correo electrónico, teléfono,
+                        mensaje de texto (incluidos medios automatizados) a la dirección de correo electrónico o al número
+                        que yo indique, incluso para fines de marketing. He leído y comprendo los terminos y condiciones.
                     </p>
                 </div>
             </div>
