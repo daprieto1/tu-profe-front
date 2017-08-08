@@ -48,6 +48,14 @@
                 return vm.disable;
             };
 
+            vm.showInsightSessions = () => {
+                var show = vm.service.daysOfWeek.filter(day => day).length === parseInt(vm.service.sessionsPerWeek)
+                    && parseInt(vm.service.sessionsPerWeek) > 0
+                    && parseInt(vm.service.months) > 0;
+                if (!show) { vm.showSessions = false }
+                return show;
+            };
+
             vm.selectDayOfWeek = index => {
                 if ((vm.disable && vm.service.daysOfWeek[index]) || (!vm.disable)) {
                     vm.service.daysOfWeek[index] = !vm.service.daysOfWeek[index]

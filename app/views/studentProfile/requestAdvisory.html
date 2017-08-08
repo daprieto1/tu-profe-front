@@ -167,9 +167,9 @@
 
         <hr>
 
-        <div class="row">
+        <div class="row" ng-if="vm.showInsightSessions()">
             <div class="large-offset-5 large-2 end columns">
-                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Personalizar sesiones</button>
+                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Visualizar sesiones</button>
                 <button class="button primary expanded" ng-if="vm.showSessions" ng-click="vm.showSessions = false">Cerrar Vista</button>
             </div>
         </div>
