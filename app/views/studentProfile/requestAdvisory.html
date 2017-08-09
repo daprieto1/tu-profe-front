@@ -226,7 +226,10 @@
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
                             <div class="large-3 end columns">
-                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses | orderBy:'courseName' track by course.id"
+                                <select id="course" name="course" 
+                                    ng-options="course as course.courseName for course in vm.courses 
+                                    | filter : {difficulty:'Especializado'}
+                                    | orderBy:'courseName' track by course.id"
                                     ng-model="vm.service.course" required>                                
                                 </select>
                                 </select>
