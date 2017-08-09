@@ -122,9 +122,11 @@
                 <div class="callout" data-equalizer-watch>
                     <div class="row" ng-if="vm.cost">
                         <div class="large-offset-1 large-10 columns">
-                            <div class="callout warning">
-                                <p>Costo total del servicio</p>
-                                <div class="stat">$ {{vm.cost.total.toLocaleString()}}</div>
+                            <div id="service-total-cost" class="animated slideInDown">
+                                <div class="callout warning">
+                                    <p>Costo total del servicio</p>
+                                    <div class="stat">$ {{vm.cost.total.toLocaleString()}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -92,7 +92,10 @@
             $scope.$watch('vm.service', function (old, newd) {
                 var service = parseService();
                 AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => vm.cost = advisoryService.cost)
+                    .then(advisoryService => {                        
+                        angular.element('#service-total-cost').removeClass().addClass('shake animated');                                                    
+                        vm.cost = advisoryService.cost;
+                    })
                     .catch(err => vm.cost = undefined);
 
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
@@ -109,8 +112,7 @@
                     var j = 0;
                     var numSessionsTemp = angular.copy(numSessions);
                     for (var i = 0; i < numSessionsTemp; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
-                        console.log(sessionDate, moment(vm.service.startDate), sessionDate > moment(vm.service.startDate));
+                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');                        
                         if (sessionDate > moment(vm.service.startDate)) {
                             vm.sessions.push({
                                 startDate: sessionDate.toDate(),
