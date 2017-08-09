@@ -132,7 +132,7 @@
                     }
                     $timeout(() => {
                         for (var i = 0; i < vm.service.numSessions; i++) {
-                            vm.sessions[i].startTime = angular.element('#startTime' + i).wickedpicker({ now: "12:00", minutesInterval: 30 });
+                            vm.sessions[i].startTime = angular.element('#startTime' + i).wickedpicker({ now: '12:00', minutesInterval: 30 });
                         }
                     }, 100);
                 }
@@ -183,7 +183,7 @@
                 vm.sessions = [];
                 vm.files = [];
                 vm.today = ServiceUtils.getToday();
-                vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                vm.startTime = angular.element('#startTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
                 vm.advisoryFile = undefined;
 
                 vm.service = {
