@@ -194,13 +194,8 @@
                 vm.disable;
                 vm.sessions = [];
                 vm.files = [];
-<<<<<<< HEAD
-                vm.today = ServiceUtils.getToday();
-                vm.startTime = angular.element('#startTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
-=======
                 vm.today = moment().add(7, 'd').format('YYYY-MM-DD');
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
->>>>>>> d00fc168c3b5d7876c0bba9cbd787a2715866340
                 vm.advisoryFile = undefined;
 
                 vm.service = {
