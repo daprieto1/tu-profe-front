@@ -11,7 +11,8 @@
                         console.log(resource);
                         $rootScope.loginTeacher(vm.teacher.email, vm.teacher.password);
                     }, function (error) {
-                        console.log(error);
+                        vm.error = error.data;
+                        vm.showError = true;
                     });
             }
 

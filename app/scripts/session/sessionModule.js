@@ -15,6 +15,12 @@
                 })
                 .when('/student-sign-up', {
                     templateUrl: 'views/session/studentSignUp.html'
+                })                
+                .when('/forgot-password', {
+                    templateUrl: 'views/session/forgotPassword.html'
+                })
+                .when('/restore-password', {
+                    templateUrl: 'views/session/restorePassword.html'
                 });
 
             var AuthAppConfig = {

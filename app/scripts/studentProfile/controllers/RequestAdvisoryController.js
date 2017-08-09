@@ -48,9 +48,17 @@
                 return vm.disable;
             };
 
+            vm.showInsightSessions = () => {
+                var show = vm.service.daysOfWeek.filter(day => day).length === parseInt(vm.service.sessionsPerWeek)
+                    && parseInt(vm.service.sessionsPerWeek) > 0
+                    && parseInt(vm.service.months) > 0;
+                if (!show) { vm.showSessions = false }
+                return show;
+            };
+
             vm.selectDayOfWeek = index => {
                 if ((vm.disable && vm.service.daysOfWeek[index]) || (!vm.disable)) {
-                    vm.service.daysOfWeek[index] = !vm.service.daysOfWeek[index]
+                    vm.service.daysOfWeek[index] = !vm.service.daysOfWeek[index];
                 }
             };
 
@@ -84,7 +92,10 @@
             $scope.$watch('vm.service', function (old, newd) {
                 var service = parseService();
                 AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => vm.cost = advisoryService.cost)
+                    .then(advisoryService => {                        
+                        angular.element('#service-total-cost').removeClass().addClass('shake animated');                                                    
+                        vm.cost = advisoryService.cost;
+                    })
                     .catch(err => vm.cost = undefined);
 
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
@@ -92,26 +103,27 @@
                     vm.sessions = [];
                     var numSessions = vm.service.type === 1 ? vm.service.months * 4 * vm.service.sessionsPerWeek : vm.service.numSessions;
                     var dayINeed = 1;
-                    var dateInit;
-                    if (moment().isoWeekday() <= dayINeed) {
-                        dateInit = moment(vm.service.startDate).isoWeekday(dayINeed);
-                    } else {
-                        dateInit = moment(vm.service.startDate).add(1, 'weeks').isoWeekday(dayINeed);
-                    }
+                    var dateInit = moment(vm.service.startDate);
+
                     var days = vm.service.daysOfWeek
-                        .map((day, index) => { return day ? index + 1 : 0; })
+                        .map((day, index) => { return day ? index : 0; })
                         .filter(day => { return day > 0; });
 
                     var j = 0;
-                    for (var i = 0; i < numSessions; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
-                        vm.sessions.push({
-                            startDate: sessionDate.toDate(),
-                            startTime: vm.startTime.wickedpicker('time'),
-                            startDateToShow: sessionDate.format('LL'),
-                            duration: 120,
-                            dayOfWeek: days[j]
-                        });
+                    var numSessionsTemp = angular.copy(numSessions);
+                    for (var i = 0; i < numSessionsTemp; i++) {
+                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');                        
+                        if (sessionDate > moment(vm.service.startDate)) {
+                            vm.sessions.push({
+                                startDate: sessionDate.toDate(),
+                                startTime: vm.startTime.wickedpicker('time'),
+                                startDateToShow: sessionDate.format('LL'),
+                                duration: 120,
+                                dayOfWeek: days[j]
+                            });
+                        } else {
+                            numSessionsTemp++;
+                        }
                         j++;
                         if (j === days.length) {
                             j = 0;
@@ -142,7 +154,7 @@
                 var aux = angular.element(document.querySelector('#file-real-input'));
                 if (angular.isDefined(aux) && angular.isDefined(aux.prop('files'))) {
                     var file = aux.prop('files')[0];
-                    console.log(file);
+
                     if (angular.isDefined(file)) {
                         vm.files.push(file);
                     }
@@ -182,8 +194,13 @@
                 vm.disable;
                 vm.sessions = [];
                 vm.files = [];
+<<<<<<< HEAD
                 vm.today = ServiceUtils.getToday();
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
+=======
+                vm.today = moment().add(7, 'd').format('YYYY-MM-DD');
+                vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+>>>>>>> d00fc168c3b5d7876c0bba9cbd787a2715866340
                 vm.advisoryFile = undefined;
 
                 vm.service = {
@@ -194,7 +211,7 @@
                     months: 0,
                     timePerSession: 0,
                     sessionsPerWeek: 0,
-                    startDate: new Date(),
+                    startDate: moment().add(7, 'd').toDate(),
                     description: '',
                     daysOfWeek: [false, false, false, false, false, false, false]
                 };

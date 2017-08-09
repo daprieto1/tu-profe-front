@@ -180,7 +180,7 @@ gulp.task('sonar', function() {
             host: {
                 url: 'http://52.26.238.251:9898/sonar/'
             },
-            projectKey: 'muRouteFront',
+            projectKey: 'TuProfeFront',
             projectName: 'Mensajeros Urbanos Route Front',
             projectVersion: '1.0.0',
             sources: ['app/scripts', 'app/styles', 'app/views'].join(','),

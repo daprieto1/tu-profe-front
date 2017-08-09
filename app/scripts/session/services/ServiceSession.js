@@ -23,6 +23,10 @@
                     method: 'POST',
                     params: { username: '@username', password: '@password' },
                     url: TU_PROFE_API + '/session/student/login'
+                },
+                forgotPassword: {
+                    method: 'POST',
+                    url: TU_PROFE_API + '/session/forgot-password'
                 }
             });
 
@@ -41,6 +45,10 @@
 
                 signUpStudent: function (student) {
                     return Session.signUpStudent({}, student).$promise;
+                },
+
+                forgotPassword: function (user) {
+                    return Session.forgotPassword({}, user).$promise;
                 }
 
             };

@@ -11,12 +11,14 @@
                     .then(function (resource) {                        
                         $rootScope.loginStudent(vm.student.email, vm.student.password);
                     }, function (error) {
-                        console.log(error);
+                        vm.error = error.data;
+                        vm.showError = true;                        
                     });
             }
 
             function initCtrl() {
                 vm.student = {};
+                vm.showError = false;
             }
 
             initCtrl();

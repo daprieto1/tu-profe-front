@@ -122,15 +122,22 @@
                 <div class="callout" data-equalizer-watch>
                     <div class="row" ng-if="vm.cost">
                         <div class="large-offset-1 large-10 columns">
-                            <div class="callout warning">
-                                <p>Costo total del servicio</p>
-                                <div class="stat">$ {{vm.cost.total.toLocaleString()}}</div>
+                            <div id="service-total-cost" class="animated slideInDown">
+                                <div class="callout warning">
+                                    <p>Costo total del servicio</p>
+                                    <div class="stat">$ {{vm.cost.total.toLocaleString()}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div id="summary" class="row">
                         <div class="large-12 columns">
                             <ul>
+                                <li ng-if="vm.cost">
+                                    <p>Precio por Mes:
+                                        <div class="stat">$ {{vm.cost.costPerMonth.toLocaleString()}}</div>
+                                    </p>
+                                </li>
                                 <li>
                                     <p>Numero de Meses:
                                         <div class="stat">{{vm.service.months}}</div>
@@ -162,9 +169,9 @@
 
         <hr>
 
-        <div class="row">
+        <div class="row" ng-if="vm.showInsightSessions()">
             <div class="large-offset-5 large-2 end columns">
-                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Personalizar sesiones</button>
+                <button class="button primary expanded" ng-if="!vm.showSessions" ng-click="vm.showSessions = true">Visualizar sesiones</button>
                 <button class="button primary expanded" ng-if="vm.showSessions" ng-click="vm.showSessions = false">Cerrar Vista</button>
             </div>
         </div>
@@ -219,8 +226,8 @@
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
                             <div class="large-3 end columns">
-                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses track by course.id" ng-model="vm.service.course"
-                                    required>                                
+                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses | orderBy:'courseName' track by course.id"
+                                    ng-model="vm.service.course" required>                                
                                 </select>
                                 </select>
                             </div>
@@ -361,15 +368,14 @@
                         </li>
                     </ul>
                     <center>
-                        <button class="button" ng-click="vm.addFile()">
-                            Adjuntar archivo
-                        </button>
+                        <button class="button secondary" ng-click="vm.specificStep=2">Atras</button>
+                        <button class="button" ng-click="vm.addFile()">Adjuntar archivo</button>
                     </center>
                 </div>
             </div>
             <div class="large-4 columns">
                 <div class="callout" data-equalizer-watch>
-                    <div class="row">
+                    <div class="row" ng-if="vm.cost">
                         <div class="large-offset-1 large-10 columns">
                             <div class="callout warning">
                                 <p>Costo total del servicio</p>
@@ -380,6 +386,11 @@
                     <div id="summary" class="row">
                         <div class="large-12 columns">
                             <ul>
+                                <li ng-if="vm.cost">
+                                    <p>Costo por Hora:
+                                        <div class="stat">$ {{vm.cost.costPerHour.toLocaleString()}}</div>
+                                    </p>
+                                </li>
                                 <li>
                                     <p>Numero de Estudiantes:
                                         <div class="stat">{{vm.service.numStudents}}</div>
@@ -429,19 +440,19 @@
                     <div class="card-section">
                         <center>
                             <form id="frm_botonePayco" name="frm_botonePayco" method="post" action="https://secure.payco.co/checkout.php">
-                                <input name="p_cust_id_cliente" type="hidden" value="13529">
-                                <input name="p_key" type="hidden" value="13b33c524c09d964014cbeb4ec1a0b0f05956354">
+                                <input name="p_cust_id_cliente" type="hidden" value="11759">
+                                <input name="p_key" type="hidden" value="497ff9859a86f94adb2555aa6d7578264944f32c">
                                 <input name="p_id_invoice" type="hidden" value="">
-                                <input name="p_description" type="hidden" value="Servicio de Acompañamiento TuProfe">
+                                <input name="p_description" type="hidden" value=" Servicio TuProfe">
                                 <input name="p_currency_code" type="hidden" value="COP">
-                                <input name="p_amount" id="p_amount" type="hidden" value="{{vm.createdService.cost.total}}">
+                                <input name="p_amount" id="p_amount" type="hidden" value="200000">
                                 <input name="p_tax" id="p_tax" type="hidden" value="0">
                                 <input name="p_amount_base" id="p_amount_base" type="hidden" value="0">
                                 <input name="p_test_request" type="hidden" value="FALSE">
                                 <input name="p_url_response" type="hidden" value="">
                                 <input name="p_url_confirmation" type="hidden" value="">
-                                <input name="p_signature" type="hidden" id="signature" value="29c56d8f58fea3832b8d6db9948662ad" />
-                                <input name="idboton" type="hidden" id="idboton" value="2082" />
+                                <input name="p_signature" type="hidden" id="signature" value="f0b101b328df21ec024b18aeb528ccdd" />
+                                <input name="idboton" type="hidden" id="idboton" value="2521" />
                                 <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png"
                                 />
                             </form>

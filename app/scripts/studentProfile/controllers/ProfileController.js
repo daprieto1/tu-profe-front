@@ -1,14 +1,16 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, ServiceStudents, envService, PROFILE_PHOTO) {
+        .controller('ProfileController', function ($scope, $timeout, $route, $cookies, $q, ProfessionServices, ServiceStudents, SchoolServices, CityServices, envService, PROFILE_PHOTO) {
             var vm = this;
 
             vm.edit = () => {
-                var student = angular.copy(vm.student);
+                var student = angular.copy(vm.studentEdit);
                 ServiceStudents.update(student)
                     .then(function () {
                         vm.editData = false;
+                        vm.student = vm.studentEdit;
+                        vm.studentEdit = angular.copy(vm.student);
                         alertify.success('Tus datos han sido actualizados');
                     });
             };
@@ -38,9 +40,21 @@
                 vm.editData = false;
                 vm.editPhoto = false;
 
+                $q.all([
+                    SchoolServices.getAll(),
+                    ProfessionServices.getAll(),
+                    CityServices.getAll()
+                ])
+                    .then(([schools, professions, cities]) => {
+                        vm.schools = schools;
+                        vm.professions = professions;
+                        vm.cities = cities;
+                    });
+
                 ServiceStudents.getStudent($cookies.get('userId'))
                     .then(student => {
                         vm.student = student;
+                        vm.studentEdit = angular.copy(student);
                         vm.profilePhotoUrl = envService.read('CloudFrontTuProfe') + PROFILE_PHOTO + student.id + '.png';
                         console.log(vm.profilePhotoUrl);
                     })
