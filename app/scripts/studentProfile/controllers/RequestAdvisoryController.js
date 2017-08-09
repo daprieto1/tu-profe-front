@@ -92,8 +92,9 @@
             $scope.$watch('vm.service', function (old, newd) {
                 var service = parseService();
                 AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => {                        
-                        angular.element('#service-total-cost').removeClass().addClass('shake animated');                                                    
+                    .then(advisoryService => {    
+                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific' ;                    
+                        angular.element(idCostElement).removeClass().addClass('shake animated');                                                    
                         vm.cost = advisoryService.cost;
                     })
                     .catch(err => vm.cost = undefined);
