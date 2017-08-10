@@ -6,13 +6,13 @@
         /**
          * Directive to read a file in a input.
          */
-        .directive("fileReader", [function ($rootScope) {
+        .directive('fileReader', [function ($rootScope) {
             return {
                 scope: {
-                    fileReader: "="
+                    fileReader: '='
                 },
                 link: function (scope, element, attributes) {
-                    element.bind("change", function (changeEvent) {
+                    element.bind('change', function (changeEvent) {
                         var reader = new FileReader();
                         reader.onload = function (loadEvent) {
                             scope.$apply(function () {

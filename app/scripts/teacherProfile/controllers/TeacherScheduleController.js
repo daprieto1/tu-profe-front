@@ -47,8 +47,8 @@
                 vm.newSection = {};
                 vm.events = [];
 
-                vm.newSection.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
-                vm.newSection.endTime = angular.element('#endTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                vm.newSection.startTime = angular.element('#startTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
+                vm.newSection.endTime = angular.element('#endTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
 
                 ScheduleServices.getSchedule(vm.teacherId)
                     .then(schedule => {
