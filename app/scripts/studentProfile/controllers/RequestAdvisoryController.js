@@ -92,9 +92,9 @@
             $scope.$watch('vm.service', function (old, newd) {
                 var service = parseService();
                 AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => {    
-                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific' ;                    
-                        angular.element(idCostElement).removeClass().addClass('shake animated');                                                    
+                    .then(advisoryService => {
+                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific';
+                        angular.element(idCostElement).removeClass().addClass('shake animated');
                         vm.cost = advisoryService.cost;
                     })
                     .catch(err => vm.cost = undefined);
@@ -113,7 +113,7 @@
                     var j = 0;
                     var numSessionsTemp = angular.copy(numSessions);
                     for (var i = 0; i < numSessionsTemp; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');                        
+                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
                         if (sessionDate > moment(vm.service.startDate)) {
                             vm.sessions.push({
                                 startDate: sessionDate.toDate(),
@@ -144,9 +144,7 @@
                         });
                     }
                     $timeout(() => {
-                        for (var i = 0; i < vm.service.numSessions; i++) {
-                            vm.sessions[i].startTime = angular.element('#startTime' + i).wickedpicker({ now: "12:00", minutesInterval: 30 });
-                        }
+                        vm.sessions[i].startTime = angular.element('#startTime-static').wickedpicker({ now: "12:00", minutesInterval: 30 });
                     }, 100);
                 }
             });
@@ -165,18 +163,13 @@
             function parseService() {
                 var service = angular.copy(vm.service);
                 service.sessions = angular.copy(vm.sessions);
+                service.sessions.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
 
                 if (vm.service.type === 1) {
                     service.months = parseInt(service.months);
-                    service.sessions.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
                 } else if (vm.service.type === 2) {
                     service.timePerSession = parseInt(service.timePerSession);
                     service.numSessions = parseInt(service.numSessions);
-                    if (vm.tabSpecific) {
-                        service.sessions.forEach((session, index) => { session.startTime = ServiceUtils.timeToMilitarFormat(vm.sessions[index].startTime.wickedpicker('time')); });
-                    } else if (vm.tabStatic) {
-                        service.sessions.forEach(session => { session.startTime = ServiceUtils.timeToMilitarFormat(session.startTime); });
-                    }
                 }
 
                 service.numStudents = parseInt(service.numStudents);

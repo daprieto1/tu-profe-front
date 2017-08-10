@@ -226,11 +226,9 @@
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
                             <div class="large-3 end columns">
-                                <select id="course" name="course" 
-                                    ng-options="course as course.courseName for course in vm.courses 
+                                <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses 
                                     | filter : {difficulty:'Especializado'}
-                                    | orderBy:'courseName' track by course.id"
-                                    ng-model="vm.service.course" required>                                
+                                    | orderBy:'courseName' track by course.id" ng-model="vm.service.course" required>                                
                                 </select>
                                 </select>
                             </div>
@@ -281,39 +279,8 @@
                 </div>
             </div>
 
-            <div class="large-8 columns" ng-show="vm.specificStep===2">
-                <tabset>
-                    <tab heading="Especifico" active="vm.tabSpecific">
-                    </tab>
-                    <tab heading="Estático" active="vm.tabStatic">
-                    </tab>
-                </tabset>
-                <div class="callout" ng-show="vm.tabSpecific">
-                    <table class="dashboard-table">
-                        <thead>
-                            <tr>
-                                <th width="300">Sesión</th>
-                                <th width="300">Fecha de Inicio</th>
-                                <th width="300">Hora de Inicio</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="session in vm.sessions track by $index">
-                                <td>
-                                    Sesión {{$index + 1}}
-                                </td>
-                                <td>
-                                    <input type="date" ng-model="session.startDate">
-                                </td>
-                                <td>
-                                    <input type="text" id="startTime{{$index}}">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-                <div class="callout" ng-show="vm.tabStatic">
+            <div class="large-8 columns" ng-show="vm.specificStep===2">                
+                <div class="callout">
                     <div class="row">
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
@@ -334,10 +301,10 @@
                     </div>
                     <div class="row">
                         <div class="large-6 columns">
-                            <label for="startTime" class="text-right middle">Hora de Inicio</label>
+                            <label for="startTime-static" class="text-right middle">Hora de Inicio</label>
                         </div>
                         <div class="large-3 end columns">
-                            <input type="text" id="startTime">
+                            <input type="text" id="startTime-static">
                         </div>
                     </div>
                     <div class="row">
