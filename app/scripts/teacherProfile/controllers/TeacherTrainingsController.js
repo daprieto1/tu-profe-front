@@ -75,7 +75,7 @@
                 vm.isFisrtTime = false;
                 vm.startTraining = false;
 
-                TrainingServices.get('61ed01c4-2ed5-4f46-a19e-d2ffa0a18331')
+                TrainingServices.get('55a2814b-f9a5-4ff8-bc82-3d4bb5e3b5ed')
                             .then(function (response) {
                                 vm.exam = response.toJSON();
                             });

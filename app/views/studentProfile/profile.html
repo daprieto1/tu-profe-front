@@ -151,7 +151,7 @@
                                         </select>                                        
                                     </div>
 
-                                    <div class="large-6 columns end">
+                                    <div class="large-6 columns end" ng-if="vm.studentEdit.school.type">
                                         <label for="profession" ng-if="vm.studentEdit.school.type === 1">Semestre</label>   
                                         <label for="profession" ng-if="vm.studentEdit.school.type === 2">Grado/Curso</label>                                        
                                         <input id="academicalLevel" name="academicalLevel" type="number" ng-model="vm.studentEdit.academicalLevel" min="1" max="14" required>

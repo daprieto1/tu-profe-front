@@ -1,6 +1,6 @@
 (function () {
     angular.module('teacherProfileModule')
-        .controller('TeacherBasicDataController', function ($scope, $cookies, $q, ServiceTeachers, CourseServices, SchoolServices, ProfessionServices) {
+        .controller('TeacherBasicDataController', function ($scope, $cookies, $q, ServiceTeachers, CourseServices, SchoolServices, CityServices, ProfessionServices) {
             var vm = this;
 
             vm.edit = function (section) {
@@ -39,12 +39,14 @@
                     SchoolServices.getAll(),
                     ProfessionServices.getAll(),
                     CourseServices.getAll(),
+                    CityServices.getAll(),
                     ServiceTeachers.getTeacher(vm.teacherId)
                 ])
-                    .then(([schools, professions, courses, teacher]) => {
+                    .then(([schools, professions, courses, cities, teacher]) => {
                         vm.universities = schools;
                         vm.professions = professions;
                         vm.subjects = courses;
+                        vm.cities = cities;
                         vm.teacher = teacher;
 
                         vm.teacher.gradeDate = new Date(vm.teacher.gradeDate);
