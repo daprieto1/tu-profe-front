@@ -72,7 +72,8 @@
                 domains: {
                     local: ['localhost'],
                     c9: ['tu-profe-front-diegoprieto.c9users.io'],
-                    heroku: ['tu-profe-front.herokuapp.com']
+                    heroku: ['tu-profe-front.herokuapp.com'],
+                    AWS_DEV: ['ec2-52-10-106-252.us-west-2.compute.amazonaws.com']
                 },
                 vars: {
                     local: {
@@ -85,6 +86,10 @@
                     },
                     heroku: {
                         apiUrl: 'https://tu-profe-api-node.herokuapp.com/api',
+                        CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
+                    },
+                    AWS_DEV: {
+                        apiUrl: 'ec2-52-10-106-252.us-west-2.compute.amazonaws.com:8080/api',
                         CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
                     }
                 }
