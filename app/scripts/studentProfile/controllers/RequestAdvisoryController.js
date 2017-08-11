@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, CourseServices, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
+        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, CourseServices, ServiceStudents, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
 
             vm.reset = () => initCtrl();
@@ -191,6 +191,7 @@
                 vm.today = moment().add(7, 'd').format('YYYY-MM-DD');
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
                 vm.advisoryFile = undefined;
+                vm.student;
 
                 vm.service = {
                     type: undefined,
@@ -207,6 +208,13 @@
 
                 CourseServices.getAll()
                     .then(courses => vm.courses = courses);
+
+                ServiceStudents.getStudent($cookies.get('userId'))
+                    .then(student => {
+                        vm.student = student;
+                        vm.service.city = vm.student.city;
+                        vm.service.address = vm.student.address;                        
+                    });
 
             }
 

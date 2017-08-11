@@ -58,7 +58,7 @@
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número de Estudiantes</label>
                         </div>
-                        <div class="large-3 end columns">
+                        <div class="large-4 end columns">
                             <select ng-model="vm.service.numStudents">
                                 <option ng-repeat="n in [] | range:4" value="{{$index+1}}">{{$index+1}}</option>
                             </select>
@@ -68,7 +68,7 @@
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número de Meses</label>
                         </div>
-                        <div class="large-3 end columns">
+                        <div class="large-4 end columns">
                             <select ng-model="vm.service.months">
                                 <option ng-repeat="n in [] | range:12" value="{{$index+1}}">{{$index+1}}</option>
                             </select>
@@ -78,7 +78,7 @@
                         <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Número sesiones por semana</label>
                         </div>
-                        <div class="large-3 end columns">
+                        <div class="large-4 end columns">
                             <select ng-model="vm.service.sessionsPerWeek" ng-change="vm.changeSessionsPerWeek()">
                                 <option ng-repeat="n in [] | range:4" value="{{$index+2}}">{{$index+2}}</option>
                             </select>
@@ -96,8 +96,16 @@
                         <div class="large-6 columns">
                             <label for="startTime" class="text-right middle">Hora de Inicio</label>
                         </div>
-                        <div class="large-3 end columns">
+                        <div class="large-4 end columns">
                             <input type="text" id="startTime" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Dirección</label>
+                        </div>
+                        <div class="large-4 end columns">
+                            <input type="text" id="middle-label" ng-model="vm.service.address" required>
                         </div>
                     </div>
                     <div class="row">
@@ -279,7 +287,7 @@
                 </div>
             </div>
 
-            <div class="large-8 columns" ng-show="vm.specificStep===2">                
+            <div class="large-8 columns" ng-show="vm.specificStep===2">
                 <div class="callout">
                     <div class="row">
                         <div class="large-6 columns">
