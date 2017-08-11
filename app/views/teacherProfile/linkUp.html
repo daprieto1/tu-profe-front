@@ -9,10 +9,10 @@
             <div>
                 <img src="images/teacherProfile/linkUp/rating.svg" alt="">
                 <div>
-                    <h3>Registro</h3>
-                    <p>Gracias por querer hacer parte del equipo de tu profe, nos gusta trabajar y por eso tenemos un proceso
-                        de vinculación que asegura que nuestro servicio y tus beneficios sean los mejores, te invitamos a
-                        seguir adelante.</p>
+                    <h3>Bienvenido</h3>
+                    <p>
+                        Gracias por iniciar tu proceso de vinculación para hacer parte del exclusivo equipo de profesores de Tu Profe. En este espacio podrás seguir de cerca tu proceso de vinculación.
+                    </p>
                 </div>
             </div>
             <div ng-if="vm.teacher.state >= 0">
@@ -20,9 +20,7 @@
                 <div>
                     <h3>Hoja de vida</h3>
                     <p ng-if="vm.teacher.state !== 0">Gracias por subir tu hoja de vida, ten por seguro que la leeremos con detalle.</p>                    
-                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="{{CloudFrontTuProfe + '/formats/curriculum.docx'}}">aqui</a> el formato de hoja de vida adjunto y sube una copia con tu información,
-                        es importante que seas honesto y detallado ya que nos ayudará a buscar la mejor manera de trabajar
-                        juntos.
+                    <p ng-if="vm.teacher.state === 0">Por favor descarga <a href="{{CloudFrontTuProfe + '/formats/curriculum.docx'}}">aqui</a> nuestro formato de hoja de vida adjunto y sube una copia con tu información diligenciada, es importante que seas honesto y detallado  al completar el documento ya que con base a esa información, se realizará un análisis teniendo en cuenta las necesidades y requisitos de nuestro equipo de trabajo.                                                
                     </p>
                     <div class="input-group" ng-if="vm.teacher.state === 0">
                         <input id="real-input-file" name="file" type="file" ng-show="false" accept=".docx" file-reader="vm.fileContent">

@@ -65,7 +65,7 @@
                 modalInstance.result.then(function (selectedItem) {
                     vm.teacher.state = TEACHER_STATES.interview.id;
                 }, function () {
-                    alertify.error('Recuerda agendar tu entrevista pronto, los cupos no son ilimitados');
+                    alertify.error('Recuerda agendar tu entrevista pronto, los cupos no son limitados');
                 });
             };
 
@@ -75,6 +75,7 @@
                     var file = aux.prop('files')[0];
                     ServiceTeachers.uploadCurriculum(file, vm.teacher.id)
                         .then(function () {
+                            alertify.success('Tu hoja de vida se ha cargado exitosamente, te daremos una respuesta tan pronto como estudiemos tu perfil y la información que nos proporcionaste. Si tienes alguna duda puedes comunicarte con nosotros a profesores@tu-profe.com o telefónicamente al 301 4547144.');
                             vm.teacher.state = 1;
                         });
                 }
