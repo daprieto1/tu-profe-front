@@ -205,7 +205,7 @@
                     description: '',
                     daysOfWeek: [false, false, false, false, false, false, false]
                 };
-
+                
                 CourseServices.getAll()
                     .then(courses => vm.courses = courses);
 

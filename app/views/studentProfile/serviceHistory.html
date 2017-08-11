@@ -11,7 +11,8 @@
                 <colgroup>
                     <col width="60">
                     <col width="100">
-                    <col width="200">
+                    <col width="150">
+                    <col width="50">
                     <col width="60">
                     <col width="60">
                     <col width="100">
@@ -22,6 +23,7 @@
                         <th></th>
                         <th></th>
                         <th ng-click="vm.sortBy('createdAt')"><a href="">Fecha <i class="fa fa-caret-down"></i></a></th>
+                        <th><a href="">Estado <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="">Estudiantes <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="">Sesiones <i class="fa fa-caret-down"></i></a></th>
                         <th><a href="">Ciudad <i class="fa fa-caret-down"></i></a></th>
@@ -44,6 +46,7 @@
                                 <span class="dashboard-table-timestamp">{{service.createdAt}}</span>
                             </div>
                         </td>
+                        <td>{{service.state}}</td>
                         <td>{{service.numStudents}}</td>
                         <td>{{service.sessions.length}}</td>
                         <td>
@@ -71,9 +74,9 @@
                         </td>
                     </tr>
                     <tr ng-show="vm.selectedService === service">
-                        <td colspan="7">
+                        <td colspan="8">
                             <div class="row">
-                                <div class="large-3 columns">
+                                <div class="large-3 columns" ng-if="false">
                                     <h5>Opciones</h5>
                                     <div class="row">
                                         <div class="large-12 columns">
@@ -84,7 +87,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="large-9 columns">
+                                <div class="large-12 columns">
                                     <h5>Sesiones</h5>
                                     <table>
                                         <thead>
@@ -104,7 +107,7 @@
                                                 <td>{{session.startTime}}</td>
                                                 <td>{{session.numHours}} Horas</td>
                                                 <td><span class="label">{{session.state.label}}</span></td>
-                                                <td>{{session.teacher}}</td>
+                                                <td>{{session.teacher ? session.teacher.name : service.teacher.name}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
