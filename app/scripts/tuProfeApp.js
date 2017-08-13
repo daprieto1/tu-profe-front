@@ -89,7 +89,7 @@
                         CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
                     },
                     AWS_DEV: {
-                        apiUrl: 'ec2-52-10-106-252.us-west-2.compute.amazonaws.com:8080/api',
+                        apiUrl: 'http://52.10.106.252:8080/api',
                         CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
                     }
                 }
