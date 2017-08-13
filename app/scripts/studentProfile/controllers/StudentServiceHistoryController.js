@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('studentProfileModule')
-        .controller('StudentServiceHistoryController', function ($scope, $cookies, AdvisoryServiceServices, SESSION_STATES) {
+        .controller('StudentServiceHistoryController', function ($scope, $cookies, envService, ServiceStudents, AdvisoryServiceServices, SESSION_STATES) {
             var vm = this;
 
             vm.sortBy = (propertyName) => {
@@ -21,6 +21,7 @@
                 vm.selectedService = undefined;
                 vm.propertyName = 'createdAt';
                 vm.reverse = true;
+                vm.TU_PROFE_API = envService.read('apiUrl');
 
                 AdvisoryServiceServices.getAllByStudentId($cookies.get('userId'))
                     .then(services => {
@@ -34,6 +35,11 @@
                             });
                             return service;
                         });
+                    });
+
+                ServiceStudents.getStudent($cookies.get('userId'))
+                    .then(student => {
+                        vm.student = student;
                     });
 
             }
