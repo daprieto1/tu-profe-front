@@ -55,7 +55,7 @@
                                     alertify.success('La entrevista ha sido agendada con éxito.');
                                     $modalInstance.close();
                                 }, function (error) {
-                                    alertify.error('La entrevista no ha podido ser agendada: ' + error.data.message);
+                                    alertify.error('La entrevista no ha podido ser agendada: ' + error.data);
                                 });
                         };
 
