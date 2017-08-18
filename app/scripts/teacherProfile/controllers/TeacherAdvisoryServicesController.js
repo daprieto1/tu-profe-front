@@ -7,12 +7,16 @@
 
             vm.updateSessionState = (session, newState) => {
                 var sessionUpdate = angular.copy(session);
+                var lastState = angular.copy(session.state);
                 sessionUpdate.state = newState;
-                session.state = SESSION_STATES.find(state => state.id === newState);                
+                session.state = SESSION_STATES.find(state => state.id === newState);
 
                 AdvisorySessionServices.update(vm.selectedService.id, sessionUpdate.id, sessionUpdate)
-                    .then(response => console.log(response))
-                    .catch(err => console.log(err));
+                    .then(response => alertify.success('Actualización de estado de sesión realizado con éxito.'))
+                    .catch(err => {
+                        session.state = lastState;
+                        alertify.error('La actualización del estado de la asesoria no pudo ser realizada.');
+                    });
             };
 
             vm.takeService = (advisory) => {
