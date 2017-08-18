@@ -46,36 +46,39 @@
                             <tr ng-show="vm.selectedService === service">
                                 <td colspan="7">
                                     <div class="row">
-                                        <div class="large-3 columns">
-                                            <h5>Opciones</h5>
-                                            <div class="row">
-                                                <div class="large-12 columns">
-                                                    <center>
-                                                        <button class="button">Ver Calendario</button>
-                                                        <button class="button">Ver Lista</button>                                                        
-                                                    </center>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="large-9 columns">
+                                        <div class="large-12 columns">
                                             <h5>Sesiones</h5>
                                             <table>
                                                 <thead>
                                                     <tr>
                                                         <th></th>
+                                                        <th></th>
                                                         <th>Fecha</th>
                                                         <th>Hora</th>
                                                         <th>Duración</th>
-                                                        <th>Estado</th>
+                                                        <th>Estado</th>                                                        
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr ng-repeat="session in service.sessions track by $index">
+                                                        <td>
+                                                            <dropdown-toggle ng-if="session.state.id < 2">
+                                                                <toggle>
+                                                                    <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                                                </toggle>
+                                                                <pane>
+                                                                    <ul class="menu vertical">                                                                        
+                                                                        <li ng-if="session.state.id < 1"><a ng-click="vm.updateSessionState(session, 1)">Iniciar</a></li>
+                                                                        <li ng-if="session.state.id < 2"><a ng-click="vm.updateSessionState(session, 2)">Terminar</a></li>                                                                        
+                                                                    </ul>
+                                                                </pane>
+                                                            </dropdown-toggle>
+                                                        </td>
                                                         <td>Sesión {{$index + 1}}</td>
                                                         <td>{{session.startDateToShow}}</td>
                                                         <td>{{session.startTime}}</td>
                                                         <td>{{session.numHours}} Horas</td>
-                                                        <td><span class="label">{{session.state.label}}</span></td>
+                                                        <td><span class="label">{{session.state.label}}</span></td>                                                        
                                                     </tr>
                                                 </tbody>
                                             </table>

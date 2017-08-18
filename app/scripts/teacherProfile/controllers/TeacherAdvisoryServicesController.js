@@ -2,8 +2,18 @@
     'use strict';
 
     angular.module('teacherProfileModule')
-        .controller('TeacherAdvisoryServicesController', function ($scope, $cookies, $q, AdvisoryServiceServices, ServiceTeachers, localStorageService, SESSION_STATES) {
+        .controller('TeacherAdvisoryServicesController', function ($scope, $cookies, $q, AdvisoryServiceServices, ServiceTeachers, AdvisorySessionServices, localStorageService, SESSION_STATES) {
             var vm = this;
+
+            vm.updateSessionState = (session, newState) => {
+                var sessionUpdate = angular.copy(session);
+                sessionUpdate.state = newState;
+                session.state = SESSION_STATES.find(state => state.id === newState);                
+
+                AdvisorySessionServices.update(vm.selectedService.id, sessionUpdate.id, sessionUpdate)
+                    .then(response => console.log(response))
+                    .catch(err => console.log(err));
+            };
 
             vm.takeService = (advisory) => {
                 AdvisoryServiceServices.assign(advisory.id, vm.teacher.id)
@@ -45,7 +55,7 @@
 
                 vm.teacher.advisoryServices.push(' ');
                 var params = { id: { in: vm.teacher.advisoryServices } };
-                
+
                 $q.all([
                     AdvisoryServiceServices.filter(params),
                     AdvisoryServiceServices.getAvailableServices(vm.teacher.id)
@@ -58,7 +68,7 @@
                             advisory.pendingSessions = advisory.sessions.filter(session => { return session.state.id === 0; }).length;
                             return advisory;
                         });
-                        
+
                     })
                     .catch(err => console.log(err));
 

@@ -25,6 +25,7 @@
         'teacherProfileModule',
         'studentProfileModule',
         'advisoryServiceModule',
+        'advisorySessionModule',
         'notificationModule',
         'scheduleModule',
         'cityModule'
