@@ -79,19 +79,23 @@
                 vars: {
                     local: {
                         apiUrl: 'http://localhost:8080/api',
-                        CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
+                        S3TuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe',
+                        CloudFrontTuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe'
                     },
                     c9: {
                         apiUrl: 'https://tu-profe-api-node-diegoprieto.c9users.io:8080/api',
-                        CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
+                        S3TuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe',
+                        CloudFrontTuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe'
                     },
                     heroku: {
                         apiUrl: 'https://tu-profe-api-node.herokuapp.com/api',
-                        CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
+                        S3TuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe',
+                        CloudFrontTuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe'
                     },
                     AWS_DEV: {
                         apiUrl: 'http://52.10.106.252:8080/api',
-                        CloudFrontTuProfe: 'https://dl7v16017ye41.cloudfront.net'
+                        S3TuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe',
+                        CloudFrontTuProfe: 'https://s3-us-west-2.amazonaws.com/tu-profe'
                     }
                 }
             });
@@ -104,7 +108,7 @@
         .run(function ($rootScope, $location, envService) {
 
             $rootScope.CloudFrontTuProfe = envService.read('CloudFrontTuProfe');
-            $rootScope.$apply(function () {                
+            $rootScope.$apply(function () {
                 angular.element(document).foundation();
             });
 
