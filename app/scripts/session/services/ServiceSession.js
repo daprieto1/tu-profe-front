@@ -27,6 +27,10 @@
                 forgotPassword: {
                     method: 'POST',
                     url: TU_PROFE_API + '/session/forgot-password'
+                },
+                restorePassword: {
+                    method: 'POST',
+                    url: TU_PROFE_API + '/session/restore-password'
                 }
             });
 
@@ -49,6 +53,10 @@
 
                 forgotPassword: function (user) {
                     return Session.forgotPassword({}, user).$promise;
+                },
+
+                restorePassword: function (data) {
+                    return Session.restorePassword({}, data).$promise;
                 }
 
             };
