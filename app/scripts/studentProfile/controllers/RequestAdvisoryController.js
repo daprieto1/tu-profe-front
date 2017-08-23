@@ -107,13 +107,13 @@
                     var dateInit = moment(vm.service.startDate);
 
                     var days = vm.service.daysOfWeek
-                        .map((day, index) => { return day ? index : 0; })
-                        .filter(day => { return day > 0; });
+                        .map((day, index) => { return day ? index : -1; })
+                        .filter(day => { return day >= 0; });                    
 
                     var j = 0;
                     var numSessionsTemp = angular.copy(numSessions);
                     for (var i = 0; i < numSessionsTemp; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
+                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');                        
                         if (sessionDate > moment(vm.service.startDate)) {
                             vm.sessions.push({
                                 startDate: sessionDate.toDate(),
@@ -139,12 +139,8 @@
                     vm.sessions = [];
                     vm.service.sessionsPerWeek = 0;
                     vm.service.daysOfWeek = [false, false, false, false, false, false, false];
-                    for (var i = 0; i < vm.service.numSessions; i++) {
-                        vm.sessions.push({
-                        });
-                    }
                     $timeout(() => {
-                        vm.sessions[i].startTime = angular.element('#startTime-static').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                        vm.startTime = angular.element('#startTime-static').wickedpicker({ now: "12:00", minutesInterval: 30 });
                     }, 100);
                 }
             });
@@ -205,7 +201,7 @@
                     description: '',
                     daysOfWeek: [false, false, false, false, false, false, false]
                 };
-                
+
                 CourseServices.getAll()
                     .then(courses => vm.courses = courses);
 
@@ -213,7 +209,7 @@
                     .then(student => {
                         vm.student = student;
                         vm.service.city = vm.student.city;
-                        vm.service.address = vm.student.address;                        
+                        vm.service.address = vm.student.address;
                     });
 
             }
