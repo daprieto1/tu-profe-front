@@ -21,12 +21,14 @@
     "hover": "Hover#^2.1.0",
     "angularMultipleSelect": "angular-multiple-select#^1.1.2",
     "alertify.js": "^0.3.11",
+    "angular-local-storage": "^0.7.1",
+    "angular-promise-buttons": "^0.1.19",    
+    "foundation-datepicker": "^1.5.6",
     "angular-environment": "^1.0.4",
+    "fullcalendar": "^3.4.0",
     "angularjs-slider": "^6.1.1",
     "wickedpicker": "^0.4.1",
-    "angular-file-model": "^0.3.1",
-    "fullcalendar": "^3.4.0",
-    "angular-local-storage": "^0.7.1"
+    "angular-file-model": "^0.3.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
