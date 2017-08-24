@@ -22,10 +22,9 @@
             vm.takeService = (advisory) => {
                 AdvisoryServiceServices.assign(advisory.id, vm.teacher.id)
                     .then(response => {
-                        console.log(response);
                         alertify.success('Su solicitud ha sido enviada, se le notificará la decisión');
                     })
-                    .catch(err => console.log(err));
+                    .catch(err => alertify.error('Su solicitud no ha sido enviada. ' + err.data));
             };
 
             vm.selectService = service => {
@@ -68,6 +67,16 @@
                         vm.assignedServices = parseAdvisoryServices(assignedServices);
                         vm.availableServices = parseAdvisoryServices(availableServices);
 
+                        vm.assignedServices.forEach(advisory => {
+                            if (advisory.files) {
+                                advisory.files = advisory.files.map(file => {
+                                    return {
+                                        name: file,
+                                        type: file.split('.').pop()
+                                    };
+                                });
+                            }
+                        });
                         vm.availableServices = vm.availableServices.map(advisory => {
                             advisory.pendingSessions = advisory.sessions.filter(session => { return session.state.id === 0; }).length;
                             return advisory;

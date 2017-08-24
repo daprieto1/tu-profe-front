@@ -71,9 +71,7 @@
                 var service = parseService();
 
                 AdvisoryServiceServices.create(service)
-                    .then(advisoryService => {
-                        vm.files.forEach(file => { AdvisoryServiceServices.uploadFile(file, advisoryService.id); });
-
+                    .then(async advisoryService => {
                         vm.successCreateService = true;
                         advisoryService.createdAt = moment(advisoryService.createdAt).format('LL');
                         advisoryService.sessions = advisoryService.sessions.map(session => {
@@ -82,6 +80,9 @@
                         })
                         vm.createdService = advisoryService;
                         alertify.success('El servicio se ha creado exitosamente!');
+                        for (var i = 0; i < vm.files.length; i++) {
+                            await AdvisoryServiceServices.uploadFile(vm.files[i], advisoryService.id);
+                        }                        
                     })
                     .catch(err => {
                         alertify.error('Lo sentimos, no hemos podido crear el servicio, ' + err.data + ' Si necesitas ayuda puedes comunicarte a servicio al cliente.');
@@ -108,12 +109,12 @@
 
                     var days = vm.service.daysOfWeek
                         .map((day, index) => { return day ? index : -1; })
-                        .filter(day => { return day >= 0; });                    
+                        .filter(day => { return day >= 0; });
 
                     var j = 0;
                     var numSessionsTemp = angular.copy(numSessions);
                     for (var i = 0; i < numSessionsTemp; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');                        
+                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
                         if (sessionDate > moment(vm.service.startDate)) {
                             vm.sessions.push({
                                 startDate: sessionDate.toDate(),

@@ -47,6 +47,24 @@
                                 <td colspan="7">
                                     <div class="row">
                                         <div class="large-12 columns">
+                                            <h5>Descripción</h5>
+                                            <p>{{service.description}}</p>
+                                        </div>
+                                    </div>
+                                    <div id="uploaded-files" class="row">
+                                        <div class="large-12 columns">
+                                            <h5>Archivos</h5>
+                                            <ul>
+                                                <li ng-repeat="file in service.files">
+                                                    <a href="{{CloudFrontTuProfe + '/advisory-services/'+ service.id + '/' + file.name}}">
+                                                        <img src="{{getFileImg(file.type)}}" alt=""> {{file.name}}
+                                                    </a>                                                    
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="large-12 columns">
                                             <h5>Sesiones</h5>
                                             <table>
                                                 <thead>
@@ -56,7 +74,7 @@
                                                         <th>Fecha</th>
                                                         <th>Hora</th>
                                                         <th>Duración</th>
-                                                        <th>Estado</th>                                                        
+                                                        <th>Estado</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -67,9 +85,9 @@
                                                                     <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
                                                                 </toggle>
                                                                 <pane>
-                                                                    <ul class="menu vertical">                                                                        
+                                                                    <ul class="menu vertical">
                                                                         <li ng-if="session.state.id < 1"><a ng-click="vm.updateSessionState(session, 1)">Iniciar</a></li>
-                                                                        <li ng-if="session.state.id < 2"><a ng-click="vm.updateSessionState(session, 2)">Terminar</a></li>                                                                        
+                                                                        <li ng-if="session.state.id < 2"><a ng-click="vm.updateSessionState(session, 2)">Terminar</a></li>
                                                                     </ul>
                                                                 </pane>
                                                             </dropdown-toggle>
@@ -78,7 +96,7 @@
                                                         <td>{{session.startDateToShow}}</td>
                                                         <td>{{session.startTime}}</td>
                                                         <td>{{session.numHours}} Horas</td>
-                                                        <td><span class="label">{{session.state.label}}</span></td>                                                        
+                                                        <td><span class="label">{{session.state.label}}</span></td>
                                                     </tr>
                                                 </tbody>
                                             </table>

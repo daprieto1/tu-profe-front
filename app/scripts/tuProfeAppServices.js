@@ -55,8 +55,7 @@
           return today;
         },
 
-        timeToMilitarFormat: time => {
-          console.log(time);
+        timeToMilitarFormat: time => {        
           var result = time
             .replace(/ /g,'')
             .replace('AM', '')
