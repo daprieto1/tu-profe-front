@@ -28,30 +28,30 @@
                     params: { advisoryServiceId: '@advisoryServiceId', teacherId: '@teacherId' },
                     method: 'POST'
                 },
-                
-                getAvailableServices:{
+
+                getAvailableServices: {
                     url: TU_PROFE_API + '/advisory-services/available-services/:teacherId',
                     params: { teacherId: '@teacherId' },
                     method: 'GET',
                     isArray: true
                 }
             });
-    
+
             var colorIndex = 0;
             var getColor = () => {
                 var colors = ['#f86363', '#63f8ce', '#639ff8', '#8d63f8', '#f8d063'];
                 colorIndex = colorIndex === colors.length ? 0 : colorIndex + 1;
                 return colors[colorIndex];
             }
-            
+
             return {
 
                 assign: (advisoryServiceId, teacherId) => {
                     return AdvisoryService.assign({ advisoryServiceId: advisoryServiceId, teacherId: teacherId }).$promise;
                 },
-                
+
                 getAvailableServices: teacherId => {
-                    return AdvisoryService.getAvailableServices({teacherId:teacherId}).$promise;
+                    return AdvisoryService.getAvailableServices({ teacherId: teacherId }).$promise;
                 },
 
                 filter: params => {
@@ -87,7 +87,7 @@
                         transformRequest: angular.identity
                     });
                 },
-                
+
                 parseAdvisoryServiceToEvent: (advisoryService) => {
                     var events = [];
                     var color = getColor();
@@ -107,6 +107,19 @@
                         };
                     });
                     return events;
+                },
+
+                validateFront: (advisoryService) => {
+                    var valid = true;
+
+                    if (!advisoryService.description
+                        || advisoryService.sessions.length <= 0
+                        || !advisoryService.address
+                        || !advisoryService.city) {
+                        valid = false;
+                    }
+
+                    return valid;
                 }
 
             }

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('studentProfileModule')
-        .controller('RequestAdvisoryController', function ($scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, CourseServices, ServiceStudents, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
+        .controller('RequestAdvisoryController', function ($q, $scope, $timeout, $cookies, ServiceUtils, AdvisoryServiceServices, CourseServices, CityServices, ServiceStudents, DAYS_OF_WEEK, ADVISORY_SERVICES_TYPE) {
             var vm = this;
 
             vm.reset = () => initCtrl();
@@ -82,7 +82,7 @@
                         alertify.success('El servicio se ha creado exitosamente!');
                         for (var i = 0; i < vm.files.length; i++) {
                             await AdvisoryServiceServices.uploadFile(vm.files[i], advisoryService.id);
-                        }                        
+                        }
                     })
                     .catch(err => {
                         alertify.error('Lo sentimos, no hemos podido crear el servicio, ' + err.data + ' Si necesitas ayuda puedes comunicarte a servicio al cliente.');
@@ -91,14 +91,6 @@
             };
 
             $scope.$watch('vm.service', function (old, newd) {
-                var service = parseService();
-                AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => {
-                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific';
-                        angular.element(idCostElement).removeClass().addClass('shake animated');
-                        vm.cost = advisoryService.cost;
-                    })
-                    .catch(err => vm.cost = undefined);
 
                 if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
                     vm.showSessions = false;
@@ -133,6 +125,18 @@
                         }
                     }
                 }
+
+                var service = parseService();
+                vm.valid = AdvisoryServiceServices.validateFront(service);
+
+                AdvisoryServiceServices.calculate(service)
+                    .then(advisoryService => {
+                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific';
+                        angular.element(idCostElement).removeClass().addClass('shake animated');
+                        vm.cost = advisoryService.cost;
+                    })
+                    .catch(err => vm.cost = undefined);                
+
             }, true);
 
             $scope.$watch('vm.specificStep', () => {
@@ -189,6 +193,7 @@
                 vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
                 vm.advisoryFile = undefined;
                 vm.student;
+                vm.valid = false;
 
                 vm.service = {
                     type: undefined,
@@ -203,15 +208,22 @@
                     daysOfWeek: [false, false, false, false, false, false, false]
                 };
 
+                $q.all([
+                    CityServices.getAll(),
+                    ServiceStudents.getStudent($cookies.get('userId'))
+                ]).then(values => {
+                    vm.cities = values[0];
+                    vm.student = values[1];
+
+                    if (vm.student.city) {
+                        vm.service.city = vm.cities.find(city => city.id === vm.student.city.id);
+                    }
+
+                    vm.service.address = vm.student.address;
+                });
+
                 CourseServices.getAll()
                     .then(courses => vm.courses = courses);
-
-                ServiceStudents.getStudent($cookies.get('userId'))
-                    .then(student => {
-                        vm.student = student;
-                        vm.service.city = vm.student.city;
-                        vm.service.address = vm.student.address;
-                    });
 
             }
 

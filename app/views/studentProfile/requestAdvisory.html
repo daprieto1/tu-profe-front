@@ -102,6 +102,15 @@
                     </div>
                     <div class="row">
                         <div class="large-6 columns">
+                            <label for="middle-label" class="text-right middle">Ciudad</label>
+                        </div>
+                        <div class="large-4 end columns">
+                            <select ng-options="city as city.name for city in vm.cities track by city.id" ng-model="vm.service.city" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
                             <label for="middle-label" class="text-right middle">Dirección</label>
                         </div>
                         <div class="large-4 end columns">
@@ -167,7 +176,7 @@
 
                     <div class="row">
                         <div class="large-offset-2 large-8 end columns">
-                            <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
+                            <button class="button success expanded" ng-click="vm.createService()" ng-disabled="!vm.valid">Solicitar Servicio</button>
                         </div>
                     </div>
 
@@ -233,7 +242,7 @@
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Materia</label>
                             </div>
-                            <div class="large-3 end columns">
+                            <div class="large-4 end columns">
                                 <select id="course" name="course" ng-options="course as course.courseName for course in vm.courses 
                                     | filter : {difficulty:'Especializado'}
                                     | orderBy:'courseName' track by course.id" ng-model="vm.service.course" required>                                
@@ -245,7 +254,7 @@
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Número de estudiantes</label>
                             </div>
-                            <div class="large-3 end columns">
+                            <div class="large-4 end columns">
                                 <select ng-model="vm.service.numStudents" required>
                                 <option ng-repeat="n in [] | range:4" value="{{$index+1}}">{{$index+1}}</option>
                             </select>
@@ -255,7 +264,7 @@
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Número de sesiones</label>
                             </div>
-                            <div class="large-3 end columns">
+                            <div class="large-4 end columns">
                                 <select ng-model="vm.service.numSessions" required>
                                 <option ng-repeat="n in [] | range:20" value="{{$index+1}}">{{$index+1}}</option>
                             </select>
@@ -265,10 +274,27 @@
                             <div class="large-6 columns">
                                 <label for="middle-label" class="text-right middle">Duración por sesión</label>
                             </div>
-                            <div class="large-3 end columns">
+                            <div class="large-4 end columns">
                                 <select ng-model="vm.service.timePerSession" required>
                                 <option ng-repeat="n in [] | range:7" value="{{$index+2}}">{{$index+2}} horas</option>
                             </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Ciudad</label>
+                            </div>
+                            <div class="large-4 end columns">
+                                <select ng-options="city as city.name for city in vm.cities track by city.id" ng-model="vm.service.city" required>
+                                    </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="large-6 columns">
+                                <label for="middle-label" class="text-right middle">Dirección</label>
+                            </div>
+                            <div class="large-4 end columns">
+                                <input type="text" id="middle-label" ng-model="vm.service.address" required>
                             </div>
                         </div>
                         <div class="row">
@@ -387,7 +413,7 @@
 
                     <div class="row">
                         <div class="large-offset-2 large-8 end columns">
-                            <button class="button success expanded" ng-click="vm.createService()">Solicitar Servicio</button>
+                            <button class="button success expanded" ng-click="vm.createService()" ng-disabled="!vm.valid">Solicitar Servicio</button>
                         </div>
                     </div>
                 </div>
