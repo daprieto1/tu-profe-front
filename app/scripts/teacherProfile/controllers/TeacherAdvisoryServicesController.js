@@ -50,6 +50,18 @@
                 return advisories;
             }
 
+            function parseFiles(files) {
+                if (files) {
+                    files = files.map(file => {
+                        return {
+                            name: file,
+                            type: file.split('.').pop()
+                        };
+                    });
+                }
+                return files;
+            }
+
             function initCtrl() {
                 vm.tabAssigned = true;
                 vm.teacherId = $cookies.get('userId');
@@ -68,17 +80,11 @@
                         vm.availableServices = parseAdvisoryServices(availableServices);
 
                         vm.assignedServices.forEach(advisory => {
-                            if (advisory.files) {
-                                advisory.files = advisory.files.map(file => {
-                                    return {
-                                        name: file,
-                                        type: file.split('.').pop()
-                                    };
-                                });
-                            }
+                            advisory.files = parseFiles(advisory.files);
                         });
                         vm.availableServices = vm.availableServices.map(advisory => {
                             advisory.pendingSessions = advisory.sessions.filter(session => { return session.state.id === 0; }).length;
+                            advisory.files = parseFiles(advisory.files);
                             return advisory;
                         });
 
