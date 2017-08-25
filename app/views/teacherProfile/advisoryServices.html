@@ -12,7 +12,18 @@
                 <tab heading="Disponibles" active="vm.tabAvailable">
                 </tab>
                 <div ng-show="vm.tabAssigned">
-                    <table class="dashboard-table">
+                    <div class="row empty-state" ng-if="vm.assignedServices.length <= 0">
+                        <div class="large-8 end columns">
+                            <img src="images/utils/inbox-empty-tray.svg" alt="">
+                            <h3>Trabajo Completo!</h3>
+                            <p>
+                                En este momento no tienes asesorias asignadas. Haz clic sobre la pestaña de "Disponibles" y comienza a utilizar tus mejores
+                                habilidades como profesor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <table class="dashboard-table" ng-if="vm.assignedServices.length > 0">
                         <thead>
                             <tr>
                                 <th></th>
@@ -108,7 +119,15 @@
                     </table>
                 </div>
                 <div ng-show="vm.tabAvailable">
-                    <table class="dashboard-table">
+                    <div class="row empty-state" ng-if="vm.assignedServices.length <= 0">
+                        <div class="large-8 end columns">
+                            <img src="images/utils/inbox-empty-tray.svg" alt="">
+                            <h3>Lo sentimos!</h3>
+                            <p>En este momento no tenemos asesorias disponibles para tu perfil de Profesor, te notificaremos
+                                por correo electrónico o mensaje de texto tan pronto como llegue una asesoria nueva.</p>
+                        </div>
+                    </div>
+                    <table class="dashboard-table" ng-if="vm.availableServices.length > 0">
                         <thead>
                             <tr>
                                 <th></th>
