@@ -112,8 +112,7 @@
                 validateFront: (advisoryService) => {
                     var valid = true;
 
-                    if (!advisoryService.description
-                        || advisoryService.sessions.length <= 0
+                    if (!advisoryService.description                        
                         || !advisoryService.address
                         || !advisoryService.city) {
                         valid = false;

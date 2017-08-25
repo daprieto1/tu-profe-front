@@ -92,50 +92,57 @@
 
             $scope.$watch('vm.service', function (old, newd) {
 
-                if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
-                    vm.showSessions = false;
-                    vm.sessions = [];
-                    var numSessions = vm.service.type === 1 ? vm.service.months * 4 * vm.service.sessionsPerWeek : vm.service.numSessions;
-                    var dayINeed = 1;
-                    var dateInit = moment(vm.service.startDate);
+                var service = parseService();
 
-                    var days = vm.service.daysOfWeek
-                        .map((day, index) => { return day ? index : -1; })
-                        .filter(day => { return day >= 0; });
+                try {
+                    if (vm.service.daysOfWeek.filter(day => { return day; }).length === parseInt(vm.service.sessionsPerWeek)) {
+                        vm.showSessions = false;
+                        vm.sessions = [];
+                        var numSessions = vm.service.type === 1 ? vm.service.months * 4 * vm.service.sessionsPerWeek : vm.service.numSessions;
+                        var dayINeed = 1;
+                        var dateInit = moment(vm.service.startDate);
 
-                    var j = 0;
-                    var numSessionsTemp = angular.copy(numSessions);
-                    for (var i = 0; i < numSessionsTemp; i++) {
-                        var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
-                        if (sessionDate > moment(vm.service.startDate)) {
-                            vm.sessions.push({
-                                startDate: sessionDate.toDate(),
-                                startTime: vm.startTime.wickedpicker('time'),
-                                startDateToShow: sessionDate.format('LL'),
-                                duration: 120,
-                                dayOfWeek: days[j]
-                            });
-                        } else {
-                            numSessionsTemp++;
-                        }
-                        j++;
-                        if (j === days.length) {
-                            j = 0;
-                            dateInit = moment(dateInit).add(1, 'weeks').isoWeekday(dayINeed);
+                        var days = vm.service.daysOfWeek
+                            .map((day, index) => { return day ? index : -1; })
+                            .filter(day => { return day >= 0; });
+
+                        var j = 0;
+                        var numSessionsTemp = angular.copy(numSessions);
+                        for (var i = 0; i < numSessionsTemp; i++) {
+                            var sessionDate = moment(dateInit).day(days[j]).week(dateInit.week()).startOf('day');
+                            if (sessionDate > moment(vm.service.startDate)) {
+                                vm.sessions.push({
+                                    startDate: sessionDate.toDate(),
+                                    startTime: vm.startTime.wickedpicker('time'),
+                                    startDateToShow: sessionDate.format('LL'),
+                                    duration: 120,
+                                    dayOfWeek: days[j]
+                                });
+                            } else {
+                                numSessionsTemp++;
+                            }
+                            j++;
+                            if (j === days.length) {
+                                j = 0;
+                                dateInit = moment(dateInit).add(1, 'weeks').isoWeekday(dayINeed);
+                            }
                         }
                     }
+                } catch (err) {
+                    console.log(err);
+                } finally {
+                    AdvisoryServiceServices.calculate(service)
+                        .then(advisoryService => {
+                            var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific';
+                            angular.element(idCostElement).removeClass().addClass('shake animated');
+                            vm.cost = advisoryService.cost;
+                        })
+                        .catch(err => vm.cost = undefined);
+
+                    vm.valid = AdvisoryServiceServices.validateFront(service);
                 }
 
-                var service = parseService();
-                vm.valid = AdvisoryServiceServices.validateFront(service);
 
-                AdvisoryServiceServices.calculate(service)
-                    .then(advisoryService => {
-                        var idCostElement = service.type === 1 ? '#service-total-cost-tutor' : '#service-total-cost-specific';
-                        angular.element(idCostElement).removeClass().addClass('shake animated');
-                        vm.cost = advisoryService.cost;
-                    })
-                    .catch(err => vm.cost = undefined);                
 
             }, true);
 
