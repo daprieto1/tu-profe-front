@@ -5,7 +5,17 @@
         </h1>
     </div>
 
-    <div class="row">
+    <div class="row empty-state" ng-if="vm.services.length <= 0">
+        <div class="large-12 end columns">
+            <img src="images/utils/line-chart.svg" alt="">
+            <h3>Solicita tu primara asesoria!</h3>
+            <p>Estas muy cerca de comenzar a disfrutar de un éxito académico sin límites con TuProfe, solicita tu primera asesoria
+                haciendo clic en el botón.</p>                
+            <button class="button" ng-click="$scope.$parent.section = 'request-advisory'">Solicitar Asesoria</button>
+        </div>
+    </div>
+
+    <div class="row" ng-if="vm.services.length > 0">
         <div class="large-12 columns">
             <table class="dashboard-table">
                 <colgroup>
@@ -69,7 +79,8 @@
                                 <input name="p_confirm_method" type="hidden" value="POST">
                                 <input name="p_signature" type="hidden" id="signature" value="{{service.signature}}" />
                                 <input name="idboton" type="hidden" id="idboton" value="2552" />
-                                <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png"/>
+                                <input type="image" id="imagen" src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/btns/btn4.png"
+                                />
                                 <input name="p_billing_document" type="hidden" value="{{vm.student.identification}}">
                                 <input name="p_billing_name" type="hidden" value="{{vm.student.name}}">
                                 <input name="p_billing_lastname" type="hidden" value="{{vm.student.lastName}}">
