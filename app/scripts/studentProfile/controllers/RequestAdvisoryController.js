@@ -152,7 +152,7 @@
                     vm.service.sessionsPerWeek = 0;
                     vm.service.daysOfWeek = [false, false, false, false, false, false, false];
                     $timeout(() => {
-                        vm.startTime = angular.element('#startTime-static').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                        vm.startTime = angular.element('#startTime-static').wickedpicker({ now: '12:00', minutesInterval: 30 });
                     }, 100);
                 }
             });
@@ -197,7 +197,7 @@
                 vm.sessions = [];
                 vm.files = [];
                 vm.today = moment().add(7, 'd').format('YYYY-MM-DD');
-                vm.startTime = angular.element('#startTime').wickedpicker({ now: "12:00", minutesInterval: 30 });
+                vm.startTime = angular.element('#startTime').wickedpicker({ now: '12:00', minutesInterval: 30 });
                 vm.advisoryFile = undefined;
                 vm.student;
                 vm.valid = false;
