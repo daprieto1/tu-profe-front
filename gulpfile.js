@@ -6,6 +6,7 @@ const del = require('del');
 const wiredep = require('wiredep').stream;
 const sass = require('gulp-ruby-sass');
 const sonar = require('gulp-sonar');
+require('babel-polyfill');
 
 const $ = gulpLoadPlugins();
 const reload = browserSync.reload;
@@ -45,7 +46,10 @@ function lint(files, options) {
 
 gulp.task('lint', () => {
     return lint('app/scripts/**/*.js', {
-        fix: true
+        fix: true,
+        parserOptions: {
+            ecmaVersion: 2017
+        }
     })
         .pipe(gulp.dest('app/scripts'));
 });
@@ -54,6 +58,9 @@ gulp.task('lint:test', () => {
         fix: true,
         env: {
             mocha: true
+        },
+        parserOptions: {
+            ecmaVersion: 2017
         }
     })
         .pipe(gulp.dest('test/spec/**/*.js'));
